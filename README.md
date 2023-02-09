@@ -1,6 +1,6 @@
-# [问 - 即答](https://vercel.app/)
+# [问 - 即答](https://qa.js.cn)
 
-用 AI 帮你回答问题。部署在 https://
+用 AI 帮你回答问题。线上预览 [qa.js.cn](https://qa.js.cn)
 
 ## 支持语言
 `English`, `Simplified Chinese`, `Traditional Chinese`, `Japanese`, `Italian`, `German`, `Spanish`,`French`,`Dutch` ,`Korean`,`Khmer`, `Hindi`
@@ -22,3 +22,7 @@ see http://localhost:3000.
 ## 一键部署
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yesmore/QA&env=OPENAI_API_KEY&project-name=Q-A&repo-name=Q-A)
+
+## 开源许可
+
+[GPL](/LICENSE).
