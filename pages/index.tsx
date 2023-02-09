@@ -96,7 +96,7 @@ const Home: NextPage = () => {
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
-        <title>Q & A</title>
+        <title>问 · 即答</title>
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -120,9 +120,9 @@ const Home: NextPage = () => {
       <Header />
 
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-2 sm:mt-4">
-        {/* <h1 className="sm:text-3xl text-2xl max-w-1xl font-bold text-slate-900">
-          问 · 即答
-        </h1> */}
+        <h1 className="sm:text-3xl text-2xl max-w-1xl font-bold text-slate-900">
+          问
+        </h1>
         <div className="max-w-xl w-full">
           <div className="flex mt-4 items-center space-x-3 mb-3">
             <span className="w-7 h-7 rounded-full bg-black text-white text-center leading-7">
