@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   const [lang, setLang] = useState<VibeType>("中文");
   const [difficulty, setDifficulty] = useState<VibeType2>("Easy");
   const [generatedDescs, setGeneratedDescs] = useState<string>("");
-  const defultDesc = "我是谁？";
+  const defultDesc = "什么是小黑子？";
 
   console.log("Streamed response: ", { generatedDescs });
   let promptObj = {
