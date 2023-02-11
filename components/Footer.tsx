@@ -32,10 +32,10 @@ export default function Footer() {
         </a>
       </div>
       <div className="">
-        <img
+        {/* <img
           style={{ display: "none" }}
           src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fqa.js.cn&count_bg=%2379C83D&title_bg=%23555555&icon=awesomelists.svg&icon_color=%230AFFAB&title=visitor&edge_flat=true"
-        />
+        /> */}
         {/* <Link
           href="https://github.com/yesmore/QA"
           className="group"

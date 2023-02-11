@@ -152,7 +152,7 @@ const Home: NextPage = () => {
             <span className="bg-secondary w-7 h-7 rounded-full text-white text-center leading-7">
               3
             </span>
-            <p className="text-secondary text-left font-medium">选择难度</p>
+            <p className="text-secondary text-left font-medium">选择级别</p>
           </div>
           <div className="block">
             <DropDown2
