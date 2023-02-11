@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   const [lang, setLang] = useState<VibeType>("中文");
   const [difficulty, setDifficulty] = useState<VibeType2>("Easy");
   const [generatedDescs, setGeneratedDescs] = useState<string>("");
-  const defultDesc = "什么是小黑子？";
+  const defultDesc = "一句话描述ChatGPT是什么";
 
   console.log("Streamed response: ", { generatedDescs });
   let promptObj = {
@@ -184,7 +184,7 @@ const Home: NextPage = () => {
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
         <ResizablePanel>
           <AnimatePresence mode="wait">
-            <motion.div className="space-y-10 my-4">
+            <motion.div className="space-y-5 my-4">
               {generatedDescs && (
                 <>
                   <div>
@@ -192,7 +192,7 @@ const Home: NextPage = () => {
                       即答
                     </h2>
                   </div>
-                  <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto  whitespace-pre-wrap">
+                  <div className="space-y-4 flex flex-col items-center justify-center max-w-xl mx-auto whitespace-pre-wrap">
                     <div
                       className="bg-fan1 rounded-xl shadow-md p-4 hover:bg-fan transition cursor-copy border text-left"
                       onClick={() => {
