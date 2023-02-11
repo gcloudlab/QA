@@ -2,6 +2,8 @@
 
 用 AI 帮你回答问题。线上预览 [qa.js.cn](https://qa.js.cn)
 
+![view](https://i.postimg.cc/3Nxc7FzR/web.png)
+
 ## 支持语言
 `English`, `Simplified Chinese`, `Traditional Chinese`, `Japanese`, `Italian`, `German`, `Spanish`,`French`,`Dutch` ,`Korean`,`Khmer`, `Hindi`
 
