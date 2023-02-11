@@ -94,10 +94,11 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
+    <div className="bg-fan flex flex-col items-center justify-center py-2 min-h-screen">
       <Head>
         <title>问 · 即答</title>
         <link
+          className="text-primary"
           rel="apple-touch-icon"
           sizes="180x180"
           href="/apple-touch-icon.png"
@@ -120,38 +121,38 @@ const Home: NextPage = () => {
       <Header />
 
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-2 sm:mt-4">
-        <h1 className="sm:text-3xl text-2xl max-w-1xl font-bold text-slate-900">
+        <h1 className="text-primary sm:text-3xl text-2xl max-w-1xl font-bold ">
           问
         </h1>
         <div className="max-w-xl w-full">
           <div className="flex mt-4 items-center space-x-3 mb-3">
-            <span className="w-7 h-7 rounded-full bg-black text-white text-center leading-7">
+            <span className="bg-secondary w-7 h-7 rounded-full text-white text-center leading-7">
               1
             </span>
-            <p className="text-left font-medium">输入你的问题</p>
+            <p className="text-secondary text-left font-medium">输入你的问题</p>
           </div>
           <textarea
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
             rows={4}
-            className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-2"
+            className="w-full rounded-md bg-fan border-gray-400 shadow-sm focus:border-secondary focus:ring-secondary my-2"
             placeholder={"e.g. " + defultDesc}
           />
           <div className="flex mb-5 items-center space-x-3">
-            <span className="w-7 h-7 rounded-full bg-black text-white text-center leading-7">
+            <span className="bg-secondary w-7 h-7 rounded-full text-white text-center leading-7">
               2
             </span>
-            <p className="text-left font-medium">选择语言</p>
+            <p className="text-secondary text-left font-medium">选择语言</p>
           </div>
           <div className="block">
             <DropDown vibe={lang} setVibe={(newLang) => setLang(newLang)} />
           </div>
 
           <div className="flex mb-5 items-center space-x-3 mt-3">
-            <span className="w-7 h-7 rounded-full bg-black text-white text-center leading-7">
+            <span className="bg-secondary w-7 h-7 rounded-full text-white text-center leading-7">
               3
             </span>
-            <p className="text-left font-medium">选择难度</p>
+            <p className="text-secondary text-left font-medium">选择难度</p>
           </div>
           <div className="block">
             <DropDown2
@@ -162,14 +163,14 @@ const Home: NextPage = () => {
 
           {!loading && (
             <button
-              className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-4 mt-3 hover:bg-black/80 w-full"
+              className="bg-primary rounded-xl text-white font-medium px-4 py-2 sm:mt-4 mt-3 hover:bg-primary/80 w-full"
               onClick={(e) => generateDesc(e)}>
               获取回答 &rarr;
             </button>
           )}
           {loading && (
             <button
-              className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-4 mt-3 hover:bg-black/80 w-full"
+              className="bg-primary rounded-xl text-white font-medium px-4 py-2 sm:mt-4 mt-3 hover:bg-primary/80 w-full"
               disabled>
               <LoadingDots color="white" style="large" />
             </button>
@@ -187,13 +188,13 @@ const Home: NextPage = () => {
               {generatedDescs && (
                 <>
                   <div>
-                    <h2 className="sm:text-4xl text-3xl font-bold text-slate-900 mx-auto">
+                    <h2 className="text-primary sm:text-4xl text-3xl font-bold mx-auto">
                       即答
                     </h2>
                   </div>
                   <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto  whitespace-pre-wrap">
                     <div
-                      className="bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border text-left"
+                      className="bg-fan1 rounded-xl shadow-md p-4 hover:bg-fan transition cursor-copy border text-left"
                       onClick={() => {
                         navigator.clipboard.writeText(generatedDescs);
                         toast("已复制到剪切板", {
@@ -221,18 +222,6 @@ const Home: NextPage = () => {
         )}
       </main>
       <Footer />
-      {/* <div className="p-5 text-center md:fixed right-0 bottom-10">
-        <a
-          href="https://www.producthunt.com/posts/teach-anything?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-teach&#0045;anything"
-          target="_blank">
-          <img
-            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=378102&theme=light"
-            alt="Teach&#0032;Anything - Teach&#0032;you&#0032;anything&#0032;in&#0032;seconds | Product Hunt"
-            width="250"
-            height="54"
-          />
-        </a>
-      </div> */}
     </div>
   );
 };

@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header className="md:flex text-center justify-between items-center w-full mt-5 pb-7 sm:px-4 px-2">
       <Link href="/" className="flex space-x-3 mb-10 md:mb-0 justify-center">
-        <h1 className="sm:text-4xl text-2xl font-bold ml-2 tracking-tight">
+        <h1 className="text-primary sm:text-4xl text-2xl font-bold ml-2 tracking-tight">
           问 · 即答
         </h1>
       </Link>

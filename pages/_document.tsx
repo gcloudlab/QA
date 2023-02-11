@@ -26,10 +26,6 @@ class MyDocument extends Document {
           <meta name="description" content="Q & A" />
           <meta property="og:description" content="Q & A" />
           <meta property="og:title" content="Q & A" />
-          {/* <meta
-            property="og:image"
-            content="https://www.teach-anything.com/og-image.png"
-          /> */}
         </Head>
         <body>
           <Main />
