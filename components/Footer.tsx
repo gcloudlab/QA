@@ -6,51 +6,30 @@ export default function Footer() {
   return (
     <footer className="text-center h-16 sm:h-20 w-full sm:pt-2 pt-4 border-t mt-5 flex sm:flex-row flex-col justify-between items-center px-3 space-y-3 sm:mb-0 mb-3">
       <div>
-        <div className="text-start">
-          Based on Open AI's{" "}
-          <a
-            className="font-bold hover:underline transition underline-offset-2"
-            href="https://platform.openai.com/docs/models/gpt-3"
-            target="__black">
-            GPT-3 models
-          </a>
-          .
-          <br />
-          Current model is{" "}
-          <a
-            className="font-bold hover:underline transition underline-offset-2"
-            href="https://platform.openai.com/docs/models/gpt-3"
-            target="__black">
-            {curr_model}
-          </a>
-          .
-        </div>
-        <div>
-          Powered by{" "}
-          <a
-            href="https://beta.openai.com/account"
-            target="_blank"
-            rel="noreferrer"
-            className="font-bold hover:underline transition underline-offset-2">
-            OpenAI
-          </a>
-          {" . "}
-          <a
-            href="https://vercel.com/"
-            target="_blank"
-            rel="noreferrer"
-            className="font-bold hover:underline transition underline-offset-2">
-            Vercel
-          </a>
-          {" . "}
-          <a
-            href="https://nextjs.org/"
-            target="_blank"
-            rel="noreferrer"
-            className="font-bold hover:underline transition underline-offset-2">
-            Next.js
-          </a>
-        </div>
+        Powered by{" "}
+        <a
+          href="https://beta.openai.com/account"
+          target="_blank"
+          rel="noreferrer"
+          className="font-bold hover:underline transition underline-offset-2">
+          OpenAI GPT-3 models
+        </a>
+        {" . "}
+        <a
+          href="https://vercel.com/"
+          target="_blank"
+          rel="noreferrer"
+          className="font-bold hover:underline transition underline-offset-2">
+          Vercel
+        </a>
+        {" . "}
+        <a
+          href="https://nextjs.org/"
+          target="_blank"
+          rel="noreferrer"
+          className="font-bold hover:underline transition underline-offset-2">
+          Next.js
+        </a>
       </div>
       <div className="flex space-x-4 pb-4 sm:pb-0">
         <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fqa.js.cn&count_bg=%2379C83D&title_bg=%23555555&icon=awesomelists.svg&icon_color=%230AFFAB&title=visitor&edge_flat=true" />
