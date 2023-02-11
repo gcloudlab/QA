@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 export default function Footer() {
+  let curr_model = process.env.AI_MODEL || "text-ada-001";
+
   return (
     <footer className="text-center h-16 sm:h-20 w-full sm:pt-2 pt-4 border-t mt-5 flex sm:flex-row flex-col justify-between items-center px-3 space-y-3 sm:mb-0 mb-3">
       <div>
@@ -19,7 +21,7 @@ export default function Footer() {
             className="font-bold hover:underline transition underline-offset-2"
             href="https://platform.openai.com/docs/models/gpt-3"
             target="__black">
-            {process.env.AI_MODEL || "text-ada-001"}
+            {curr_model}
           </a>
           .
         </div>
