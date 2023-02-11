@@ -94,7 +94,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="bg-fan flex flex-col items-center justify-center py-2 min-h-screen">
+    <div className="flex flex-col items-center justify-center py-2 min-h-screen">
       <Head>
         <title>问 · 即答</title>
         <link

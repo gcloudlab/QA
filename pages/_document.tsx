@@ -27,7 +27,7 @@ class MyDocument extends Document {
           <meta property="og:description" content="Q & A" />
           <meta property="og:title" content="Q & A" />
         </Head>
-        <body>
+        <body style={{ backgroundColor: "#F5E6D8" }}>
           <Main />
           <NextScript />
         </body>
