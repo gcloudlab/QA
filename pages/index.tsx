@@ -188,7 +188,7 @@ const Home: NextPage = () => {
               {generatedDescs && (
                 <>
                   <div>
-                    <h2 className="text-primary sm:text-4xl text-3xl font-bold mx-auto">
+                    <h2 className="text-primary sm:text-3xl text-2xl font-bold mx-auto">
                       即答
                     </h2>
                   </div>
