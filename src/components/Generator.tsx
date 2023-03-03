@@ -4,7 +4,7 @@ import IconClear from "./icons/Clear";
 import type { ChatMessage } from "../types";
 
 export default () => {
-  let inputRef: HTMLInputElement;
+  let inputRef: HTMLTextAreaElement;
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([]);
   const [currentAssistantMessage, setCurrentAssistantMessage] =
     createSignal("");
@@ -92,9 +92,8 @@ export default () => {
           </div>
         )}>
         <div class="my-4 flex items-center gap-2">
-          <input
+          <textarea
             ref={inputRef!}
-            type="textarea"
             id="input"
             placeholder="Enter something..."
             autocomplete="off"
