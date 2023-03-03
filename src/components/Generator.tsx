@@ -103,7 +103,7 @@ export default () => {
             }}
             w-full
             px-4
-            pt-4
+            pt-3
             h-12
             text-slate
             rounded-sm
