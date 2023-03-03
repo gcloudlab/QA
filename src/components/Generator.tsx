@@ -75,8 +75,6 @@ export default () => {
     inputRef.focus();
   };
 
-  const handleKeyDown = (e: KeyboardEvent) => {};
-
   return (
     <div my-6>
       <For each={messageList()}>
@@ -94,10 +92,11 @@ export default () => {
             AI is thinking...
           </div>
         )}>
-        <div class="my-4 flex items-center gap-2">
+        <div class="my-4 flex items-end gap-2">
           <textarea
             ref={inputRef!}
             id="input"
+            // rows={1}
             placeholder="Enter something..."
             autocomplete="off"
             autofocus
@@ -114,6 +113,7 @@ export default () => {
                 inputRef.value =
                   value.substring(0, start) + "\n" + value.substring(end);
                 inputRef.selectionStart = inputRef.selectionEnd = start + 1;
+                inputRef.rows += 1;
               }
               // e.key === "Enter" && !e.isComposing && handleButtonClick();
             }}
