@@ -79,6 +79,28 @@ export default () => {
 
   return (
     <div my-6>
+      <div class="my-4 gap-2">
+        <input
+          ref={inputKeyRef!}
+          type="text"
+          placeholder="Custom key (Optional)"
+          autocomplete="off"
+          w-full
+          px-4
+          py-3
+          h-12
+          min-h-12
+          text-slate
+          rounded-sm
+          bg-slate
+          bg-op-15
+          focus:bg-op-20
+          focus:ring-0
+          focus:outline-none
+          placeholder:text-slate-400
+          placeholder:op-30
+        />
+      </div>
       <For each={messageList()}>
         {(message) => (
           <MessageItem role={message.role} message={message.content} />
@@ -94,28 +116,6 @@ export default () => {
             thinking...
           </div>
         )}>
-        <div class="my-4 gap-2">
-          <input
-            ref={inputKeyRef!}
-            type="text"
-            placeholder="Custom key (Optional)"
-            autocomplete="off"
-            w-full
-            px-4
-            py-3
-            h-12
-            min-h-12
-            text-slate
-            rounded-sm
-            bg-slate
-            bg-op-15
-            focus:bg-op-20
-            focus:ring-0
-            focus:outline-none
-            placeholder:text-slate-400
-            placeholder:op-30
-          />
-        </div>
         <div class="my-4 flex items-end gap-2">
           <textarea
             ref={inputRef!}
