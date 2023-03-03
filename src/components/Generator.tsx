@@ -5,6 +5,7 @@ import type { ChatMessage } from "../types";
 
 export default () => {
   let inputRef: HTMLTextAreaElement;
+  let inputKeyRef: HTMLInputElement;
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([]);
   const [currentAssistantMessage, setCurrentAssistantMessage] =
     createSignal("");
@@ -30,6 +31,7 @@ export default () => {
       method: "POST",
       body: JSON.stringify({
         messages: messageList(),
+        customKey: inputKeyRef.value,
       }),
     });
     if (!response.ok) {
@@ -89,15 +91,37 @@ export default () => {
         when={!loading()}
         fallback={() => (
           <div class="h-12 my-4 flex items-center justify-center bg-slate bg-op-15 text-slate rounded-sm">
-            AI is thinking...
+            thinking...
           </div>
         )}>
+        <div class="my-4 gap-2">
+          <input
+            ref={inputKeyRef!}
+            type="text"
+            placeholder="Custom key (Optional)"
+            autocomplete="off"
+            w-full
+            px-4
+            py-3
+            h-12
+            min-h-12
+            text-slate
+            rounded-sm
+            bg-slate
+            bg-op-15
+            focus:bg-op-20
+            focus:ring-0
+            focus:outline-none
+            placeholder:text-slate-400
+            placeholder:op-30
+          />
+        </div>
         <div class="my-4 flex items-end gap-2">
           <textarea
             ref={inputRef!}
             id="input"
             // rows={1}
-            placeholder="Enter something..."
+            placeholder="Talk with me..."
             autocomplete="off"
             autofocus
             disabled={loading()}
@@ -119,12 +143,13 @@ export default () => {
             }}
             w-full
             px-4
-            pt-3
+            py-3
             h-12
             min-h-12
             text-slate
             rounded-sm
             bg-slate
+            class="ipt"
             bg-op-15
             focus:bg-op-20
             focus:ring-0
