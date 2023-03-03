@@ -94,7 +94,7 @@ export default () => {
         <div class="my-4 flex items-center gap-2">
           <input
             ref={inputRef!}
-            type="text"
+            type="textarea"
             id="input"
             placeholder="Enter something..."
             autocomplete="off"
