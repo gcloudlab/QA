@@ -93,6 +93,7 @@ export default () => {
         )}>
         <div class="my-4 flex items-center gap-2">
           <textarea
+            class="flex"
             ref={inputRef!}
             id="input"
             placeholder="Enter something..."
@@ -103,6 +104,7 @@ export default () => {
               e.key === "Enter" && !e.isComposing && handleButtonClick();
             }}
             w-full
+            items-center
             px-4
             h-12
             text-slate
