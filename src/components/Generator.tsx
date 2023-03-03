@@ -121,6 +121,7 @@ export default () => {
             px-4
             pt-3
             h-12
+            min-h-12
             text-slate
             rounded-sm
             bg-slate
