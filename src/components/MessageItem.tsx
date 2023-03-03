@@ -28,12 +28,12 @@ export default ({ role, message }: Props) => {
   };
   return (
     <div
-      class="flex py-2 gap-3 -mx-4 px-4 rounded-lg transition-colors md:hover:bg-slate/3"
+      class="flex py-2 gap-3  px-4 rounded-1 transition-colors bg-[#80a39d] md:hover:bg-slate-4"
       class:op-75={role === "user"}>
       <div
         class={`shrink-0 w-7 h-7 mt-4 rounded-full op-80 ${roleClass[role]}`}></div>
       <div
-        class="message prose text-slate-700 break-words overflow-hidden"
+        class="message prose text-slate-900 break-words overflow-hidden"
         innerHTML={htmlString()}
       />
     </div>
