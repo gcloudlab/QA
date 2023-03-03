@@ -65,13 +65,17 @@ export default () => {
     ]);
     setCurrentAssistantMessage("");
     setLoading(false);
+    inputRef.focus();
   };
 
   const clear = () => {
     inputRef.value = "";
     setMessageList([]);
     setCurrentAssistantMessage("");
+    inputRef.focus();
   };
+
+  const handleKeyDown = (e: KeyboardEvent) => {};
 
   return (
     <div my-6>
@@ -99,7 +103,19 @@ export default () => {
             autofocus
             disabled={loading()}
             onKeyDown={(e) => {
-              e.key === "Enter" && !e.isComposing && handleButtonClick();
+              if (e.key === "Enter" && !e.isComposing && !e.shiftKey) {
+                e.preventDefault();
+                handleButtonClick();
+              } else if (e.key === "Enter" && e.shiftKey) {
+                e.preventDefault();
+                const start = inputRef.selectionStart;
+                const end = inputRef.selectionEnd;
+                const value = inputRef.value;
+                inputRef.value =
+                  value.substring(0, start) + "\n" + value.substring(end);
+                inputRef.selectionStart = inputRef.selectionEnd = start + 1;
+              }
+              // e.key === "Enter" && !e.isComposing && handleButtonClick();
             }}
             w-full
             px-4
