@@ -7,7 +7,6 @@ specifiers:
   '@unocss/preset-attributify': ^0.50.1
   '@unocss/preset-typography': ^0.50.3
   '@unocss/reset': ^0.50.1
-  '@vercel/analytics': ^0.1.11
   astro: ^2.0.15
   eventsource-parser: ^0.1.0
   highlight.js: ^11.7.0
@@ -23,7 +22,6 @@ dependencies:
   '@astrojs/solid-js': 2.0.2_3gp6ihuexfr5udehowqtgybixa
   '@astrojs/vercel': 3.1.3_astro@2.0.15+react@18.2.0
   '@unocss/reset': 0.50.1
-  '@vercel/analytics': 0.1.11_react@18.2.0
   astro: 2.0.15
   eventsource-parser: 0.1.0
   highlight.js: 11.7.0
