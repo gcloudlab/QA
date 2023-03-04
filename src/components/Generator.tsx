@@ -4,6 +4,7 @@ import LoadingDots from "./LoadingDots";
 import { clearCustomKey, getCustomKey, setCustomKey } from "../utils/cache";
 import IconClear from "./icons/Clear";
 import type { ChatMessage } from "../types";
+import { hideKey } from "../utils/hideKey";
 
 export default () => {
   let inputRef: HTMLTextAreaElement;
@@ -21,7 +22,6 @@ export default () => {
     }
     setLoading(true);
 
-    // inputRef.value = "";
     setMessageList([
       ...messageList(),
       {
@@ -33,6 +33,8 @@ export default () => {
     setError(false);
     setCustomKey(inputKeyRef.value);
     inputKeyRef.value = "";
+    inputKeyRef.placeholder =
+      getCustomKey() !== "" ? hideKey(getCustomKey()) : "Custom key (Optional)";
 
     const response = await fetch("/api/generate", {
       method: "POST",
@@ -94,9 +96,7 @@ export default () => {
           type="text"
           placeholder={`${
             getCustomKey() !== ""
-              ? getCustomKey().slice(0, 2) +
-                "***********" +
-                getCustomKey().slice(getCustomKey().length - 3)
+              ? hideKey(getCustomKey())
               : "Custom key (Optional)"
           }`}
           autocomplete="off"
