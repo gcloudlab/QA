@@ -9,9 +9,9 @@ const LoadingDots = ({
 }) => {
   return (
     <span class={style == "small" ? "loading2" : "loading"}>
-      <span class={`bg-[#${color}]`} />
-      <span class={`bg-[#${color}]`} />
-      <span class={`bg-[#${color}]`} />
+      <span class="bg-black" />
+      <span class="bg-black" />
+      <span class="bg-black" />
     </span>
   );
 };

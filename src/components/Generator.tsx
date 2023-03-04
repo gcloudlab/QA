@@ -140,6 +140,7 @@ export default () => {
           </button>
         </Show>
       </div>
+
       <For each={messageList()}>
         {(message) => (
           <MessageItem role={message.role} message={message.content} />
