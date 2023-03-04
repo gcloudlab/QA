@@ -92,7 +92,7 @@ export default () => {
           placeholder={`${
             cacheKey() !== ""
               ? cacheKey().slice(0, 2) +
-                "*".repeat(cacheKey().length - 5) +
+                "*********" +
                 cacheKey().slice(cacheKey().length - 3)
               : "Custom key (Optional)"
           }`}
