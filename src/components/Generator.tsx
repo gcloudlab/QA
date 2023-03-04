@@ -13,7 +13,6 @@ export default () => {
     createSignal("");
   const [loading, setLoading] = createSignal(false);
   const [error, setError] = createSignal(false);
-  const [cacheKey, setCacheKey] = createSignal(getCustomKey());
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value;
@@ -33,7 +32,6 @@ export default () => {
 
     setError(false);
     setCustomKey(inputKeyRef.value);
-    setCacheKey(inputKeyRef.value);
     inputKeyRef.value = "";
 
     const response = await fetch("/api/generate", {
@@ -95,10 +93,10 @@ export default () => {
           ref={inputKeyRef!}
           type="text"
           placeholder={`${
-            cacheKey() !== ""
-              ? cacheKey().slice(0, 2) +
+            getCustomKey() !== ""
+              ? getCustomKey().slice(0, 2) +
                 "***********" +
-                cacheKey().slice(cacheKey().length - 3)
+                getCustomKey().slice(getCustomKey().length - 3)
               : "Custom key (Optional)"
           }`}
           autocomplete="off"
@@ -117,13 +115,12 @@ export default () => {
           placeholder:text-slate-900
           placeholder:op-30
         />
-        <Show when={cacheKey() !== ""}>
+        <Show when={getCustomKey() !== ""}>
           <button
             title="Clear cache"
             onClick={() => {
               clearCustomKey();
               inputKeyRef.value = "";
-              setCacheKey("");
             }}
             disabled={loading()}
             h-12
