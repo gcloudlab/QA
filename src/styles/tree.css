@@ -5,7 +5,7 @@
 .tree li {
   display: block;
   position: relative;
-  padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
+  /* padding-left: calc(2 * var(--spacing) - var(--radius) - 2px); */
 }
 .tree ul {
   margin-left: calc(var(--radius) - var(--spacing));
@@ -31,6 +31,7 @@
 .tree summary {
   display: block;
   cursor: pointer;
+  padding-left: calc(2 * var(--spacing) - var(--radius) - 8px);
 }
 .tree summary::marker,
 .tree summary::-webkit-details-marker {
@@ -48,7 +49,7 @@
   display: block;
   position: absolute;
   top: calc(var(--spacing) / 2 - var(--radius));
-  left: calc(var(--spacing) - var(--radius) - 1px);
+  left: calc(var(--spacing) - var(--radius) - 13px);
   width: calc(2 * var(--radius));
   height: calc(2 * var(--radius));
   border-radius: 50%;
@@ -57,7 +58,7 @@
 .tree summary::before {
   content: "+";
   z-index: 1;
-  background: #696;
+  background: #80a39d;
   color: #fff;
   line-height: calc(2 * var(--radius) - 2px);
   text-align: center;

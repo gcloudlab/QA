@@ -90,57 +90,64 @@ export default () => {
 
   return (
     <div my-6>
-      <div class="my-4 flex gap-2">
-        <input
-          ref={inputKeyRef!}
-          type="text"
-          placeholder={`${
-            getCustomKey() !== ""
-              ? hideKey(getCustomKey())
-              : "Custom key (Optional)"
-          }`}
-          autocomplete="off"
-          w-full
-          px-4
-          py-3
-          h-12
-          min-h-12
-          text-slate-700
-          rounded-1
-          bg-slate
-          bg-op-15
-          focus:bg-op-20
-          focus:ring-0
-          focus:outline-none
-          placeholder:text-slate-900
-          placeholder:op-30
-        />
-        <Show when={getCustomKey() !== ""}>
-          <button
-            title="Clear cache"
-            onClick={() => {
-              clearCustomKey();
-              inputKeyRef.value = "";
-              inputKeyRef.placeholder =
-                getCustomKey() !== ""
-                  ? hideKey(getCustomKey())
-                  : "Custom key (Optional)";
-            }}
-            disabled={loading()}
-            h-12
-            px-4
-            py-2
-            bg-slate
-            bg-op-15
-            hover:bg-slate-4
-            transition-colors
-            text-slate
-            hover:text-slate-1
-            rounded-1>
-            <IconClear />
-          </button>
-        </Show>
-      </div>
+      <ul class="tree">
+        <li>
+          <details open>
+            <summary text-slate>Advanced Options </summary>
+            <div class="my-4 flex gap-1">
+              <input
+                ref={inputKeyRef!}
+                type="text"
+                placeholder={`${
+                  getCustomKey() !== ""
+                    ? hideKey(getCustomKey())
+                    : "Custom key (Optional)"
+                }`}
+                autocomplete="off"
+                w-full
+                px-4
+                py-3
+                h-12
+                min-h-12
+                text-slate-700
+                rounded-1
+                bg-slate
+                bg-op-15
+                focus:bg-op-20
+                focus:ring-0
+                focus:outline-none
+                placeholder:text-slate-900
+                placeholder:op-30
+              />
+              <Show when={getCustomKey() !== ""}>
+                <button
+                  title="Clear cache"
+                  onClick={() => {
+                    clearCustomKey();
+                    inputKeyRef.value = "";
+                    inputKeyRef.placeholder =
+                      getCustomKey() !== ""
+                        ? hideKey(getCustomKey())
+                        : "Custom key (Optional)";
+                  }}
+                  disabled={loading()}
+                  h-12
+                  px-4
+                  py-2
+                  bg-slate
+                  bg-op-15
+                  hover:bg-slate-4
+                  transition-colors
+                  text-slate
+                  hover:text-slate-1
+                  rounded-1>
+                  <IconClear />
+                </button>
+              </Show>
+            </div>
+          </details>
+        </li>
+      </ul>
 
       <For each={messageList()}>
         {(message) => (
@@ -158,7 +165,7 @@ export default () => {
             <LoadingDots style="large" />
           </button>
         )}>
-        <div class="my-4 flex items-end gap-2">
+        <div class="my-4 flex items-end gap-1">
           <textarea
             ref={inputRef!}
             id="input"
