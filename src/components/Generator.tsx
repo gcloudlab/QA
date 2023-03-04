@@ -92,9 +92,9 @@ export default () => {
     <div my-6>
       <ul class="tree">
         <li>
-          <details open>
-            <summary text-slate>Advanced Options </summary>
-            <div class="my-4 flex gap-1">
+          <details open mb-4>
+            <summary text-slate>Advanced Options</summary>
+            <div class="mt-4 flex gap-1">
               <input
                 ref={inputKeyRef!}
                 type="text"
@@ -136,7 +136,7 @@ export default () => {
                   py-2
                   bg-slate
                   bg-op-15
-                  hover:bg-slate-4
+                  hover:bg-slate-5
                   transition-colors
                   text-slate
                   hover:text-slate-1
@@ -170,7 +170,7 @@ export default () => {
             ref={inputRef!}
             id="input"
             // rows={1}
-            placeholder="Talk with me..."
+            placeholder="Say something, and press 'Enter'"
             autocomplete="off"
             autofocus
             disabled={loading()}
@@ -242,7 +242,7 @@ export default () => {
             py-2
             bg-slate
             bg-op-15
-            hover:bg-slate-4
+            hover:bg-slate-500
             transition-colors
             text-slate
             hover:text-slate-1
