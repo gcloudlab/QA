@@ -56,7 +56,8 @@ export const post: APIRoute = async (context) => {
             const queue = encoder.encode(text);
             controller.enqueue(queue);
           } catch (e) {
-            controller.error(e);
+            // controller.error(e);
+            console.log(e);
           }
         }
       };

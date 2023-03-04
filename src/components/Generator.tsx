@@ -1,5 +1,6 @@
 import { createSignal, For, Show } from "solid-js";
 import MessageItem from "./MessageItem";
+import LoadingDots from "./LoadingDots";
 import { clearCustomKey, getCustomKey, setCustomKey } from "../utils/cache";
 import IconClear from "./icons/Clear";
 import type { ChatMessage } from "../types";
@@ -11,6 +12,7 @@ export default () => {
   const [currentAssistantMessage, setCurrentAssistantMessage] =
     createSignal("");
   const [loading, setLoading] = createSignal(false);
+  const [error, setError] = createSignal(false);
   const [cacheKey, setCacheKey] = createSignal(getCustomKey());
 
   const handleButtonClick = async () => {
@@ -20,7 +22,7 @@ export default () => {
     }
     setLoading(true);
 
-    inputRef.value = "";
+    // inputRef.value = "";
     setMessageList([
       ...messageList(),
       {
@@ -29,6 +31,7 @@ export default () => {
       },
     ]);
 
+    setError(false);
     setCustomKey(inputKeyRef.value);
     setCacheKey(inputKeyRef.value);
     inputKeyRef.value = "";
@@ -41,6 +44,8 @@ export default () => {
       }),
     });
     if (!response.ok) {
+      setLoading(false);
+      setError(true);
       throw new Error(response.statusText);
     }
     const data = response.body;
@@ -92,7 +97,7 @@ export default () => {
           placeholder={`${
             cacheKey() !== ""
               ? cacheKey().slice(0, 2) +
-                "*********" +
+                "***********" +
                 cacheKey().slice(cacheKey().length - 3)
               : "Custom key (Optional)"
           }`}
@@ -126,8 +131,10 @@ export default () => {
             py-2
             bg-slate
             bg-op-15
-            hover:bg-op-20
+            hover:bg-slate-4
+            transition-colors
             text-slate
+            hover:text-slate-1
             rounded-1>
             <IconClear />
           </button>
@@ -141,12 +148,13 @@ export default () => {
       {currentAssistantMessage() && (
         <MessageItem role="assistant" message={currentAssistantMessage} />
       )}
+
       <Show
         when={!loading()}
         fallback={() => (
-          <div class="h-12 my-4 flex items-center justify-center bg-slate bg-op-15 text-slate-500 rounded-sm">
-            thinking...
-          </div>
+          <button class="h-12 bg-[#80a39d] rounded-1 text-white font-medium px-4 py-2 sm:mt-4 mt-3 hover:bg-primary/80 w-full">
+            <LoadingDots style="large" />
+          </button>
         )}>
         <div class="my-4 flex items-end gap-2">
           <textarea
@@ -197,7 +205,8 @@ export default () => {
             py-2
             bg-slate
             bg-op-15
-            hover:bg-op-20
+            hover:bg-slate-4
+            transition-colors
             text-slate
             rounded-1>
             <svg
@@ -216,7 +225,7 @@ export default () => {
             </svg>
           </button>
           <button
-            title="Clear caht"
+            title="Clear chat"
             onClick={clear}
             disabled={loading()}
             h-12
@@ -224,12 +233,25 @@ export default () => {
             py-2
             bg-slate
             bg-op-15
-            hover:bg-op-20
+            hover:bg-slate-4
+            transition-colors
             text-slate
+            hover:text-slate-1
             rounded-1>
             <IconClear />
           </button>
         </div>
+        {error() && (
+          <p class="text-gray-400 my-5">
+            🚨 Something error, please try again later, or{" "}
+            <a
+              href="https://github.com/yesmore/QA/issues"
+              class=" underline hover:text-black">
+              contact
+            </a>
+            .{" "}
+          </p>
+        )}
       </Show>
     </div>
   );
