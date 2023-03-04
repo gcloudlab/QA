@@ -6,8 +6,20 @@ Chat with Ai, based on ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.opena
 
 ## Feature
 
-- ⚡ fastly
-- 🤩 support custom key
+- fastly
+- support custom key
+
+## Local development
+
+> Make sure to rename the file `.env.example` to `.env`, and fill in the key value via [OpenAI](https://beta.openai.com/account/api-keys).
+
+```bash
+git clone https://github.com/yesmore/QA.git
+pnpm i
+
+# make sure your Node.js version is 18.+
+pnpm dev
+```
 
 ## Deploy With Vercel
 
@@ -15,6 +27,10 @@ Chat with Ai, based on ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.opena
 
 ## License
 
-GPT
+[GPL](./LICENSE)
 
 <a href="https://www.buymeacoffee.com/yesmore" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
+## Thanks
+
+- [chatgpt-demo](https://github.com/ddiu8081/chatgpt-demo)

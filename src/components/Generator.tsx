@@ -1,5 +1,6 @@
 import { createSignal, For, Show } from "solid-js";
 import MessageItem from "./MessageItem";
+import { clearCustomKey, getCustomKey, setCustomKey } from "../utils/cache";
 import IconClear from "./icons/Clear";
 import type { ChatMessage } from "../types";
 
@@ -26,6 +27,8 @@ export default () => {
         content: inputValue,
       },
     ]);
+
+    setCustomKey(inputKeyRef.value);
 
     const response = await fetch("/api/generate", {
       method: "POST",
@@ -79,10 +82,11 @@ export default () => {
 
   return (
     <div my-6>
-      <div class="my-4 gap-2">
+      <div class="my-4 flex gap-2">
         <input
+          value={getCustomKey()}
           ref={inputKeyRef!}
-          type="text"
+          type="password"
           placeholder="Custom key (Optional)"
           autocomplete="off"
           w-full
@@ -100,6 +104,25 @@ export default () => {
           placeholder:text-slate-900
           placeholder:op-30
         />
+        <Show when={getCustomKey() !== ""}>
+          <button
+            title="Clear cache"
+            onClick={() => {
+              clearCustomKey();
+              inputKeyRef.value = "";
+            }}
+            disabled={loading()}
+            h-12
+            px-4
+            py-2
+            bg-slate
+            bg-op-15
+            hover:bg-op-20
+            text-slate
+            rounded-1>
+            <IconClear />
+          </button>
+        </Show>
       </div>
       <For each={messageList()}>
         {(message) => (
@@ -184,7 +207,7 @@ export default () => {
             </svg>
           </button>
           <button
-            title="Clear"
+            title="Clear caht"
             onClick={clear}
             disabled={loading()}
             h-12
