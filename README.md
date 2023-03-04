@@ -11,7 +11,7 @@ Chat with Ai, based on ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.opena
 
 ## Local development
 
-> Make sure to rename the file `.env.example` to `.env`, and fill in the key value via [OpenAI](https://beta.openai.com/account/api-keys).
+> Make sure to rename the file `.env.example` to `.env`, and fill in the key value via [OpenAI](https://platform.openai.com/account/api-keys).
 
 ```bash
 git clone https://github.com/yesmore/QA.git

@@ -30,12 +30,14 @@ export default () => {
     ]);
 
     setCustomKey(inputKeyRef.value);
+    setCacheKey(inputKeyRef.value);
+    inputKeyRef.value = "";
 
     const response = await fetch("/api/generate", {
       method: "POST",
       body: JSON.stringify({
         messages: messageList(),
-        customKey: inputKeyRef.value,
+        customKey: getCustomKey(),
       }),
     });
     if (!response.ok) {
