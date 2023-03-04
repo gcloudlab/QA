@@ -121,6 +121,10 @@ export default () => {
             onClick={() => {
               clearCustomKey();
               inputKeyRef.value = "";
+              inputKeyRef.placeholder =
+                getCustomKey() !== ""
+                  ? hideKey(getCustomKey())
+                  : "Custom key (Optional)";
             }}
             disabled={loading()}
             h-12
