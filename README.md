@@ -6,8 +6,9 @@ Chat with Ai, based on ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.opena
 
 ## Feature
 
-- fastly
-- support custom key
+- Realy fast
+- Support custom key
+- Random conversation scene prompts
 
 ## Local development
 
@@ -32,5 +33,6 @@ pnpm dev
 ## Thanks
 
 - [chatgpt-demo](https://github.com/ddiu8081/chatgpt-demo)
+- [Awesome ChatGPT Prompts](https://prompts.chat/)
 
 <a href="https://www.buymeacoffee.com/yesmore" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>

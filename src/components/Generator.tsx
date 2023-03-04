@@ -1,10 +1,16 @@
 import { createSignal, For, Show } from "solid-js";
 import MessageItem from "./MessageItem";
 import LoadingDots from "./LoadingDots";
-import { clearCustomKey, getCustomKey, setCustomKey } from "../utils/cache";
+import {
+  clearCustomKey,
+  getCustomKey,
+  setCustomKey,
+  hideKey,
+  getRandomInt,
+} from "../utils";
+import PromptList from "../data/prompts.json";
 import IconClear from "./icons/Clear";
 import type { ChatMessage } from "../types";
-import { hideKey } from "../utils/hideKey";
 
 export default () => {
   let inputRef: HTMLTextAreaElement;
@@ -81,6 +87,12 @@ export default () => {
     inputRef.focus();
   };
 
+  const handleRandomPrompt = async () => {
+    const _index = getRandomInt(0, PromptList.length - 1);
+    inputRef.value = PromptList[_index].prompt;
+    handleButtonClick();
+  };
+
   const clear = () => {
     inputRef.value = "";
     setMessageList([]);
@@ -92,8 +104,19 @@ export default () => {
     <div my-6>
       <ul class="tree">
         <li>
-          <details open mb-4>
-            <summary text-slate>Advanced Options</summary>
+          <details mb-4>
+            <summary text-slate>
+              Advanced Options or{" "}
+              <button
+                title="Generate a conversation scene randomly"
+                disabled={loading()}
+                transition-colors
+                text-slate-6
+                hover:text-slate-4
+                onClick={handleRandomPrompt}>
+                Random prompt🎉
+              </button>
+            </summary>
             <div class="mt-4 flex gap-1">
               <input
                 ref={inputKeyRef!}
@@ -130,7 +153,6 @@ export default () => {
                         ? hideKey(getCustomKey())
                         : "Custom key (Optional)";
                   }}
-                  disabled={loading()}
                   h-12
                   px-4
                   py-2
@@ -170,7 +192,7 @@ export default () => {
             ref={inputRef!}
             id="input"
             // rows={1}
-            placeholder="Say something, and press 'Enter'"
+            placeholder="Say something..."
             autocomplete="off"
             autofocus
             disabled={loading()}
@@ -256,7 +278,7 @@ export default () => {
             <a
               href="https://github.com/yesmore/QA/issues"
               class=" underline hover:text-black">
-              contact
+              contact issue
             </a>
             .{" "}
           </p>
