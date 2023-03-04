@@ -11,6 +11,7 @@ export default () => {
   const [currentAssistantMessage, setCurrentAssistantMessage] =
     createSignal("");
   const [loading, setLoading] = createSignal(false);
+  const [cacheKey, setCacheKey] = createSignal(getCustomKey());
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value;
@@ -84,10 +85,15 @@ export default () => {
     <div my-6>
       <div class="my-4 flex gap-2">
         <input
-          value={getCustomKey()}
           ref={inputKeyRef!}
-          type="password"
-          placeholder="Custom key (Optional)"
+          type="text"
+          placeholder={`${
+            cacheKey() !== ""
+              ? cacheKey().slice(0, 2) +
+                "*".repeat(cacheKey().length - 5) +
+                cacheKey().slice(cacheKey().length - 3)
+              : "Custom key (Optional)"
+          }`}
           autocomplete="off"
           w-full
           px-4
@@ -104,12 +110,13 @@ export default () => {
           placeholder:text-slate-900
           placeholder:op-30
         />
-        <Show when={getCustomKey() !== ""}>
+        <Show when={cacheKey() !== ""}>
           <button
             title="Clear cache"
             onClick={() => {
               clearCustomKey();
               inputKeyRef.value = "";
+              setCacheKey("");
             }}
             disabled={loading()}
             h-12
