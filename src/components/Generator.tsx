@@ -1,4 +1,4 @@
-import { createSignal, For, Show, Index } from "solid-js";
+import { createSignal, onMount, Show, Index } from "solid-js";
 import MessageItem from "./MessageItem";
 import LoadingDots from "./icons/LoadingDots";
 import {
@@ -15,12 +15,50 @@ import type { ChatMessage } from "@/types";
 export default () => {
   let inputRef: HTMLTextAreaElement;
   let inputKeyRef: HTMLInputElement;
+  let autoScrolling = true;
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([]);
   const [currentAssistantMessage, setCurrentAssistantMessage] =
     createSignal("");
   const [loading, setLoading] = createSignal(false);
   const [error, setError] = createSignal(false);
   const [controller, setController] = createSignal<AbortController>(null);
+
+  onMount(() => {
+    window.addEventListener(
+      "wheel",
+      () => {
+        stopAutoScroll();
+      },
+      { passive: false }
+    );
+    window.addEventListener(
+      "touchmove",
+      () => {
+        stopAutoScroll();
+      },
+      { passive: false }
+    );
+    window.addEventListener(
+      "keydown",
+      (e) => {
+        if (e.key === "ArrowUp" || e.key === "ArrowUp") {
+          stopAutoScroll();
+        }
+      },
+      { passive: false }
+    );
+  });
+  const startAutoScroll = () => {
+    if (autoScrolling) {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  };
+  const stopAutoScroll = () => {
+    autoScrolling = false;
+  };
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value;
@@ -37,8 +75,8 @@ export default () => {
     ]);
     requestWithLatestMessage();
   };
-
   const requestWithLatestMessage = async () => {
+    autoScrolling = true;
     setLoading(true);
     setCurrentAssistantMessage("");
     try {
@@ -85,10 +123,7 @@ export default () => {
           if (char) {
             setCurrentAssistantMessage(currentAssistantMessage() + char);
           }
-          window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: "smooth",
-          });
+          startAutoScroll();
         }
         done = readerDone;
       }
@@ -102,7 +137,6 @@ export default () => {
     }
     archiveCurrentMessage();
   };
-
   const archiveCurrentMessage = () => {
     if (currentAssistantMessage()) {
       setMessageList([
@@ -118,6 +152,13 @@ export default () => {
       inputRef.focus();
     }
   };
+  const clear = () => {
+    inputRef.value = "";
+    inputRef.style.height = "auto";
+    setMessageList([]);
+    setCurrentAssistantMessage("");
+    inputRef.focus();
+  };
 
   const stopStreamFetch = () => {
     if (controller()) {
@@ -125,7 +166,6 @@ export default () => {
       archiveCurrentMessage();
     }
   };
-
   const retryLastFetch = () => {
     if (messageList().length > 0) {
       const lastMessage = messageList()[messageList().length - 1];
@@ -135,7 +175,6 @@ export default () => {
       }
     }
   };
-
   const handleKeydown = (e: KeyboardEvent) => {
     if (e.isComposing || e.shiftKey) {
       return;
@@ -144,19 +183,10 @@ export default () => {
       handleButtonClick();
     }
   };
-
   const handleRandomPrompt = async () => {
     const _index = getRandomInt(0, PromptList.length - 1);
     inputRef.value = PromptList[_index].prompt;
     handleButtonClick();
-  };
-
-  const clear = () => {
-    inputRef.value = "";
-    inputRef.style.height = "auto";
-    setMessageList([]);
-    setCurrentAssistantMessage("");
-    inputRef.focus();
   };
 
   return (
