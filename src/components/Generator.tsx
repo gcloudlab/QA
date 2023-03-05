@@ -72,6 +72,10 @@ export default () => {
         if (char) {
           setCurrentAssistantMessage(currentAssistantMessage() + char);
         }
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
       }
       done = readerDone;
     }
@@ -85,6 +89,15 @@ export default () => {
     setCurrentAssistantMessage("");
     setLoading(false);
     inputRef.focus();
+  };
+
+  const handleKeydown = (e: KeyboardEvent) => {
+    if (e.isComposing || e.shiftKey) {
+      return;
+    }
+    if (e.key === "Enter") {
+      handleButtonClick();
+    }
   };
 
   const handleRandomPrompt = async () => {
@@ -191,32 +204,21 @@ export default () => {
           <textarea
             ref={inputRef!}
             id="input"
-            // rows={1}
             placeholder="Say something..."
+            rows="1"
             autocomplete="off"
             autofocus
             disabled={loading()}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.isComposing && !e.shiftKey) {
-                e.preventDefault();
-                handleButtonClick();
-              } else if (e.key === "Enter" && e.shiftKey) {
-                e.preventDefault();
-                const start = inputRef.selectionStart;
-                const end = inputRef.selectionEnd;
-                const value = inputRef.value;
-                inputRef.value =
-                  value.substring(0, start) + "\n" + value.substring(end);
-                inputRef.selectionStart = inputRef.selectionEnd = start + 1;
-                inputRef.rows += 1;
-              }
-              // e.key === "Enter" && !e.isComposing && handleButtonClick();
+            onKeyDown={handleKeydown}
+            onInput={() => {
+              inputRef.style.height = "auto";
+              inputRef.style.height = inputRef.scrollHeight + "px";
             }}
             w-full
             px-4
             py-3
-            h-12
             min-h-12
+            max-h-36
             text-slate-700
             rounded-1
             bg-slate

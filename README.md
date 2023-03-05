@@ -6,7 +6,7 @@ Chat with Ai, based on ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.opena
 
 ## Feature
 
-- Realy fast
+- Really fast
 - Support custom key
 - Random conversation scene prompts
 
