@@ -129,7 +129,6 @@ export default () => {
   const retryLastFetch = () => {
     if (messageList().length > 0) {
       const lastMessage = messageList()[messageList().length - 1];
-      console.log(lastMessage);
       if (lastMessage.role === "assistant") {
         setMessageList(messageList().slice(0, -1));
         requestWithLatestMessage();
