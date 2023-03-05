@@ -5,6 +5,7 @@ import MarkdownIt from "markdown-it";
 import mdKatex from "markdown-it-katex";
 import mdHighlight from "markdown-it-highlightjs";
 import IconRefresh from "./icons/Refresh";
+import toast, { Toaster } from "solid-toast";
 
 interface Props {
   role: ChatMessage["role"];
@@ -33,7 +34,18 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
     <div class="-mx-4 px-4 transition-colors md:hover:bg-slate/3">
       <div
         class="flex py-2 gap-3 px-4 rounded-sm transition-colors bg-[#80a39d] hover:bg-op-80"
-        class:op-75={role === "user"}>
+        class:op-75={role === "user"}
+        onClick={() => {
+          navigator.clipboard.writeText(
+            typeof message === "string" ? message : message()
+          );
+          toast("Copied to clipboard", {
+            icon: "✂️",
+            position: "top-center",
+            duration: 2000,
+          });
+          // toast.success("Toast launched successfully!");
+        }}>
         <div
           class={`shrink-0 w-7 h-7 mt-4 rounded-full op-80 ${roleClass[role]}`}></div>
         <div
@@ -59,6 +71,7 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
           <IconRefresh />
         </button>
       )}
+      <Toaster />
     </div>
   );
 };

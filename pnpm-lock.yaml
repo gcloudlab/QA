@@ -17,6 +17,7 @@ specifiers:
   markdown-it-katex: ^2.0.3
   punycode: ^2.3.0
   solid-js: ^1.6.11
+  solid-toast: ^0.4.0
   undici: ^5.20.0
   unocss: ^0.50.1
 
@@ -33,6 +34,7 @@ dependencies:
   markdown-it-highlightjs: 4.0.1
   markdown-it-katex: 2.0.3
   solid-js: 1.6.11
+  solid-toast: 0.4.0_solid-js@1.6.11
   undici: 5.20.0
 
 devDependencies:
@@ -3414,6 +3416,14 @@ packages:
     resolution: {integrity: sha512-JquQQHPArGq+i2PLURxJ99Pcz2/1docpbycSio/cKSA0SeI3z5zRjy0TNcH4NRYvbOLrcini+iovXwnexKabyw==}
     dependencies:
       csstype: 3.1.1
+    dev: false
+
+  /solid-toast/0.4.0_solid-js@1.6.11:
+    resolution: {integrity: sha512-ciJbj+n+7KbUN6wfwZsW7lqFESLoQ9sXMG4uJWuHrIw2f0GxX3/wLSKs0Q1YwdTZZRxyRJ1Nwc2eBVcJvs91+g==}
+    peerDependencies:
+      solid-js: ^1.5.4
+    dependencies:
+      solid-js: 1.6.11
     dev: false
 
   /source-map-js/1.0.2:
