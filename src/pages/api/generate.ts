@@ -6,6 +6,11 @@ import { fetch, ProxyAgent } from "undici";
 
 const apiKey = import.meta.env.OPENAI_API_KEY || "";
 const https_proxy = import.meta.env.HTTPS_PROXY || "";
+const THRESHOLD = 1;
+const rateLimit = {
+  count: 0,
+  lastAccessTime: Date.now(),
+};
 
 export const post: APIRoute = async (context) => {
   const body = await context.request.json();
@@ -15,6 +20,19 @@ export const post: APIRoute = async (context) => {
   if (!messages) {
     return new Response("No input text");
   }
+  const now = Date.now();
+
+  if (now - rateLimit.lastAccessTime < 4000) {
+    // 1000毫秒=1秒
+    if (rateLimit.count >= THRESHOLD) {
+      return new Response("⚠ Request is too fast, please wait a second~");
+    }
+    rateLimit.count++;
+  } else {
+    rateLimit.count = 1;
+    rateLimit.lastAccessTime = now;
+  }
+
   const initOptions = generatePayload(
     customKey !== "" ? customKey : apiKey,
     messages
