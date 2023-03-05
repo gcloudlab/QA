@@ -1,5 +1,6 @@
-import { createSignal, onMount, Show, Index } from "solid-js";
+import { createSignal, onMount, onCleanup, Show, Index } from "solid-js";
 import MessageItem from "./MessageItem";
+import ScrollToBottom from "./ScrollToBottom";
 import LoadingDots from "./icons/LoadingDots";
 import {
   clearCustomKey,
@@ -22,32 +23,27 @@ export default () => {
   const [loading, setLoading] = createSignal(false);
   const [error, setError] = createSignal(false);
   const [controller, setController] = createSignal<AbortController>(null);
+  const eventTypes = ["wheel", "touchmove", "keydown"];
 
   onMount(() => {
-    window.addEventListener(
-      "wheel",
-      () => {
-        stopAutoScroll();
-      },
-      { passive: false }
-    );
-    window.addEventListener(
-      "touchmove",
-      () => {
-        stopAutoScroll();
-      },
-      { passive: false }
-    );
-    window.addEventListener(
-      "keydown",
-      (e) => {
-        if (e.key === "ArrowUp" || e.key === "ArrowUp") {
-          stopAutoScroll();
-        }
-      },
-      { passive: false }
-    );
+    eventTypes.forEach((type) => {
+      window.addEventListener(type, eventHandler, { passive: false });
+    });
   });
+  onCleanup(() => {
+    eventTypes.forEach((type) => {
+      window.removeEventListener(type, eventHandler);
+    });
+  });
+
+  const eventHandler = (e) => {
+    if (e.type === "keydown") {
+      if (e.key !== "ArrowUp" && e.key !== "ArrowDown") {
+        return;
+      }
+    }
+    stopAutoScroll();
+  };
   const startAutoScroll = () => {
     if (autoScrolling) {
       window.scrollTo({
@@ -57,7 +53,9 @@ export default () => {
     }
   };
   const stopAutoScroll = () => {
-    autoScrolling = false;
+    if (loading) {
+      autoScrolling = false;
+    }
   };
 
   const handleButtonClick = async () => {
@@ -333,6 +331,7 @@ export default () => {
             placeholder:op-30
           />
           <button
+            title="send"
             onClick={handleButtonClick}
             disabled={loading()}
             h-12
