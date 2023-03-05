@@ -182,17 +182,24 @@ export default () => {
 
       <Show
         when={!loading()}
+        //fallback={() => (
+          //<button class="h-12 bg-[#80a39d] rounded-1 text-white font-medium px-4 py-2 sm:mt-4 mt-3 hover:bg-primary/80 w-full">
+            //<LoadingDots style="large" />
+          //</button>
+        //)}>
+        
         fallback={() => (
-          <button class="h-12 bg-[#80a39d] rounded-1 text-white font-medium px-4 py-2 sm:mt-4 mt-3 hover:bg-primary/80 w-full">
-            <LoadingDots style="large" />
-          </button>
-        )}>
+          <div class="h-12 my-4 flex items-center justify-center bg-gradient-to-r from-green-400 to-pink-500 text-white rounded-sm animate-pulse">
+  小团团思考ing...
+</div>
+        )}
+      >
         <div class="my-4 flex items-end gap-1">
           <textarea
             ref={inputRef!}
             id="input"
             // rows={1}
-            placeholder="Say something..."
+            placeholder="输入你的任何问题或想法喔..."
             autocomplete="off"
             autofocus
             disabled={loading()}
