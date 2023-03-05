@@ -1,4 +1,4 @@
-import "../styles/loading-dots.css";
+import "@/styles/loading-dots.css";
 
 const LoadingDots = ({
   color = "000",

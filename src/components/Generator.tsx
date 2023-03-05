@@ -1,16 +1,16 @@
-import { createSignal, For, Show } from "solid-js";
+import { createSignal, For, Show, Index } from "solid-js";
 import MessageItem from "./MessageItem";
-import LoadingDots from "./LoadingDots";
+import LoadingDots from "./icons/LoadingDots";
 import {
   clearCustomKey,
   getCustomKey,
   setCustomKey,
   hideKey,
   getRandomInt,
-} from "../utils";
-import PromptList from "../data/prompts.json";
+} from "@/utils";
+import PromptList from "@/data/prompts.json";
 import IconClear from "./icons/Clear";
-import type { ChatMessage } from "../types";
+import type { ChatMessage } from "@/types";
 
 export default () => {
   let inputRef: HTMLTextAreaElement;
@@ -20,13 +20,13 @@ export default () => {
     createSignal("");
   const [loading, setLoading] = createSignal(false);
   const [error, setError] = createSignal(false);
+  const [controller, setController] = createSignal<AbortController>(null);
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value;
     if (!inputValue) {
       return;
     }
-    setLoading(true);
 
     setMessageList([
       ...messageList(),
@@ -35,60 +35,106 @@ export default () => {
         content: inputValue,
       },
     ]);
+    requestWithLatestMessage();
+  };
 
-    setError(false);
-    setCustomKey(inputKeyRef.value);
-    inputKeyRef.value = "";
-    inputKeyRef.placeholder =
-      getCustomKey() !== "" ? hideKey(getCustomKey()) : "Custom key (Optional)";
-
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      body: JSON.stringify({
-        messages: messageList(),
-        customKey: getCustomKey(),
-      }),
-    });
-    if (!response.ok) {
-      setLoading(false);
-      setError(true);
-      throw new Error(response.statusText);
-    }
-    const data = response.body;
-    if (!data) {
-      throw new Error("No data");
-    }
-    const reader = data.getReader();
-    const decoder = new TextDecoder("utf-8");
-    let done = false;
-
-    while (!done) {
-      const { value, done: readerDone } = await reader.read();
-      if (value) {
-        let char = decoder.decode(value);
-        if (char === "\n" && currentAssistantMessage().endsWith("\n")) {
-          continue;
-        }
-        if (char) {
-          setCurrentAssistantMessage(currentAssistantMessage() + char);
-        }
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: "smooth",
-        });
-      }
-      done = readerDone;
-    }
-    setMessageList([
-      ...messageList(),
-      {
-        role: "assistant",
-        content: currentAssistantMessage(),
-      },
-    ]);
+  const requestWithLatestMessage = async () => {
+    setLoading(true);
     setCurrentAssistantMessage("");
-    setLoading(false);
-    inputRef.focus();
+    try {
+      const controller = new AbortController();
+      setController(controller);
+      const requestMessageList = [...messageList()];
+
+      setError(false);
+      setCustomKey(inputKeyRef.value);
+      inputKeyRef.value = "";
+      inputKeyRef.placeholder =
+        getCustomKey() !== ""
+          ? hideKey(getCustomKey())
+          : "Custom key (Optional)";
+
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        body: JSON.stringify({
+          messages: requestMessageList,
+          customKey: getCustomKey(),
+        }),
+        signal: controller.signal,
+      });
+      if (!response.ok) {
+        setLoading(false);
+        setError(true);
+        throw new Error(response.statusText);
+      }
+      const data = response.body;
+      if (!data) {
+        throw new Error("No data");
+      }
+      const reader = data.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let done = false;
+
+      while (!done) {
+        const { value, done: readerDone } = await reader.read();
+        if (value) {
+          let char = decoder.decode(value);
+          if (char === "\n" && currentAssistantMessage().endsWith("\n")) {
+            continue;
+          }
+          if (char) {
+            setCurrentAssistantMessage(currentAssistantMessage() + char);
+          }
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+          });
+        }
+        done = readerDone;
+      }
+      setLoading(false);
+      inputRef.focus();
+    } catch (e) {
+      console.error(e);
+      setLoading(false);
+      setController(null);
+      return;
+    }
+    archiveCurrentMessage();
+  };
+
+  const archiveCurrentMessage = () => {
+    if (currentAssistantMessage()) {
+      setMessageList([
+        ...messageList(),
+        {
+          role: "assistant",
+          content: currentAssistantMessage(),
+        },
+      ]);
+      setCurrentAssistantMessage("");
+      setLoading(false);
+      setController(null);
+      inputRef.focus();
+    }
+  };
+
+  const stopStreamFetch = () => {
+    if (controller()) {
+      controller().abort();
+      archiveCurrentMessage();
+    }
+  };
+
+  const retryLastFetch = () => {
+    if (messageList().length > 0) {
+      const lastMessage = messageList()[messageList().length - 1];
+      console.log(lastMessage);
+      if (lastMessage.role === "assistant") {
+        setMessageList(messageList().slice(0, -1));
+        requestWithLatestMessage();
+      }
+    }
   };
 
   const handleKeydown = (e: KeyboardEvent) => {
@@ -108,6 +154,7 @@ export default () => {
 
   const clear = () => {
     inputRef.value = "";
+    inputRef.style.height = "auto";
     setMessageList([]);
     setCurrentAssistantMessage("");
     inputRef.focus();
@@ -184,11 +231,19 @@ export default () => {
         </li>
       </ul>
 
-      <For each={messageList()}>
-        {(message) => (
-          <MessageItem role={message.role} message={message.content} />
+      <Index each={messageList()}>
+        {(message, index) => (
+          <MessageItem
+            role={message().role}
+            message={message().content}
+            showRetry={() =>
+              message().role === "assistant" &&
+              index === messageList().length - 1
+            }
+            onRetry={retryLastFetch}
+          />
         )}
-      </For>
+      </Index>
       {currentAssistantMessage() && (
         <MessageItem role="assistant" message={currentAssistantMessage} />
       )}
@@ -196,9 +251,26 @@ export default () => {
       <Show
         when={!loading()}
         fallback={() => (
-          <button class="h-12 bg-[#80a39d] rounded-1 text-white font-medium px-4 py-2 sm:mt-4 mt-3 hover:bg-primary/80 w-full">
-            <LoadingDots style="large" />
-          </button>
+          <div class="flex sm:mt-4 mt-3 gap-1">
+            <button class="h-12 bg-[#80a39d] rounded-1 text-white font-medium px-4 py-2 hover:bg-primary/80 w-full">
+              <LoadingDots style="large" />
+            </button>
+            <button
+              h-12
+              px-4
+              py-2
+              bg-slate
+              bg-op-15
+              items-center
+              hover:bg-slate-500
+              transition-colors
+              text-slate
+              hover:text-slate-1
+              rounded-1
+              onClick={stopStreamFetch}>
+              Stop
+            </button>
+          </div>
         )}>
         <div class="my-4 flex items-end gap-1">
           <textarea
@@ -206,6 +278,7 @@ export default () => {
             id="input"
             placeholder="Say something..."
             rows="1"
+            resize-none
             autocomplete="off"
             autofocus
             disabled={loading()}
