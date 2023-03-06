@@ -1,6 +1,6 @@
 import { createSignal, onMount, onCleanup, Show, Index } from "solid-js";
 import MessageItem from "./MessageItem";
-import ScrollToBottom from "./ScrollToBottom";
+import { generateSignature } from "@/utils/auth";
 import LoadingDots from "./icons/LoadingDots";
 import {
   clearCustomKey,
@@ -12,6 +12,7 @@ import {
 import PromptList from "@/data/prompts.json";
 import IconClear from "./icons/Clear";
 import type { ChatMessage } from "@/types";
+import _ from "lodash";
 
 export default () => {
   let inputRef: HTMLTextAreaElement;
@@ -44,14 +45,16 @@ export default () => {
     }
     stopAutoScroll();
   };
-  const startAutoScroll = () => {
-    if (autoScrolling) {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth",
-      });
+  const startAutoScroll = _.throttle(
+    () => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    },
+    300,
+    {
+      leading: true,
+      trailing: false,
     }
-  };
+  );
   const stopAutoScroll = () => {
     if (loading) {
       autoScrolling = false;
@@ -90,11 +93,19 @@ export default () => {
           ? hideKey(getCustomKey())
           : "Custom key (Optional)";
 
+      const timestamp = Date.now();
       const response = await fetch("/api/generate", {
         method: "POST",
         body: JSON.stringify({
           messages: requestMessageList,
           customKey: getCustomKey(),
+          time: timestamp,
+          sign: await generateSignature({
+            t: timestamp,
+            m:
+              requestMessageList?.[requestMessageList.length - 1]?.content ||
+              "",
+          }),
         }),
         signal: controller.signal,
       });
