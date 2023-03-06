@@ -11,7 +11,8 @@ export default function Clipboard(props: { message: string | Function }) {
         hover:bg-slate-4
         transition-colors
         text-slate
-        rounded-1
+        rounded-sm
+        shadow-md
         onClick={() => {
           navigator.clipboard.writeText(
             typeof props.message === "string" ? props.message : props.message()

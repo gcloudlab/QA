@@ -14,3 +14,10 @@ export const clearCustomKey = () => {
     localStorage.removeItem("custom-key");
   }
 };
+
+export const getSession = () => {
+  if (typeof window !== "undefined") {
+    return localStorage.getItem("custom-key") || "";
+  }
+  return "";
+};

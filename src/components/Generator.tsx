@@ -12,6 +12,7 @@ import {
 import PromptList from "@/data/prompts.json";
 import IconClear from "./icons/Clear";
 import type { ChatMessage } from "@/types";
+import Toggle from "./Toggle";
 import Footer from "./Footer";
 
 export default () => {
@@ -89,7 +90,7 @@ export default () => {
       inputKeyRef.placeholder =
         getCustomKey() !== ""
           ? hideKey(getCustomKey())
-          : "Custom key (Optional)";
+          : "OpenAI API Key (Optional)";
 
       const timestamp = Date.now();
       const response = await fetch("/api/generate", {
@@ -196,9 +197,13 @@ export default () => {
     handleButtonClick();
   };
 
+  const handleCheckSession = (isChecked) => {
+    console.log(isChecked);
+  };
+
   return (
     <div class="my-6 ">
-      <ul class="tree">
+      <ul class="tree mb-4">
         <li>
           <details mb-4>
             <summary text-slate>
@@ -213,59 +218,74 @@ export default () => {
                 Random prompt🎉
               </button>
             </summary>
-            <div class="mt-4 flex">
-              <input
-                ref={inputKeyRef!}
-                type="text"
-                placeholder={`${
-                  getCustomKey() !== ""
-                    ? hideKey(getCustomKey())
-                    : "Custom key (Optional)"
-                }`}
-                autocomplete="off"
-                w-full
-                px-4
-                py-3
-                h-12
-                min-h-12
-                text-slate-700
-                rounded-l
-                bg-slate
-                bg-op-15
-                focus:bg-op-20
-                focus:ring-0
-                focus:outline-none
-                placeholder:text-slate-900
-                placeholder:op-30
-              />
-              <button
-                title="Clear key"
-                onClick={() => {
-                  clearCustomKey();
-                  inputKeyRef.value = "";
-                  inputKeyRef.placeholder =
+            <div class="mt-4">
+              <div class="flex">
+                <input
+                  ref={inputKeyRef!}
+                  type="text"
+                  placeholder={`${
                     getCustomKey() !== ""
                       ? hideKey(getCustomKey())
-                      : "Custom key (Optional)";
-                }}
-                h-12
-                px-4
-                py-2
-                bg-slate-5
-                bg-op-15
-                hover:bg-slate-4
-                transition-colors
-                text-slate
-                hover:text-slate-1
-                rounded-r>
-                <IconClear />
-              </button>
+                      : "OpenAI API Key (Optional)"
+                  }`}
+                  autocomplete="off"
+                  w-full
+                  px-4
+                  py-3
+                  h-12
+                  min-h-12
+                  text-slate-700
+                  rounded-l
+                  bg-slate
+                  bg-op-15
+                  focus:bg-op-20
+                  focus:ring-0
+                  focus:outline-none
+                  placeholder:text-slate-900
+                  placeholder:op-30
+                />
+                <button
+                  title="Clear key"
+                  onClick={() => {
+                    clearCustomKey();
+                    inputKeyRef.value = "";
+                    inputKeyRef.placeholder =
+                      getCustomKey() !== ""
+                        ? hideKey(getCustomKey())
+                        : "OpenAI API Key (Optional)";
+                  }}
+                  h-12
+                  px-4
+                  py-2
+                  bg-slate-5
+                  bg-op-15
+                  hover:bg-slate-4
+                  transition-colors
+                  text-slate
+                  hover:text-slate-1
+                  rounded-r>
+                  <IconClear />
+                </button>
+              </div>
+              <div mt-3 ml-2>
+                <Toggle
+                  title="Auto scroll (work in progress)"
+                  value={true}
+                  onCheckboxChange={handleCheckSession}
+                />
+                <Toggle
+                  title="Auto save the current session (work in progress)"
+                  value={false}
+                  onCheckboxChange={handleCheckSession}
+                />
+              </div>
             </div>
           </details>
         </li>
       </ul>
+
       <div class="flex flex-col">
-        <div flex-grow-2 classList={{ "mb-17": messageList().length > 0 }}>
+        <div flex-grow-2 classList={{ "mb-17.5": messageList().length > 0 }}>
           <Index each={messageList()}>
             {(message, index) => (
               <MessageItem

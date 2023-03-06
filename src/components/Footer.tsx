@@ -34,14 +34,14 @@ export default ({ onClear }: Props) => (
 
         <button
           class="flex items-center justify-between"
-          title="Clear chat"
-          w-22
+          title="Clear current session"
+          w-26
           onClick={onClear}
           transition-colors
           text-slate-7
           hover:text-slate-5>
           <IconClear />
-          Clear chat
+          Clear session
         </button>
       </div>
 
