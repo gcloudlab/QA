@@ -265,7 +265,7 @@ export default () => {
         </li>
       </ul>
       <div class="flex flex-col">
-        <div flex-grow-2 classList={{ "mb-21": messageList().length > 0 }}>
+        <div flex-grow-2 classList={{ "mb-17": messageList().length > 0 }}>
           <Index each={messageList()}>
             {(message, index) => (
               <MessageItem
@@ -286,7 +286,7 @@ export default () => {
 
         <div
           classList={{
-            "fixed bottom-0 z-1 pr-8 py-4 w-full bg-[#f5e6d8]":
+            "fixed bottom-0 z-1 pr-8 pb-4 w-full bg-[#f5e6d8]":
               messageList().length > 0,
           }}
           style="max-width: 75ch">
