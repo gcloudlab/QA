@@ -1,11 +1,12 @@
-import type { Accessor } from "solid-js";
+import { Accessor, createSignal } from "solid-js";
 import type { ChatMessage } from "../types";
 import MarkdownIt from "markdown-it";
 // @ts-ignore
 import mdKatex from "markdown-it-katex";
 import mdHighlight from "markdown-it-highlightjs";
 import IconRefresh from "./icons/Refresh";
-import toast, { Toaster } from "solid-toast";
+import Clipboard from "./Clipboard";
+import { Toaster } from "solid-toast";
 
 interface Props {
   role: ChatMessage["role"];
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export default ({ role, message, showRetry, onRetry }: Props) => {
+  const [showCopy, setShowCopy] = createSignal(false);
   const roleClass = {
     system: "bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300",
     user: "bg-gradient-to-r from-purple-400 to-yellow-400",
@@ -30,48 +32,45 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
     }
     return "";
   };
+
   return (
-    <div class="-mx-4 px-4 transition-colors md:hover:bg-slate/3">
+    <div class="relative -mx-4 px-4 transition-colors md:hover:bg-slate/3">
       <div
         class="flex py-2 gap-3 px-4 rounded-sm transition-colors bg-[#80a39d] hover:bg-op-80"
         class:op-75={role === "user"}
-        onClick={() => {
-          navigator.clipboard.writeText(
-            typeof message === "string" ? message : message()
-          );
-          toast("Copied to clipboard", {
-            icon: "✂️",
-            position: "top-center",
-            duration: 2000,
-          });
-          // toast.success("Toast launched successfully!");
-        }}>
+        onMouseEnter={() => setShowCopy(true)}
+        onMouseLeave={() => setShowCopy(false)}>
         <div
           class={`shrink-0 w-7 h-7 mt-4 rounded-full op-80 ${roleClass[role]}`}></div>
         <div
           class="message prose text-slate-900 break-words overflow-hidden"
           innerHTML={htmlString()}
         />
+        {showCopy() && <Clipboard message={message} />}
+        {showRetry?.() && onRetry && (
+          <button
+            class="absolute"
+            bottom-0
+            right-4
+            z-1
+            title="Retry"
+            onClick={onRetry}
+            style={{ "margin-top": "-25px" }}
+            text-center
+            float-right
+            px-2
+            py-1
+            bg-op-15
+            hover:bg-slate-400
+            transition-colors
+            text-slate-7
+            hover:text-slate-1
+            rounded-1>
+            <IconRefresh />
+          </button>
+        )}
+        <Toaster />
       </div>
-      {showRetry?.() && onRetry && (
-        <button
-          title="Retry"
-          onClick={onRetry}
-          style={{ "margin-top": "-25px" }}
-          text-center
-          float-right
-          px-2
-          py-1
-          bg-op-15
-          hover:bg-slate-400
-          transition-colors
-          text-slate-7
-          hover:text-slate-1
-          rounded-1>
-          <IconRefresh />
-        </button>
-      )}
-      <Toaster />
     </div>
   );
 };
