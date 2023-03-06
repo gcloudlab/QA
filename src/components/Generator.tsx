@@ -12,6 +12,7 @@ import {
 import PromptList from "@/data/prompts.json";
 import IconClear from "./icons/Clear";
 import type { ChatMessage } from "@/types";
+import Footer from "./Footer";
 
 export default () => {
   let inputRef: HTMLTextAreaElement;
@@ -134,11 +135,11 @@ export default () => {
         done = readerDone;
       }
       setLoading(false);
-      inputRef.focus();
     } catch (e) {
       console.error(e);
       setLoading(false);
       setController(null);
+      inputRef.focus();
       return;
     }
     archiveCurrentMessage();
@@ -196,7 +197,7 @@ export default () => {
   };
 
   return (
-    <div my-6>
+    <div class="my-6 ">
       <ul class="tree">
         <li>
           <details mb-4>
@@ -212,7 +213,7 @@ export default () => {
                 Random prompt🎉
               </button>
             </summary>
-            <div class="mt-4 flex gap-1">
+            <div class="mt-4 flex">
               <input
                 ref={inputKeyRef!}
                 type="text"
@@ -228,7 +229,7 @@ export default () => {
                 h-12
                 min-h-12
                 text-slate-700
-                rounded-1
+                rounded-l
                 bg-slate
                 bg-op-15
                 focus:bg-op-20
@@ -237,164 +238,170 @@ export default () => {
                 placeholder:text-slate-900
                 placeholder:op-30
               />
-              <Show when={getCustomKey() !== ""}>
+              <button
+                title="Clear key"
+                onClick={() => {
+                  clearCustomKey();
+                  inputKeyRef.value = "";
+                  inputKeyRef.placeholder =
+                    getCustomKey() !== ""
+                      ? hideKey(getCustomKey())
+                      : "Custom key (Optional)";
+                }}
+                h-12
+                px-4
+                py-2
+                bg-slate-5
+                bg-op-15
+                hover:bg-slate-4
+                transition-colors
+                text-slate
+                hover:text-slate-1
+                rounded-r>
+                <IconClear />
+              </button>
+            </div>
+          </details>
+        </li>
+      </ul>
+      <div class="flex flex-col">
+        <div flex-grow-2 classList={{ "mb-21": messageList().length > 0 }}>
+          <Index each={messageList()}>
+            {(message, index) => (
+              <MessageItem
+                role={message().role}
+                message={message().content}
+                showRetry={() =>
+                  message().role === "assistant" &&
+                  index === messageList().length - 1
+                }
+                onRetry={retryLastFetch}
+              />
+            )}
+          </Index>
+          {currentAssistantMessage() && (
+            <MessageItem role="assistant" message={currentAssistantMessage} />
+          )}
+        </div>
+
+        <div
+          classList={{
+            "fixed bottom-0 z-1 pr-8 py-4 w-full bg-[#f5e6d8]":
+              messageList().length > 0,
+          }}
+          style="max-width: 75ch">
+          <Show
+            when={!loading()}
+            fallback={() => (
+              <div class="flex">
+                <button class="h-12 bg-[#80a39d] rounded-l text-white font-medium px-4 py-2 hover:bg-primary/80 w-full">
+                  <LoadingDots style="large" />
+                </button>
                 <button
-                  title="Clear cache"
-                  onClick={() => {
-                    clearCustomKey();
-                    inputKeyRef.value = "";
-                    inputKeyRef.placeholder =
-                      getCustomKey() !== ""
-                        ? hideKey(getCustomKey())
-                        : "Custom key (Optional)";
-                  }}
+                  title="Stop"
                   h-12
                   px-4
                   py-2
                   bg-slate
                   bg-op-15
-                  hover:bg-slate-5
+                  items-center
+                  hover:bg-slate-500
                   transition-colors
                   text-slate
                   hover:text-slate-1
-                  rounded-1>
-                  <IconClear />
+                  rounded-r
+                  onClick={stopStreamFetch}>
+                  <svg
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="5466"
+                    w-6
+                    h-6>
+                    <path
+                      d="M856 208.7v606.6c0 26.5-21.5 48-48 48H216c-26.5 0-48-21.5-48-48V208.7c0-26.5 21.5-48 48-48h592c26.5 0 48 21.5 48 48z"
+                      p-id="5467"
+                      fill="#707070"></path>
+                  </svg>
                 </button>
-              </Show>
+              </div>
+            )}>
+            <div class=" flex items-end">
+              <textarea
+                ref={inputRef!}
+                id="input"
+                placeholder="Say something..."
+                rows="1"
+                resize-none
+                autocomplete="off"
+                autofocus
+                disabled={loading()}
+                onKeyDown={handleKeydown}
+                onInput={() => {
+                  inputRef.style.height = "auto";
+                  inputRef.style.height = inputRef.scrollHeight + "px";
+                }}
+                w-full
+                px-4
+                py-3
+                min-h-12
+                max-h-36
+                text-slate-700
+                rounded-l
+                bg-slate
+                class="ipt"
+                bg-op-15
+                focus:bg-op-20
+                focus:ring-0
+                focus:outline-none
+                placeholder:text-slate-900
+                placeholder:op-30
+              />
+              <button
+                title="send"
+                onClick={handleButtonClick}
+                disabled={loading()}
+                h-12
+                px-4
+                py-2
+                bg-slate-5
+                bg-op-15
+                hover:bg-slate-4
+                transition-colors
+                rounded-r
+                text-slate>
+                <svg
+                  w-6
+                  h-6
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="3659"
+                  width="256"
+                  height="256">
+                  <path
+                    d="M925.6 559.2L152 145.6c-11.2-5.6-24.8 3.2-23.2 15.2l60 714.4c0.8 11.2 12 17.6 22.4 13.6L460.8 784l136.8 155.2c8.8 9.6 24 5.6 27.2-6.4l65.6-245.6L925.6 588c11.2-5.6 12-22.4 0-28.8z m-328 305.6l-72-128-368-568 488 504-48 192z"
+                    p-id="3660"
+                    fill="#707070"></path>
+                </svg>
+              </button>
             </div>
-          </details>
-        </li>
-      </ul>
-
-      <Index each={messageList()}>
-        {(message, index) => (
-          <MessageItem
-            role={message().role}
-            message={message().content}
-            showRetry={() =>
-              message().role === "assistant" &&
-              index === messageList().length - 1
-            }
-            onRetry={retryLastFetch}
-          />
-        )}
-      </Index>
-      {currentAssistantMessage() && (
-        <MessageItem role="assistant" message={currentAssistantMessage} />
-      )}
-
-      <Show
-        when={!loading()}
-        fallback={() => (
-          <div class="flex sm:mt-4 mt-3 gap-1">
-            <button class="h-12 bg-[#80a39d] rounded-1 text-white font-medium px-4 py-2 hover:bg-primary/80 w-full">
-              <LoadingDots style="large" />
-            </button>
-            <button
-              h-12
-              px-4
-              py-2
-              bg-slate
-              bg-op-15
-              items-center
-              hover:bg-slate-500
-              transition-colors
-              text-slate
-              hover:text-slate-1
-              rounded-1
-              onClick={stopStreamFetch}>
-              Stop
-            </button>
-          </div>
-        )}>
-        <div class="my-4 flex items-end gap-1">
-          <textarea
-            ref={inputRef!}
-            id="input"
-            placeholder="Say something..."
-            rows="1"
-            resize-none
-            autocomplete="off"
-            autofocus
-            disabled={loading()}
-            onKeyDown={handleKeydown}
-            onInput={() => {
-              inputRef.style.height = "auto";
-              inputRef.style.height = inputRef.scrollHeight + "px";
-            }}
-            w-full
-            px-4
-            py-3
-            min-h-12
-            max-h-36
-            text-slate-700
-            rounded-1
-            bg-slate
-            class="ipt"
-            bg-op-15
-            focus:bg-op-20
-            focus:ring-0
-            focus:outline-none
-            placeholder:text-slate-900
-            placeholder:op-30
-          />
-          <button
-            title="send"
-            onClick={handleButtonClick}
-            disabled={loading()}
-            h-12
-            px-4
-            py-2
-            bg-slate
-            bg-op-15
-            hover:bg-slate-4
-            transition-colors
-            text-slate
-            rounded-1>
-            <svg
-              w-6
-              h-6
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="3659"
-              width="256"
-              height="256">
-              <path
-                d="M925.6 559.2L152 145.6c-11.2-5.6-24.8 3.2-23.2 15.2l60 714.4c0.8 11.2 12 17.6 22.4 13.6L460.8 784l136.8 155.2c8.8 9.6 24 5.6 27.2-6.4l65.6-245.6L925.6 588c11.2-5.6 12-22.4 0-28.8z m-328 305.6l-72-128-368-568 488 504-48 192z"
-                p-id="3660"
-                fill="#707070"></path>
-            </svg>
-          </button>
-          <button
-            title="Clear chat"
-            onClick={clear}
-            disabled={loading()}
-            h-12
-            px-4
-            py-2
-            bg-slate
-            bg-op-15
-            hover:bg-slate-500
-            transition-colors
-            text-slate
-            hover:text-slate-1
-            rounded-1>
-            <IconClear />
-          </button>
+            {error() && (
+              <p class="text-gray-400 my-5">
+                🚨 Something error, please try again later, or{" "}
+                <a
+                  href="https://github.com/yesmore/QA/issues"
+                  class=" underline hover:text-black">
+                  contact issue
+                </a>
+                .{" "}
+              </p>
+            )}
+          </Show>
+          <Footer onClear={clear} />
         </div>
-        {error() && (
-          <p class="text-gray-400 my-5">
-            🚨 Something error, please try again later, or{" "}
-            <a
-              href="https://github.com/yesmore/QA/issues"
-              class=" underline hover:text-black">
-              contact issue
-            </a>
-            .{" "}
-          </p>
-        )}
-      </Show>
+      </div>
     </div>
   );
 };
