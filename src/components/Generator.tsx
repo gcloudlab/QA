@@ -253,6 +253,7 @@ export default () => {
       return;
     }
     if (e.key === "Enter") {
+      startAutoScroll();
       handleButtonClick();
     }
   };
