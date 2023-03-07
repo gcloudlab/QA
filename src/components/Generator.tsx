@@ -1,7 +1,7 @@
 import { createSignal, onMount, onCleanup, Show, Index } from "solid-js";
 import MessageItem from "./MessageItem";
 import { generateSignature } from "@/utils/auth";
-import LoadingDots from "./icons/LoadingDots";
+import { getCreditGrants } from "@/utils/openAI";
 import {
   clearCustomKey,
   getCustomKey,
@@ -10,10 +10,11 @@ import {
   getRandomInt,
 } from "@/utils";
 import PromptList from "@/data/prompts.json";
+import LoadingDots from "./icons/LoadingDots";
 import IconClear from "./icons/Clear";
-import type { ChatMessage } from "@/types";
 import Toggle from "./Toggle";
 import Footer from "./Footer";
+import type { ChatMessage } from "@/types";
 
 export default () => {
   let inputRef: HTMLTextAreaElement;
@@ -25,12 +26,18 @@ export default () => {
   const [loading, setLoading] = createSignal(false);
   const [error, setError] = createSignal(false);
   const [controller, setController] = createSignal<AbortController>(null);
+  const [balance, setBalance] = createSignal("--");
   const eventTypes = ["wheel", "touchmove", "keydown"];
 
-  onMount(() => {
+  onMount(async () => {
     eventTypes.forEach((type) => {
       window.addEventListener(type, eventHandler, { passive: false });
     });
+    if (getCustomKey() !== "") {
+      getCreditGrants(getCustomKey()).then((res) => {
+        setBalance(res);
+      });
+    }
   });
   onCleanup(() => {
     eventTypes.forEach((type) => {
@@ -75,6 +82,14 @@ export default () => {
     ]);
     requestWithLatestMessage();
   };
+  const requestKeyBalance = async () => {
+    if (inputKeyRef.value !== "") {
+      getCreditGrants(inputKeyRef.value).then((res) => {
+        setBalance(res);
+        console.log(res);
+      });
+    }
+  };
   const requestWithLatestMessage = async () => {
     autoScrolling = true;
     setLoading(true);
@@ -86,6 +101,7 @@ export default () => {
 
       setError(false);
       setCustomKey(inputKeyRef.value);
+
       inputKeyRef.value = "";
       inputKeyRef.placeholder =
         getCustomKey() !== ""
@@ -203,11 +219,11 @@ export default () => {
 
   return (
     <div class="my-6 ">
-      <ul class="tree mb-4">
+      <ul class="advanced-settingstree mb-4">
         <li>
           <details open mb-4>
             <summary text-slate>
-              Advanced Settings or try{" "}
+              Advanced settings or{" "}
               <button
                 title="Generate a conversation scene randomly"
                 disabled={loading()}
@@ -229,6 +245,7 @@ export default () => {
                         ? hideKey(getCustomKey())
                         : "OpenAI API Key (Optional)"
                     }`}
+                    onBlur={requestKeyBalance}
                     autocomplete="off"
                     w-full
                     px-4
@@ -249,6 +266,7 @@ export default () => {
                     title="Clear key"
                     onClick={() => {
                       clearCustomKey();
+                      setBalance("--");
                       inputKeyRef.value = "";
                       inputKeyRef.placeholder =
                         getCustomKey() !== ""
@@ -268,17 +286,33 @@ export default () => {
                     <IconClear />
                   </button>
                 </div>
-                <a
-                  text-sm
-                  text-slate-4
-                  border-b
-                  border-slate
-                  border-none
-                  hover:border-dashed
-                  href="https://platform.openai.com/account/api-keys"
-                  target="_blank">
-                  How to get OpenAI API key?
-                </a>
+                <div class="flex justify-between items-center ml-1 mt-2">
+                  <p>
+                    <a
+                      text-sm
+                      text-slate-4
+                      border-b
+                      border-slate
+                      border-none
+                      hover:border-dashed
+                      href="https://platform.openai.com/account/api-keys"
+                      target="_blank">
+                      How to get OpenAI API key?
+                    </a>
+                  </p>
+
+                  <p text-sm text-slate-4>
+                    Usage:{" "}
+                    <span
+                      border-b
+                      border-slate
+                      border-none
+                      hover:border-dashed
+                      text-slate-5>
+                      {balance()}
+                    </span>
+                  </p>
+                </div>
               </div>
 
               <div class="setting-group" mt-3>
@@ -299,7 +333,10 @@ export default () => {
       </ul>
 
       <div class="flex flex-col">
-        <div flex-grow-2 classList={{ "mb-17.5": messageList().length > 0 }}>
+        <div
+          class="message-wrapper"
+          flex-grow-2
+          classList={{ "mb-17.5": messageList().length > 0 }}>
           <Index each={messageList()}>
             {(message, index) => (
               <MessageItem
