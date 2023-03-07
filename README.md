@@ -11,9 +11,9 @@ Chat with Ai, based on ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.opena
 - Random conversation scene prompts
 - Pre settings
 
-## Local development
+## Setup
 
-> Make sure to rename the file `.env.example` to `.env`, and fill in the key value via [OpenAI](https://platform.openai.com/account/api-keys).
+> Make sure to rename the file `.env.example` to `.env`, and fill in the `OPENAI_API_KEY` value via [OpenAI](https://platform.openai.com/account/api-keys).
 > If you want to test locally, make sure fill in the `HTTPS_PROXY` value. 
 
 ```bash

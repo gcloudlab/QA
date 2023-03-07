@@ -328,7 +328,7 @@ export default () => {
                   onCheckboxChange={handleCheckSession}
                 />
                 <Toggle
-                  title="Auto save the current session (work in progress)"
+                  title="Auto save current session (work in progress)"
                   value={false}
                   onCheckboxChange={handleCheckSession}
                 />
