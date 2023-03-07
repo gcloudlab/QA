@@ -1,4 +1,4 @@
-# ChatGPT Q&A
+# QAGPT
 
 Chat with Ai, based on ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.openai.com/docs/guides/chat), so fast~
 
@@ -9,10 +9,12 @@ Chat with Ai, based on ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.opena
 - Really fast
 - Support custom key
 - Random conversation scene prompts
+- Pre settings
 
 ## Local development
 
 > Make sure to rename the file `.env.example` to `.env`, and fill in the key value via [OpenAI](https://platform.openai.com/account/api-keys).
+> If you want to test locally, make sure fill in the `HTTPS_PROXY` value. 
 
 ```bash
 git clone https://github.com/yesmore/QA.git
