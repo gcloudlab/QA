@@ -6,17 +6,19 @@ import {
   Index,
   createEffect,
 } from "solid-js";
-import MessageItem from "./MessageItem";
-import { generateSignature } from "@/utils/auth";
-import { getCreditGrants } from "@/utils/openAI";
+import { defaultToggleSetting } from "@/default";
+import throttle from "just-throttle";
 import {
   clearCustomKey,
   getCustomKey,
   setCustomKey,
   hideKey,
   getRandomInt,
+  getCreditGrants,
+  generateSignature,
 } from "@/utils";
 import PromptList from "@/data/prompts.json";
+import MessageItem from "./MessageItem";
 import Setting from "./Setting";
 import TextError from "./Error";
 import Footer from "./Footer";
@@ -25,8 +27,6 @@ import IconClear from "./icons/Clear";
 import IconSend from "./icons/Send";
 import IconStop from "./icons/Stop";
 import type { ChatMessage } from "@/types";
-import { defaultToggleSetting } from "@/default";
-import throttle from "just-throttle";
 
 export type Setting = typeof defaultToggleSetting;
 
@@ -138,7 +138,6 @@ export default () => {
     if (inputKeyRef.value !== "") {
       getCreditGrants(inputKeyRef.value).then((res) => {
         setBalance(res);
-        console.log(res);
       });
     }
   };
