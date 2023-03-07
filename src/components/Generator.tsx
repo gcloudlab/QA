@@ -68,8 +68,14 @@ export default () => {
   };
 
   const handleButtonClick = async () => {
+    if (getCustomKey() === "" && inputKeyRef.value === "") {
+      setError(true);
+      setCurrentAssistantMessage("");
+      return;
+    }
+
     const inputValue = inputRef.value;
-    if (!inputValue) {
+    if (!inputValue || /^\n+$/.test(inputValue)) {
       return;
     }
 
@@ -91,11 +97,6 @@ export default () => {
     }
   };
   const requestWithLatestMessage = async () => {
-    if (getCustomKey() === "" && inputKeyRef.value === "") {
-      setError(true);
-      return;
-    }
-
     autoScrolling = true;
     setLoading(true);
     setCurrentAssistantMessage("");
@@ -109,9 +110,7 @@ export default () => {
 
       inputKeyRef.value = "";
       inputKeyRef.placeholder =
-        getCustomKey() !== ""
-          ? hideKey(getCustomKey())
-          : "OpenAI API Key (Optional)";
+        getCustomKey() !== "" ? hideKey(getCustomKey()) : "OpenAI API Key";
 
       const timestamp = Date.now();
       const response = await fetch("/api/generate", {
@@ -224,7 +223,7 @@ export default () => {
   };
 
   return (
-    <div class="my-6 ">
+    <div class="my-6">
       <ul class="advanced-settingstree mb-4">
         <li>
           <details mb-4>
@@ -249,7 +248,7 @@ export default () => {
                     placeholder={`${
                       getCustomKey() !== ""
                         ? hideKey(getCustomKey())
-                        : "OpenAI API Key (Optional)"
+                        : "OpenAI API Key"
                     }`}
                     onBlur={requestKeyBalance}
                     autocomplete="off"
@@ -277,7 +276,7 @@ export default () => {
                       inputKeyRef.placeholder =
                         getCustomKey() !== ""
                           ? hideKey(getCustomKey())
-                          : "OpenAI API Key (Optional)";
+                          : "OpenAI API Key";
                     }}
                     h-10
                     px-4
@@ -321,7 +320,12 @@ export default () => {
                 </div>
               </div>
 
-              <div class="setting-group" mt-3>
+              <div class="setting-group mt-3 ml-1">
+                <Toggle
+                  title="Auto save API Key locally (work in progress)"
+                  value={true}
+                  onCheckboxChange={handleCheckSession}
+                />
                 <Toggle
                   title="Auto scroll (work in progress)"
                   value={true}
@@ -357,7 +361,11 @@ export default () => {
             )}
           </Index>
           {currentAssistantMessage() && (
-            <MessageItem role="assistant" message={currentAssistantMessage} />
+            <MessageItem
+              rounded-10
+              role="assistant"
+              message={currentAssistantMessage}
+            />
           )}
         </div>
 
