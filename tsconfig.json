@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "jsx": "preserve",
+    "resolveJsonModule": true,
     "jsxImportSource": "solid-js",
     "paths": {
       "@/*": ["src/*"]

@@ -205,9 +205,9 @@ export default () => {
     <div class="my-6 ">
       <ul class="tree mb-4">
         <li>
-          <details mb-4>
+          <details open mb-4>
             <summary text-slate>
-              Advanced Options or{" "}
+              Advanced Settings or try{" "}
               <button
                 title="Generate a conversation scene randomly"
                 disabled={loading()}
@@ -218,56 +218,70 @@ export default () => {
                 Random prompt🎉
               </button>
             </summary>
-            <div class="mt-4">
-              <div class="flex">
-                <input
-                  ref={inputKeyRef!}
-                  type="text"
-                  placeholder={`${
-                    getCustomKey() !== ""
-                      ? hideKey(getCustomKey())
-                      : "OpenAI API Key (Optional)"
-                  }`}
-                  autocomplete="off"
-                  w-full
-                  px-4
-                  py-3
-                  h-12
-                  min-h-12
-                  text-slate-700
-                  rounded-l
-                  bg-slate
-                  bg-op-15
-                  focus:bg-op-20
-                  focus:ring-0
-                  focus:outline-none
-                  placeholder:text-slate-900
-                  placeholder:op-30
-                />
-                <button
-                  title="Clear key"
-                  onClick={() => {
-                    clearCustomKey();
-                    inputKeyRef.value = "";
-                    inputKeyRef.placeholder =
+            <div class="mt-4 ml-3">
+              <div class="api-key">
+                <div class="flex">
+                  <input
+                    ref={inputKeyRef!}
+                    type="text"
+                    placeholder={`${
                       getCustomKey() !== ""
                         ? hideKey(getCustomKey())
-                        : "OpenAI API Key (Optional)";
-                  }}
-                  h-12
-                  px-4
-                  py-2
-                  bg-slate-5
-                  bg-op-15
-                  hover:bg-slate-4
-                  transition-colors
-                  text-slate
-                  hover:text-slate-1
-                  rounded-r>
-                  <IconClear />
-                </button>
+                        : "OpenAI API Key (Optional)"
+                    }`}
+                    autocomplete="off"
+                    w-full
+                    px-4
+                    py-2
+                    h-10
+                    min-h-10
+                    text-slate-700
+                    rounded-l
+                    bg-slate
+                    bg-op-15
+                    focus:bg-op-20
+                    focus:ring-0
+                    focus:outline-none
+                    placeholder:text-slate-900
+                    placeholder:op-30
+                  />
+                  <button
+                    title="Clear key"
+                    onClick={() => {
+                      clearCustomKey();
+                      inputKeyRef.value = "";
+                      inputKeyRef.placeholder =
+                        getCustomKey() !== ""
+                          ? hideKey(getCustomKey())
+                          : "OpenAI API Key (Optional)";
+                    }}
+                    h-10
+                    px-4
+                    py-2
+                    bg-slate-5
+                    bg-op-15
+                    hover:bg-slate-4
+                    transition-colors
+                    text-slate
+                    hover:text-slate-1
+                    rounded-r>
+                    <IconClear />
+                  </button>
+                </div>
+                <a
+                  text-sm
+                  text-slate-4
+                  border-b
+                  border-slate
+                  border-none
+                  hover:border-dashed
+                  href="https://platform.openai.com/account/api-keys"
+                  target="_blank">
+                  How to get OpenAI API key?
+                </a>
               </div>
-              <div mt-3 ml-2>
+
+              <div mt-3>
                 <Toggle
                   title="Auto scroll (work in progress)"
                   value={true}

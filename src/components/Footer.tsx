@@ -21,15 +21,6 @@ export default ({ onClear }: Props) => (
             yesmore
           </a>
           <span mx-2>|</span>
-          <a
-            border-b
-            border-slate
-            border-none
-            hover:border-dashed
-            href="https://platform.openai.com/account/api-keys"
-            target="_blank">
-            How to get OpenAI key?
-          </a>
         </p>
 
         <button
