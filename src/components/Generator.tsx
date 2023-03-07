@@ -12,6 +12,8 @@ import {
 import PromptList from "@/data/prompts.json";
 import LoadingDots from "./icons/LoadingDots";
 import IconClear from "./icons/Clear";
+import IconSend from "./icons/Send";
+import IconStop from "./icons/Stop";
 import Toggle from "./Toggle";
 import Footer from "./Footer";
 import type { ChatMessage } from "@/types";
@@ -376,7 +378,7 @@ export default () => {
           }}
           style="max-width: 75ch">
           <Show
-            when={!loading()}
+            when={loading()}
             fallback={() => (
               <div class="flex">
                 <button class="h-12 bg-[#80a39d] rounded-l text-white font-medium px-4 py-2 hover:bg-primary/80 w-full">
@@ -396,23 +398,11 @@ export default () => {
                   hover:text-slate-1
                   rounded-r
                   onClick={stopStreamFetch}>
-                  <svg
-                    class="icon"
-                    viewBox="0 0 1024 1024"
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    p-id="5466"
-                    w-6
-                    h-6>
-                    <path
-                      d="M856 208.7v606.6c0 26.5-21.5 48-48 48H216c-26.5 0-48-21.5-48-48V208.7c0-26.5 21.5-48 48-48h592c26.5 0 48 21.5 48 48z"
-                      p-id="5467"
-                      fill="#707070"></path>
-                  </svg>
+                  <IconStop />
                 </button>
               </div>
             )}>
-            <div class=" flex items-end">
+            <div class="flex items-end">
               <textarea
                 ref={inputRef!}
                 id="input"
@@ -444,7 +434,7 @@ export default () => {
                 placeholder:op-30
               />
               <button
-                title="send"
+                title="Send"
                 onClick={handleButtonClick}
                 disabled={loading()}
                 h-12
@@ -456,20 +446,7 @@ export default () => {
                 transition-colors
                 rounded-r
                 text-slate>
-                <svg
-                  w-6
-                  h-6
-                  viewBox="0 0 1024 1024"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  p-id="3659"
-                  width="256"
-                  height="256">
-                  <path
-                    d="M925.6 559.2L152 145.6c-11.2-5.6-24.8 3.2-23.2 15.2l60 714.4c0.8 11.2 12 17.6 22.4 13.6L460.8 784l136.8 155.2c8.8 9.6 24 5.6 27.2-6.4l65.6-245.6L925.6 588c11.2-5.6 12-22.4 0-28.8z m-328 305.6l-72-128-368-568 488 504-48 192z"
-                    p-id="3660"
-                    fill="#707070"></path>
-                </svg>
+                <IconSend />
               </button>
             </div>
             {error() && (
