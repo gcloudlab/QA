@@ -216,6 +216,7 @@ export default () => {
     const _index = getRandomInt(0, PromptList.length - 1);
     inputRef.value = PromptList[_index].prompt;
     handleButtonClick();
+    inputRef.value = "";
   };
 
   const handleCheckSession = (isChecked) => {
