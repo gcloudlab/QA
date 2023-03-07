@@ -1,4 +1,11 @@
-import { createSignal, onMount, onCleanup, Show, Index } from "solid-js";
+import {
+  createSignal,
+  onMount,
+  onCleanup,
+  Show,
+  Index,
+  createEffect,
+} from "solid-js";
 import MessageItem from "./MessageItem";
 import { generateSignature } from "@/utils/auth";
 import { getCreditGrants } from "@/utils/openAI";
@@ -10,19 +17,24 @@ import {
   getRandomInt,
 } from "@/utils";
 import PromptList from "@/data/prompts.json";
+import Toggle from "./Toggle";
+import Setting from "./Setting";
+import Footer from "./Footer";
 import LoadingDots from "./icons/LoadingDots";
 import IconClear from "./icons/Clear";
 import IconSend from "./icons/Send";
 import IconStop from "./icons/Stop";
-import Toggle from "./Toggle";
-import Footer from "./Footer";
 import type { ChatMessage } from "@/types";
+import { defaultToggleSetting } from "@/default";
 import throttle from "just-throttle";
+
+export type Setting = typeof defaultToggleSetting;
 
 export default () => {
   let inputRef: HTMLTextAreaElement;
   let inputKeyRef: HTMLInputElement;
   let autoScrolling = true;
+  const eventTypes = ["wheel", "touchmove", "keydown"];
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([]);
   const [currentAssistantMessage, setCurrentAssistantMessage] =
     createSignal("");
@@ -30,18 +42,45 @@ export default () => {
   const [error, setError] = createSignal(false);
   const [controller, setController] = createSignal<AbortController>(null);
   const [balance, setBalance] = createSignal("--");
-  const eventTypes = ["wheel", "touchmove", "keydown"];
+  const [setting, setSetting] = createSignal(defaultToggleSetting);
 
-  onMount(async () => {
-    eventTypes.forEach((type) => {
-      window.addEventListener(type, eventHandler, { passive: false });
-    });
+  onMount(() => {
     if (getCustomKey() !== "") {
       getCreditGrants(getCustomKey()).then((res) => {
         setBalance(res);
       });
     }
+    eventTypes.forEach((type) => {
+      window.addEventListener(type, eventHandler, { passive: false });
+    });
+
+    const storage = localStorage.getItem("setting");
+    const session = localStorage.getItem("session");
+    try {
+      let autoSaveSession = false;
+      if (storage) {
+        const parsed = JSON.parse(storage);
+        autoSaveSession = parsed.autoSaveSession;
+
+        setSetting({
+          ...defaultToggleSetting,
+          ...parsed,
+        });
+      }
+      if (session && autoSaveSession) {
+        setMessageList(JSON.parse(session));
+      }
+    } catch {
+      console.log("Setting parse error");
+    }
   });
+
+  createEffect(() => {
+    localStorage.setItem("setting", JSON.stringify(setting()));
+    if (setting().autoSaveSession)
+      localStorage.setItem("session", JSON.stringify(messageList()));
+  });
+
   onCleanup(() => {
     eventTypes.forEach((type) => {
       window.removeEventListener(type, eventHandler);
@@ -225,10 +264,6 @@ export default () => {
     inputRef.value = "";
   };
 
-  const handleCheckSession = (isChecked) => {
-    console.log(isChecked);
-  };
-
   return (
     <div class="my-6">
       <ul class="advanced-settings tree mb-4">
@@ -327,22 +362,8 @@ export default () => {
                 </div>
               </div>
 
-              <div class="setting-group mt-3 ml-1">
-                <Toggle
-                  title="Auto save API Key locally (work in progress)"
-                  value={true}
-                  onCheckboxChange={handleCheckSession}
-                />
-                <Toggle
-                  title="Auto scroll (work in progress)"
-                  value={true}
-                  onCheckboxChange={handleCheckSession}
-                />
-                <Toggle
-                  title="Auto save current session (work in progress)"
-                  value={false}
-                  onCheckboxChange={handleCheckSession}
-                />
+              <div class="setting mt-3 ml-1">
+                <Setting setting={setting} setSetting={setSetting} />
               </div>
             </div>
           </details>
@@ -455,13 +476,13 @@ export default () => {
               </button>
             </div>
             {error() && (
-              <p class="text-gray-400 my-5">
+              <p class="text-pink-6 my-5">
                 🚨 Something error, please check your Api Key and try again
                 later, or{" "}
                 <a
                   href="https://github.com/yesmore/QA/issues"
                   class=" underline hover:text-black">
-                  contact issue
+                  report issue
                 </a>
                 .{" "}
               </p>

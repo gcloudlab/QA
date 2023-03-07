@@ -1,28 +1,16 @@
 import "@/styles/toggle.css";
-import { createSignal } from "solid-js";
+import { Accessor, JSXElement } from "solid-js";
 
 interface Props {
   title: string;
-  value: boolean;
-  onCheckboxChange: (isChecked: boolean) => void;
+  children: JSXElement;
 }
 
-export default ({ title, value, onCheckboxChange }: Props) => {
-  const [isChecked, setIsChecked] = createSignal(value);
-
-  const handleCheckboxChange = (event) => {
-    setIsChecked(event.target.checked);
-    onCheckboxChange(event.target.checked);
-  };
-
+export default ({ title, children }: Props) => {
   return (
     <div class="flex items-center text-sm mb-2">
       <label class="checkbox">
-        <input
-          type="checkbox"
-          checked={isChecked()}
-          onChange={handleCheckboxChange}
-        />
+        {children}
         <svg viewBox="0 0 21 18">
           <symbol viewBox="0 0 21 18" id="tick-path">
             <path

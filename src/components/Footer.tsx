@@ -15,9 +15,9 @@ export default ({ onClear }: Props) => (
           border-slate
           border-none
           hover:border-dashed
-          href="https://yesmore.cc"
+          href="https://platform.openai.com"
           target="_blank">
-          yesmore
+          Build with OpenAI API
         </a>
       </p>
 
