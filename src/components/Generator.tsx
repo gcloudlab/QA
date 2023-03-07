@@ -71,7 +71,7 @@ export default () => {
         setMessageList(JSON.parse(session));
       }
     } catch {
-      console.log("Setting parse error");
+      setError("Setting parse error");
     }
   });
 

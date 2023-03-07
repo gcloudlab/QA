@@ -15,7 +15,7 @@ export default function Setting({ setting, setSetting }: Props) {
   };
 
   return (
-    <div>
+    <div class="setting-wrapper">
       <Toggle title="Auto save current session (can be saved after refreshing)">
         <input
           type="checkbox"
