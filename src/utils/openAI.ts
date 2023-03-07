@@ -72,7 +72,7 @@ export const getCreditGrants = async (apiKey: string) => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
+          Authorization: `Bearer ${apiKey.trim()}`,
         },
         method: "GET",
       }
