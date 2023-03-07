@@ -20,7 +20,6 @@ export default ({ onClear }: Props) => (
             target="_blank">
             yesmore
           </a>
-          <span mx-2>|</span>
         </p>
 
         <button

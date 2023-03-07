@@ -281,7 +281,7 @@ export default () => {
                 </a>
               </div>
 
-              <div mt-3>
+              <div class="setting-group" mt-3>
                 <Toggle
                   title="Auto scroll (work in progress)"
                   value={true}
