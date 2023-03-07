@@ -26,6 +26,7 @@
     "solid-js": "^1.6.11",
     "solid-toast": "^0.4.0",
     "solidjs-use": "^1.2.0",
+    "just-throttle": "^4.2.0",
     "undici": "^5.20.0"
   },
   "devDependencies": {

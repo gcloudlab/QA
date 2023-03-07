@@ -17,6 +17,7 @@ import IconStop from "./icons/Stop";
 import Toggle from "./Toggle";
 import Footer from "./Footer";
 import type { ChatMessage } from "@/types";
+import throttle from "just-throttle";
 
 export default () => {
   let inputRef: HTMLTextAreaElement;
@@ -55,14 +56,18 @@ export default () => {
     }
     stopAutoScroll();
   };
-  const startAutoScroll = () => {
-    if (autoScrolling) {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth",
-      });
-    }
-  };
+  const startAutoScroll = throttle(
+    () => {
+      if (autoScrolling) {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+    },
+    250,
+    { leading: true, trailing: false }
+  );
   const stopAutoScroll = () => {
     if (loading) {
       autoScrolling = false;
@@ -226,7 +231,7 @@ export default () => {
 
   return (
     <div class="my-6">
-      <ul class="advanced-settingstree mb-4">
+      <ul class="advanced-settings tree mb-4">
         <li>
           <details mb-4>
             <summary text-slate>
@@ -348,7 +353,7 @@ export default () => {
         <div
           class="message-wrapper"
           flex-grow-2
-          classList={{ "mb-17.5": messageList().length > 0 }}>
+          classList={{ "mb-17.4": messageList().length > 0 }}>
           <Index each={messageList()}>
             {(message, index) => (
               <MessageItem
