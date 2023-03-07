@@ -9,7 +9,6 @@ export default ({ onClear }: Props) => (
   <footer class="mt-6 text-sm text-slate-800 op-60">
     <div class="flex" justify-between>
       <p>
-        <span>By</span>{" "}
         <a
           border-b
           border-slate

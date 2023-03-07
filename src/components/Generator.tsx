@@ -17,8 +17,8 @@ import {
   getRandomInt,
 } from "@/utils";
 import PromptList from "@/data/prompts.json";
-import Toggle from "./Toggle";
 import Setting from "./Setting";
+import TextError from "./Error";
 import Footer from "./Footer";
 import LoadingDots from "./icons/LoadingDots";
 import IconClear from "./icons/Clear";
@@ -39,7 +39,7 @@ export default () => {
   const [currentAssistantMessage, setCurrentAssistantMessage] =
     createSignal("");
   const [loading, setLoading] = createSignal(false);
-  const [error, setError] = createSignal(false);
+  const [error, setError] = createSignal("");
   const [controller, setController] = createSignal<AbortController>(null);
   const [balance, setBalance] = createSignal("--");
   const [setting, setSetting] = createSignal(defaultToggleSetting);
@@ -115,7 +115,7 @@ export default () => {
 
   const handleButtonClick = async () => {
     if (getCustomKey() === "" && inputKeyRef.value === "") {
-      setError(true);
+      setError("Empty API Key");
       setCurrentAssistantMessage("");
       return;
     }
@@ -151,7 +151,7 @@ export default () => {
       setController(controller);
       const requestMessageList = [...messageList()];
 
-      setError(false);
+      setError("");
       setCustomKey(inputKeyRef.value);
 
       inputKeyRef.value = "";
@@ -176,7 +176,7 @@ export default () => {
       });
       if (!response.ok) {
         setLoading(false);
-        setError(true);
+        setError("Response error");
         throw new Error(response.statusText);
       }
       const data = response.body;
@@ -475,18 +475,7 @@ export default () => {
                 <IconSend />
               </button>
             </div>
-            {error() && (
-              <p class="text-pink-6 my-5">
-                🚨 Something error, please check your Api Key and try again
-                later, or{" "}
-                <a
-                  href="https://github.com/yesmore/QA/issues"
-                  class=" underline hover:text-black">
-                  report issue
-                </a>
-                .{" "}
-              </p>
-            )}
+            {error() !== "" && <TextError info={error()} />}
           </Show>
           <Footer onClear={clear} />
         </div>
