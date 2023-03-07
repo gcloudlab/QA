@@ -1,4 +1,5 @@
 import { Accessor, createSignal } from "solid-js";
+import { Toaster } from "solid-toast";
 import type { ChatMessage } from "../types";
 import MarkdownIt from "markdown-it";
 // @ts-ignore
@@ -6,7 +7,6 @@ import mdKatex from "markdown-it-katex";
 import mdHighlight from "markdown-it-highlightjs";
 import IconRefresh from "./icons/Refresh";
 import Clipboard from "./Clipboard";
-import { Toaster } from "solid-toast";
 
 interface Props {
   role: ChatMessage["role"];
@@ -17,6 +17,7 @@ interface Props {
 
 export default ({ role, message, showRetry, onRetry }: Props) => {
   const [showCopy, setShowCopy] = createSignal(false);
+
   const roleClass = {
     system: "bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300",
     user: "bg-gradient-to-r from-purple-400 to-yellow-400",

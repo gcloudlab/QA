@@ -1,6 +1,13 @@
+import { createSignal } from "solid-js";
 import toast from "solid-toast";
+import { useClipboard } from "solidjs-use";
 
 export default function Clipboard(props: { message: string | Function }) {
+  const [source] = createSignal(
+    typeof props.message === "string" ? props.message : props.message()
+  );
+  const { copy } = useClipboard({ source });
+
   return (
     <div class="absolute top-0 right-4 z-1">
       <button
@@ -14,9 +21,7 @@ export default function Clipboard(props: { message: string | Function }) {
         rounded-sm
         shadow-md
         onClick={() => {
-          navigator.clipboard.writeText(
-            typeof props.message === "string" ? props.message : props.message()
-          );
+          copy();
           toast("Copied to clipboard", {
             icon: "✂️",
             position: "top-center",
