@@ -91,6 +91,11 @@ export default () => {
     }
   };
   const requestWithLatestMessage = async () => {
+    if (getCustomKey() === "" && inputKeyRef.value === "") {
+      setError(true);
+      return;
+    }
+
     autoScrolling = true;
     setLoading(true);
     setCurrentAssistantMessage("");
@@ -221,7 +226,7 @@ export default () => {
     <div class="my-6 ">
       <ul class="advanced-settingstree mb-4">
         <li>
-          <details open mb-4>
+          <details mb-4>
             <summary text-slate>
               Advanced settings or{" "}
               <button
@@ -460,7 +465,8 @@ export default () => {
             </div>
             {error() && (
               <p class="text-gray-400 my-5">
-                🚨 Something error, please try again later, or{" "}
+                🚨 Something error, please check your Api Key and try again
+                later, or{" "}
                 <a
                   href="https://github.com/yesmore/QA/issues"
                   class=" underline hover:text-black">
