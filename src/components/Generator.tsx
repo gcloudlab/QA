@@ -378,7 +378,7 @@ export default () => {
           }}
           style="max-width: 75ch">
           <Show
-            when={loading()}
+            when={!loading()}
             fallback={() => (
               <div class="flex">
                 <button class="h-12 bg-[#80a39d] rounded-l text-white font-medium px-4 py-2 hover:bg-primary/80 w-full">
