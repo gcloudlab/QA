@@ -22,6 +22,7 @@ export default ({ loading, onClear, onRandom }: Props) => {
         class="flex items-center justify-between"
         title="Clear current session"
         w-26
+        disabled={loading()}
         onClick={onClear}
         transition-colors
         hover:text-slate-5>
