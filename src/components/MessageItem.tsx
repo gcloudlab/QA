@@ -24,7 +24,7 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
     assistant: "bg-gradient-to-r from-cyan-200  to-[#80a39d]",
   };
   const htmlString = () => {
-    const md = MarkdownIt().use(mdKatex).use(mdHighlight);
+    const md = MarkdownIt({ html: true }).use(mdKatex).use(mdHighlight);
 
     if (typeof message === "function") {
       return md.render(message());
