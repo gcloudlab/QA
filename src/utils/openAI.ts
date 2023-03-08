@@ -15,7 +15,7 @@ export const generatePayload = (
   },
   method: "POST",
   body: JSON.stringify({
-    model: "gpt-3.5-turbo",
+    model: "gpt-3.5-turbo-0301",
     messages,
     temperature: 0.6,
     stream: true,
