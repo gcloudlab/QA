@@ -1,38 +1,7 @@
 import Github from "./icons/Github";
-import IconClear from "./icons/Clear";
 
-interface Props {
-  onClear: () => void;
-}
-
-export default ({ onClear }: Props) => (
+export default () => (
   <footer class="mt-6 text-sm text-slate-800 op-60">
-    <div class="flex" justify-between>
-      <p>
-        <a
-          border-b
-          border-slate
-          border-none
-          hover:border-dashed
-          href="https://platform.openai.com"
-          target="_blank">
-          Build with OpenAI API
-        </a>
-      </p>
-
-      <button
-        class="flex items-center justify-between"
-        title="Clear current session"
-        w-26
-        onClick={onClear}
-        transition-colors
-        text-slate-7
-        hover:text-slate-5>
-        <IconClear />
-        Clear session
-      </button>
-    </div>
-
     <div class="flex" mt-3 gap-2>
       <a
         class="flex max-w-fit items-center justify-center space-x-2 rounded-1 border border-amber-300 bg-amber px-3 py-2 text-sm text-gray-600 shadow-sm transition-colors hover:border-amber-400 hover:bg-amber-300 hover:text-slate-2"
