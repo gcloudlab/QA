@@ -76,9 +76,4 @@ export const getCreditGrants = async (apiKey: string) => {
   } catch (error) {
     return `${error.message}`;
   }
-
-  // if (response.status === 200) {
-  //   return `${response.body}`;
-  // }
-  // return "Invalid API Key";
 };

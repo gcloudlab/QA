@@ -52,6 +52,7 @@ export default () => {
         setBalance(res);
       });
     }
+
     eventTypes.forEach((type) => {
       window.addEventListener(type, eventHandler, { passive: false });
     });
