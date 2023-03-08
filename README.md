@@ -11,10 +11,22 @@ Chat with Ai, based on ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.opena
 - Random conversation scene prompts
 - Pre settings
 
-## Setup
+## Environment variables
 
 > Make sure to rename the file `.env.example` to `.env`, and fill in the `OPENAI_API_KEY` value via [OpenAI](https://platform.openai.com/account/api-keys).
+> 
 > If you want to test locally, make sure fill in the `HTTPS_PROXY` value. 
+
+
+| Name                  | Description                    | Example                        |
+| --------------------- | ------------------------------ | ------------------------------ |
+| `OPENAI_API_BASE_URL` | Custom base url for OpenAI API | `https://api.openai.com`       |
+| `OPENAI_API_KEY`      | Custom OpenAI API Key          | `sk-eawsgfwegwaqeqtq234516512` |
+| `HTTPS_PROXY`         | Provide proxy for OpenAI API   | `http://127.0.0.1:7890`        |
+
+
+
+## Setup
 
 ```bash
 git clone https://github.com/yesmore/QA.git
