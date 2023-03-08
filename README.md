@@ -23,7 +23,7 @@ Chat with Ai, based on ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.opena
 | `OPENAI_API_BASE_URL` | Custom base url for OpenAI API | `https://api.openai.com`       |
 | `OPENAI_API_KEY`      | Custom OpenAI API Key          | `sk-eawsgfwegwaqeqtq234516512` |
 | `HTTPS_PROXY`         | Provide proxy for OpenAI API   | `http://127.0.0.1:7890`        |
-
+| `SECRET_KEY`          | Secret string for the project  | `123456`                       |
 
 
 ## Setup
