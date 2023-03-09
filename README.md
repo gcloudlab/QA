@@ -7,9 +7,10 @@ Chat with Ai, based on ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.opena
 ## Feature
 
 - Really fast
-- Support custom key
+- Support custom API key
 - Random conversation scene prompts
-- Pre settings
+- Support pre settings
+- Save your session
 
 ## Environment variables
 
