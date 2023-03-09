@@ -5,6 +5,12 @@ import {
 } from "eventsource-parser";
 import type { ChatMessage } from "@/types";
 
+const baseUrl = (
+  import.meta.env.OPENAI_API_BASE_URL || "https://api.openai.com"
+)
+  .trim()
+  .replace(/\/$/, "");
+
 export const generatePayload = (
   apiKey: string,
   messages: ChatMessage[]
@@ -58,21 +64,18 @@ export const parseOpenAIStream = (rawResponse: Response) => {
 
 export const getCreditGrants = async (apiKey: string) => {
   try {
-    const res = await fetch(
-      "https://api.openai.com/dashboard/billing/credit_grants",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey.trim()}`,
-        },
-        method: "GET",
-      }
-    );
+    const res = await fetch(`${baseUrl}/dashboard/billing/credit_grants`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey.trim()}`,
+      },
+      method: "GET",
+    });
     if (res.status === 200) {
       const resJson = await res.json();
       return `$${resJson.total_used.toFixed(2)} / $${resJson.total_granted}`;
     }
-    return "Invalid API Key";
+    return "无效密钥";
   } catch (error) {
     return `寄了`;
   }
