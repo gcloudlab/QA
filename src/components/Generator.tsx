@@ -17,7 +17,7 @@ import {
   getCreditGrants,
   generateSignature,
 } from "@/utils";
-import PromptList from "@/data/prompts.json";
+import PromptList from "@/data/prompts-zh.json";
 import MessageItem from "./MessageItem";
 import Setting from "./Setting";
 import TextError from "./Error";
@@ -74,7 +74,7 @@ export default () => {
         setMessageList(JSON.parse(session));
       }
     } catch {
-      setError("Setting parse error");
+      setError("解析缓存设置出错");
     }
   });
 
@@ -118,7 +118,7 @@ export default () => {
 
   const handleButtonClick = async () => {
     if (getCustomKey() === "" && inputKeyRef.value === "") {
-      setError("Empty API Key");
+      setError("OpenAI API 密钥不能为空");
       setCurrentAssistantMessage("");
       return;
     }
@@ -178,7 +178,7 @@ export default () => {
       });
       if (!response.ok) {
         setLoading(false);
-        setError("Response error");
+        setError("响应出错了");
         throw new Error(response.statusText);
       }
       const data = response.body;
@@ -271,7 +271,7 @@ export default () => {
     <ul class="tree">
       <li>
         <details mb-4>
-          <summary text-slate>Advanced settings</summary>
+          <summary text-slate>高级设置</summary>
           <div class="mt-4 pb-2">
             <div class="api-key">
               <div class="flex">
@@ -301,7 +301,7 @@ export default () => {
                   placeholder:op-30
                 />
                 <button
-                  title="Clear key"
+                  title="清空密钥"
                   onClick={() => {
                     clearCustomKey();
                     setBalance("--");
@@ -335,12 +335,12 @@ export default () => {
                     hover:border-dashed
                     href="https://platform.openai.com/account/api-keys"
                     target="_blank">
-                    How to get OpenAI API key?
+                    如何获取 OpenAI API key?
                   </a>
                 </p>
 
                 <p text-sm text-slate-4>
-                  Usage:{" "}
+                  已使用:{" "}
                   <span
                     border-b
                     border-slate
@@ -391,7 +391,7 @@ export default () => {
       <textarea
         ref={inputRef!}
         id="input"
-        placeholder="Say something..."
+        placeholder="说点什么..."
         rows="1"
         resize-none
         autocomplete="off"
@@ -419,7 +419,7 @@ export default () => {
         placeholder:op-30
       />
       <button
-        title="Send"
+        title="发送"
         onClick={handleButtonClick}
         disabled={loading()}
         h-12
@@ -454,7 +454,7 @@ export default () => {
                 <LoadingDots style="large" />
               </button>
               <button
-                title="Stop"
+                title="停止"
                 h-12
                 px-4
                 py-2

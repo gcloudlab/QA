@@ -1,6 +1,6 @@
 export default () => (
   <button
-    title="scroll to top"
+    title="滚动到底部"
     onClick={() => {
       window.scrollTo({
         top: document.body.scrollHeight,

@@ -11,7 +11,7 @@ export default function Clipboard(props: { message: string | Function }) {
   return (
     <div class="absolute top-0 right-4 z-1">
       <button
-        title="Copy"
+        title="复制"
         m-3
         px-2
         py-2
@@ -23,7 +23,7 @@ export default function Clipboard(props: { message: string | Function }) {
         shadow-sm
         onClick={() => {
           copy();
-          toast("Copied to clipboard", {
+          toast("已复制到剪切板", {
             icon: "✂️",
             position: "top-center",
             duration: 2000,

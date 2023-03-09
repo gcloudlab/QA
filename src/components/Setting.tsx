@@ -16,7 +16,7 @@ export default function Setting({ setting, setSetting }: Props) {
 
   return (
     <div class="setting-wrapper">
-      <Toggle title="Auto save current session (can be saved after refreshing)">
+      <Toggle title="自动保存当前会话 (网站刷新后依然存在)">
         <input
           type="checkbox"
           checked={setting().autoSaveSession}

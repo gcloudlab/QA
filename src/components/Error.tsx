@@ -1,11 +1,11 @@
 export default (props: { info: string }) => (
   <p class="text-pink-6 my-5">
-    🚨 {props.info}, please try again later, or{" "}
+    🚨 {props.info}，请稍后再试，或者
     <a
       href="https://github.com/yesmore/QA/issues"
       class=" underline hover:text-black">
-      report issue
+      上报问题
     </a>
-    .{" "}
+    。
   </p>
 );

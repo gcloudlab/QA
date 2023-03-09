@@ -54,7 +54,7 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
             bottom-0
             right-4
             z-1
-            title="Retry"
+            title="重试"
             onClick={onRetry}
             style={{ "margin-top": "-25px" }}
             text-center
