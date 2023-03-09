@@ -31,6 +31,8 @@ Chat with Ai, based on ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.opena
 ```bash
 git clone https://github.com/yesmore/QA.git
 
+cp .env.example .env
+
 pnpm i
 # make sure your Node.js version is 18.+
 pnpm dev
