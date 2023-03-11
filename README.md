@@ -1,25 +1,24 @@
-# QAGPT
+# QAChat
 
-Chat with Ai, based on ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.openai.com/docs/guides/chat), so fast~
+与 AI 对话，基于 ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.openai.com/docs/guides/chat)。
 
 ![web](./web.png)
 
-## Feature
+## 特点
 
-- Really fast
-- Support custom API key
-- Random conversation scene prompts
-- Support pre settings
-- Save your session
+- 快得批爆
+- 支持自定义 OpenAI API 密钥
+- 支持随机生成预设场景（100+）
+- 支持缓存会话
 
-## Environment variables
+## 环境变量
 
-> Make sure to rename the file `.env.example` to `.env`, and fill in the `OPENAI_API_KEY` value via [OpenAI](https://platform.openai.com/account/api-keys).
+> 请先将文件 `.env.example` 重命名为 `.env`, 并填写 `OPENAI_API_KEY` 变量值（此处申请[OpenAI](https://platform.openai.com/account/api-keys)）。
 > 
-> If you want to test locally, make sure fill in the `HTTPS_PROXY` value. 
+> 如果需要本地开发，请填写http代理 `HTTPS_PROXY` 变量。
 
 
-| Name                  | Description                    | Example                        |
+| 变量                  | 描述                           | 示例                           |
 | --------------------- | ------------------------------ | ------------------------------ |
 | `OPENAI_API_BASE_URL` | Custom base url for OpenAI API | `https://api.openai.com`       |
 | `OPENAI_API_KEY`      | Custom OpenAI API Key          | `sk-eawsgfwegwaqeqtq234516512` |
@@ -27,7 +26,7 @@ Chat with Ai, based on ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.opena
 | `SECRET_KEY`          | Secret string for the project  | `123456`                       |
 
 
-## Setup
+## 本地调试
 
 ```bash
 git clone https://github.com/yesmore/QA.git
@@ -35,7 +34,7 @@ git clone https://github.com/yesmore/QA.git
 cp .env.example .env
 
 pnpm i
-# make sure your Node.js version is 18.+
+# 本地 Node.js 版本必须大于 18.+
 pnpm dev
 ```
 
@@ -43,13 +42,14 @@ pnpm dev
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyesmore%2FQA&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20Key&envLink=https%3A%2F%2Fplatform.openai.com%2Faccount%2Fapi-keys)
 
-## License
+## 开源许可
 
 [GPL](./LICENSE)
 
-## Thanks
+## 鸣谢
 
 - [chatgpt-demo](https://github.com/ddiu8081/chatgpt-demo)
 - [Awesome ChatGPT Prompts](https://prompts.chat/)
+- [ChatGPT 中文调教指南](https://chatguide.plexpt.com/)
 
 <a href="https://www.buymeacoffee.com/yesmore" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>

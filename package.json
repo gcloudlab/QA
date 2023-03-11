@@ -1,5 +1,5 @@
 {
-  "name": "qa-gpt",
+  "name": "qa-chat",
   "type": "module",
   "version": "1.0.1",
   "scripts": {
