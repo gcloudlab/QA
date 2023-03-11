@@ -21,13 +21,11 @@ export default ({ loading, onClear, onRandom }: Props) => {
       <button
         class="flex items-center justify-between"
         title="清空当前会话"
-        w-18
         disabled={loading()}
         onClick={onClear}
         transition-colors
         hover:text-slate-5>
-        <IconClear />
-        清空会话
+        <IconClear /> 清空会话
       </button>
     </div>
   );
