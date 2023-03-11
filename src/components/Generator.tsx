@@ -37,6 +37,7 @@ export default () => {
   let inputKeyRef: HTMLInputElement;
   let autoScrolling = true;
   const eventTypes = ["wheel", "touchmove", "keydown"];
+
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([]);
   const [currentAssistantMessage, setCurrentAssistantMessage] =
     createSignal("");
@@ -117,7 +118,9 @@ export default () => {
   };
 
   const handleButtonClick = async () => {
-    if (getCustomKey() === "" && inputKeyRef.value === "") {
+    const envKey = import.meta.env.OPENAI_API_KEY || "";
+
+    if (getCustomKey() === "" && inputKeyRef.value === "" && envKey === "") {
       setError("OpenAI API 密钥不能为空");
       setCurrentAssistantMessage("");
       return;
