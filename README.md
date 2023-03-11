@@ -11,6 +11,20 @@
 - 支持随机生成预设场景（100+）
 - 支持缓存会话
 
+特别提供预设文件（中/英文），方便开发者集成:
+
+**源文件**
+
+- [prompts.json](https://github.com/yesmore/QA/blob/main/src/data/prompts.json)
+- [prompts-zh.json](https://github.com/yesmore/QA/blob/main/src/data/prompts-zh.json)
+
+**Api调用**
+
+- [https://nb.js.cn/prompts](https://nb.js.cn/prompts)
+- [https://nb.js.cn/prompts-zh](https://nb.js.cn/prompts-zh)
+
+> Api 会请求 Github 仓库源文件，速度比较慢，可下载源文件自部署接口。
+
 ## 环境变量
 
 > 请先将文件 `.env.example` 重命名为 `.env`, 并填写 `OPENAI_API_KEY` 变量值（此处申请[OpenAI](https://platform.openai.com/account/api-keys)）。
@@ -38,9 +52,10 @@ pnpm i
 pnpm dev
 ```
 
-## Deploy With Vercel
+## 部署到 Vercel
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyesmore%2FQA&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20Key&envLink=https%3A%2F%2Fplatform.openai.com%2Faccount%2Fapi-keys)
+
 
 ## 开源许可
 
