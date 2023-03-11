@@ -118,9 +118,11 @@ export default () => {
   };
 
   const handleButtonClick = async () => {
-    const envKey = import.meta.env.OPENAI_API_KEY || "";
-
-    if (getCustomKey() === "" && inputKeyRef.value === "" && envKey === "") {
+    if (
+      getCustomKey() === "" &&
+      inputKeyRef.value === "" &&
+      !setting().useFreeKey
+    ) {
       setError("OpenAI API 密钥不能为空");
       setCurrentAssistantMessage("");
       return;

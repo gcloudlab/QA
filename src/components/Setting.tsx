@@ -13,6 +13,12 @@ export default function Setting({ setting, setSetting }: Props) {
       autoSaveSession: e.target.checked,
     });
   };
+  const handleSetUseFreeKey = (e) => {
+    setSetting({
+      ...setting(),
+      useFreeKey: e.target.checked,
+    });
+  };
 
   return (
     <div class="setting-wrapper">
@@ -21,6 +27,13 @@ export default function Setting({ setting, setSetting }: Props) {
           type="checkbox"
           checked={setting().autoSaveSession}
           onChange={handleSetAutoSaveSession}
+        />
+      </Toggle>
+      <Toggle title="使用免费体验密钥">
+        <input
+          type="checkbox"
+          checked={setting().useFreeKey}
+          onChange={handleSetUseFreeKey}
         />
       </Toggle>
     </div>
