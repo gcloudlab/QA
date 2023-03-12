@@ -270,8 +270,8 @@ export default () => {
   const handleRandomPrompt = async () => {
     const _index = getRandomInt(0, PromptList.length - 1);
     inputRef.value = PromptList[_index].prompt;
-    handleButtonClick();
-    inputRef.value = "";
+    inputRef.style.height = "auto";
+    inputRef.style.height = inputRef.scrollHeight + "px";
   };
 
   const renderAdvancedSettings = () => (
