@@ -163,7 +163,9 @@ export default () => {
 
       inputKeyRef.value = "";
       inputKeyRef.placeholder =
-        getCustomKey() !== "" ? hideKey(getCustomKey()) : "OpenAI API Key";
+        getCustomKey() !== ""
+          ? hideKey(getCustomKey())
+          : "请填写 OpenAI API 密钥";
 
       const timestamp = Date.now();
       const response = await fetch("/api/generate", {
@@ -286,7 +288,7 @@ export default () => {
                   placeholder={`${
                     getCustomKey() !== ""
                       ? hideKey(getCustomKey())
-                      : "OpenAI API Key"
+                      : "请填写 OpenAI API 密钥"
                   }`}
                   onBlur={requestKeyBalance}
                   autocomplete="off"
@@ -314,7 +316,7 @@ export default () => {
                     inputKeyRef.placeholder =
                       getCustomKey() !== ""
                         ? hideKey(getCustomKey())
-                        : "OpenAI API Key";
+                        : "请填写 OpenAI API 密钥";
                   }}
                   h-10
                   px-4
@@ -340,7 +342,7 @@ export default () => {
                     hover:border-dashed
                     href="https://platform.openai.com/account/api-keys"
                     target="_blank">
-                    如何获取 OpenAI API key?
+                    如何获取 OpenAI API 密钥?
                   </a>
                 </p>
 
