@@ -26,9 +26,13 @@ export default () => (
       </a>{" "}
       密钥并填写。
     </strong>
-    你也可以选中'免费体验密钥'功能，即可使用站长提供的
+    你也可以选中"免费体验密钥"功能 (默认已开启)，即可使用站长提供的
     <strong>免费密钥且无需填写自己的密钥</strong>
-    体验（若填写则优先使用你的密钥）。注意，免费体验功能不能保证长久提供。
+    体验 (若填写则优先使用你的密钥)。
+    <p mt-1>
+      注意，免费体验功能不保证长久提供，可以联系QQ <strong>3224266014</strong>{" "}
+      购买私有密钥或帮助注册ChatGPT账号。
+    </p>
     <p my-1>
       如果你需要一些灵感，你可以尝试“随机预设场景”，它会自动生成一段来自{" "}
       <a
@@ -47,7 +51,7 @@ export default () => (
       <a href="https://t.me/yesmore_cc" target="_blank">
         <img src="https://img.shields.io/badge/-Juiçe的秘密基地-fff?logo=Telegram" />
       </a>{" "}
-      与喵娘聊天~（已集成免费 ChatGPT 聊天机器人）
+      与喵娘聊天~ (已集成免费 ChatGPT 聊天机器人)
     </p>
   </div>
 );
