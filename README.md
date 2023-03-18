@@ -6,7 +6,7 @@
 
 ![web](./web.png)
 
-## 特点
+## 特性
 
 - 快得批爆
 - 支持自定义 OpenAI API 密钥
@@ -40,7 +40,7 @@
 | `OPENAI_API_KEY`      | Custom OpenAI API Key          | `sk-eawsgfwegwaqeqtq234516512` |
 | `HTTPS_PROXY`         | Provide proxy for OpenAI API   | `http://127.0.0.1:7890`        |
 | `SECRET_KEY`          | Secret string for the project  | `123456`                       |
-
+| `HEAD_SCRIPTS`        | HTML Scripts                   |                                |
 
 ## 本地调试
 
