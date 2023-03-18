@@ -342,7 +342,7 @@ export default () => {
                     hover:border-dashed
                     href="https://shop.terobox.com?from=1127"
                     target="_blank">
-                    如何获取 OpenAI API 密钥?
+                    购买 OpenAI API 账号/密钥
                   </a>
                 </p>
 
