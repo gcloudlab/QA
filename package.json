@@ -19,6 +19,7 @@
     "eventsource-parser": "^0.1.0",
     "highlight.js": "^11.7.0",
     "js-sha256": "^0.9.0",
+    "just-throttle": "^4.2.0",
     "katex": "^0.6.0",
     "markdown-it": "^13.0.1",
     "markdown-it-highlightjs": "^4.0.1",
@@ -26,7 +27,6 @@
     "solid-js": "^1.6.11",
     "solid-toast": "^0.4.0",
     "solidjs-use": "^1.2.0",
-    "just-throttle": "^4.2.0",
     "undici": "^5.20.0"
   },
   "devDependencies": {

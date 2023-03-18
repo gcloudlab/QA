@@ -16,6 +16,7 @@ import {
   getRandomInt,
   getCreditGrants,
   generateSignature,
+  getRealtimeUV,
 } from "@/utils";
 import PromptList from "@/data/prompts-zh.json";
 import MessageItem from "./MessageItem";
@@ -46,13 +47,16 @@ export default () => {
   const [controller, setController] = createSignal<AbortController>(null);
   const [balance, setBalance] = createSignal("--");
   const [setting, setSetting] = createSignal(defaultToggleSetting);
+  const [online, setOnline] = createSignal("0");
 
-  onMount(() => {
+  onMount(async () => {
     if (getCustomKey() !== "") {
       getCreditGrants(getCustomKey()).then((res) => {
         setBalance(res);
       });
     }
+    setOnline(await getRealtimeUV());
+    setInterval(async () => setOnline(await getRealtimeUV()), 30000);
 
     eventTypes.forEach((type) => {
       window.addEventListener(type, eventHandler, { passive: false });
@@ -278,7 +282,12 @@ export default () => {
     <ul class="tree">
       <li>
         <details mb-4>
-          <summary text-slate>高级设置</summary>
+          <summary>
+            <div class="flex justify-between items-center text-slate">
+              <p>高级设置</p>
+              <p text-sm>在线: {online}人</p>
+            </div>
+          </summary>
           <div class="mt-4 pb-2">
             <div class="api-key">
               <div class="flex">
