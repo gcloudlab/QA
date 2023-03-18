@@ -16,7 +16,6 @@ import {
   getRandomInt,
   getCreditGrants,
   generateSignature,
-  getRealtimeUV,
 } from "@/utils";
 import PromptList from "@/data/prompts-zh.json";
 import MessageItem from "./MessageItem";
@@ -47,7 +46,7 @@ export default () => {
   const [controller, setController] = createSignal<AbortController>(null);
   const [balance, setBalance] = createSignal("--");
   const [setting, setSetting] = createSignal(defaultToggleSetting);
-  const [online, setOnline] = createSignal("0");
+  const [online, setOnline] = createSignal("--");
 
   onMount(async () => {
     if (getCustomKey() !== "") {
@@ -55,8 +54,9 @@ export default () => {
         setBalance(res);
       });
     }
-    setOnline(await getRealtimeUV());
-    setInterval(async () => setOnline(await getRealtimeUV()), 30000);
+
+    await requestRealtimeOnline();
+    setInterval(async () => await requestRealtimeOnline(), 30000);
 
     eventTypes.forEach((type) => {
       window.addEventListener(type, eventHandler, { passive: false });
@@ -118,6 +118,20 @@ export default () => {
   const stopAutoScroll = () => {
     if (loading) {
       autoScrolling = false;
+    }
+  };
+
+  const requestRealtimeOnline = async () => {
+    const response = await fetch("/api/online");
+
+    if (response.ok) {
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      const { value } = await reader.read();
+      let char = decoder.decode(value);
+      setOnline(char);
+    } else {
+      setOnline("1000");
     }
   };
 
@@ -187,6 +201,7 @@ export default () => {
         }),
         signal: controller.signal,
       });
+
       if (!response.ok) {
         setLoading(false);
         setError("响应出错了");
