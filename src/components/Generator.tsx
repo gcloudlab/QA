@@ -307,7 +307,7 @@ export default () => {
             <div class="flex justify-between items-end text-slate">
               <p>高级设置</p>
               <div class="flex items-center" text-sm>
-                <span class="online-dot mr-2.5 mt-0.05"></span>
+                <span class="online-dot mr-2.5 mt-0.03"></span>
                 <span>{online} 在线</span>
               </div>
             </div>

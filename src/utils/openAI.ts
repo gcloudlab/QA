@@ -77,6 +77,6 @@ export const getCreditGrants = async (apiKey: string) => {
     }
     return "无效密钥";
   } catch (error) {
-    return `寄了`;
+    return `代理错误`;
   }
 };
