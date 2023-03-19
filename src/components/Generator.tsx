@@ -47,7 +47,8 @@ export default () => {
   const [balance, setBalance] = createSignal("--");
   const [setting, setSetting] = createSignal(defaultToggleSetting);
   const [isLoadStorage, setIsLoadStorage] = createSignal(false);
-  const [online, setOnline] = createSignal("--");
+  const [online, setOnline] = createSignal("0");
+  const [reqCount, setReqCount] = createSignal("0");
 
   onMount(async () => {
     if (getCustomKey() !== "") {
@@ -57,7 +58,11 @@ export default () => {
     }
 
     await requestRealtimeOnline();
-    setInterval(async () => await requestRealtimeOnline(), 30000);
+    await requestTotalCount();
+    setInterval(async () => {
+      await requestRealtimeOnline();
+      await requestTotalCount();
+    }, 30000);
 
     eventTypes.forEach((type) => {
       window.addEventListener(type, eventHandler, { passive: false });
@@ -138,6 +143,19 @@ export default () => {
       setOnline(char);
     } else {
       setOnline("1000");
+    }
+  };
+  const requestTotalCount = async () => {
+    const response = await fetch("/api/requestCount");
+
+    if (response.ok) {
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      const { value } = await reader.read();
+      let char = decoder.decode(value);
+      setReqCount(char);
+    } else {
+      setReqCount("1000");
     }
   };
 
@@ -307,9 +325,13 @@ export default () => {
           <summary>
             <div class="flex justify-between items-end text-slate">
               <p>高级设置</p>
-              <div class="flex items-center" text-sm>
+              <div class="flex ml-auto mr-3 items-center" text-sm>
                 <span class="online-dot mr-2.5 mt-0.03"></span>
                 <span>{online} 在线</span>
+              </div>
+              <div class="flex items-center" text-sm>
+                <span class="request-dot mr-2.5 mt-0.03"></span>
+                <span>{reqCount} 请求</span>
               </div>
             </div>
           </summary>
