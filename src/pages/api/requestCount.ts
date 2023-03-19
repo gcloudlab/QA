@@ -1,13 +1,14 @@
 import type { APIRoute } from "astro";
 
 const vercelToken = import.meta.env.VERCEL_TOKEN || "";
+const vercelPrjId = import.meta.env.VERCEL_PROJECT_ID || "";
 
 export const get: APIRoute = async () => {
   try {
-    const currentDate = new Date();
-    const isoDate = currentDate.toISOString();
+    const now = new Date();
+    const isoDate = now.toISOString();
     const res = await fetch(
-      `https://api.vercel.com/v2/usage?type=requests&from=2023-02-16T16%3A00%3A00.000Z&to=${isoDate}`,
+      `https://api.vercel.com/v2/usage?type=requests&from=2023-02-16T16%3A00%3A00.000Z&to=${isoDate}&projectId=${vercelPrjId}`,
       {
         headers: {
           "Content-Type": "application/json",

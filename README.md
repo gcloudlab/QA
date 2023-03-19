@@ -41,6 +41,8 @@
 | `HTTPS_PROXY`         | Provide proxy for OpenAI API   | `http://127.0.0.1:7890`        |
 | `SECRET_KEY`          | Secret string for the project  | `123456`                       |
 | `HEAD_SCRIPTS`        | HTML Scripts                   |                                |
+| `VERCEL_TOKEN`        | Vercel app token               | `Bearer xxxxxxx`               |
+| `VERCEL_PROJECT_ID`   | Vercel project id              | `prj_xwgweghewewhbWB`          |
 
 ## 本地调试
 
