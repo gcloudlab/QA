@@ -46,6 +46,7 @@ export default () => {
   const [controller, setController] = createSignal<AbortController>(null);
   const [balance, setBalance] = createSignal("--");
   const [setting, setSetting] = createSignal(defaultToggleSetting);
+  const [isLoadStorage, setIsLoadStorage] = createSignal(false);
   const [online, setOnline] = createSignal("--");
 
   onMount(async () => {
@@ -74,6 +75,7 @@ export default () => {
           ...defaultToggleSetting,
           ...parsed,
         });
+        setIsLoadStorage(true);
       }
       if (session && autoSaveSession) {
         setMessageList(JSON.parse(session));
@@ -84,7 +86,8 @@ export default () => {
   });
 
   createEffect(() => {
-    localStorage.setItem("setting", JSON.stringify(setting()));
+    if (isLoadStorage())
+      localStorage.setItem("setting", JSON.stringify(setting()));
     if (setting().autoSaveSession)
       localStorage.setItem("session", JSON.stringify(messageList()));
   });
@@ -301,7 +304,7 @@ export default () => {
             <div class="flex justify-between items-end text-slate">
               <p>高级设置</p>
               <div class="flex items-center" text-sm>
-                <span class="online-dot mr-2.5 mt-0.1"></span>
+                <span class="online-dot mr-2.5 mt-0.05"></span>
                 <span>{online} 在线</span>
               </div>
             </div>

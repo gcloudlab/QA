@@ -20,6 +20,6 @@ export const get: APIRoute = async () => {
     }
     return new Response("1000");
   } catch (error) {
-    return new Response("寄了");
+    return new Response("1001");
   }
 };
