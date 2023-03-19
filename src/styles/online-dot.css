@@ -1,0 +1,36 @@
+.online-dot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.online-dot::before,
+.online-dot::after {
+  position: absolute;
+  content: "";
+  height: 1.1em;
+  width: 1.1em;
+  border: 1.1em solid #0cce6b;
+  border-radius: 50%;
+  animation: loader_79178 2s linear infinite;
+}
+
+.online-dot::after {
+  opacity: 0;
+  animation-delay: 1s;
+}
+
+@keyframes loader_79178 {
+  0% {
+    border: 1em solid #0cce6b;
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  100% {
+    border: 0 solid #0cce6b;
+    transform: scale(1);
+    opacity: 0;
+  }
+}
