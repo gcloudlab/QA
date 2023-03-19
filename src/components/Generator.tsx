@@ -153,6 +153,8 @@ export default () => {
       const decoder = new TextDecoder("utf-8");
       const { value } = await reader.read();
       let char = decoder.decode(value);
+      console.log(char);
+
       setReqCount(char);
     } else {
       setReqCount("1000");

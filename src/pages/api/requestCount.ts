@@ -8,7 +8,7 @@ export const get: APIRoute = async () => {
     const now = new Date();
     const isoDate = now.toISOString();
     const res = await fetch(
-      `https://api.vercel.com/v2/usage?type=requests&from=2023-02-16T16%3A00%3A00.000Z&to=${isoDate}&projectId=${vercelPrjId}`,
+      `https://api.vercel.com/v4/usage/top?from=2023-02-16T16%3A00%3A00.000Z&to=${isoDate}&limit=5&sortKey=requests&pathType=request_path&projectId=${vercelPrjId}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -19,10 +19,10 @@ export const get: APIRoute = async () => {
     );
     if (res.status === 200) {
       const resJson = await res.json();
-      const totalRequests = resJson.data.reduce((acc, curr) => {
-        return acc + curr.request_miss_count + curr.request_hit_count;
-      }, 0);
-      return new Response(totalRequests);
+      const totalRequests = resJson.data.find(
+        (item) => item.target_path === "/api/generate"
+      );
+      return new Response(totalRequests.requests);
     }
     return new Response("1000");
   } catch (error) {
