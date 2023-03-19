@@ -264,6 +264,7 @@ export default () => {
     inputRef.value = "";
     inputRef.style.height = "auto";
     setMessageList([]);
+    localStorage.setItem("session", JSON.stringify([]));
     setCurrentAssistantMessage("");
     inputRef.focus();
   };
