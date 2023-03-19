@@ -86,10 +86,13 @@ export default () => {
   });
 
   createEffect(() => {
-    if (isLoadStorage())
+    if (isLoadStorage()) {
       localStorage.setItem("setting", JSON.stringify(setting()));
-    if (setting().autoSaveSession)
+    }
+
+    if (setting().autoSaveSession && messageList().length > 0) {
       localStorage.setItem("session", JSON.stringify(messageList()));
+    }
   });
 
   onCleanup(() => {
