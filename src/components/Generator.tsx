@@ -157,7 +157,7 @@ export default () => {
 
       setReqCount(char);
     } else {
-      setReqCount("1000");
+      setReqCount("1002");
     }
   };
 
