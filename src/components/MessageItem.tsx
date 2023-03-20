@@ -6,16 +6,26 @@ import MarkdownIt from "markdown-it";
 import mdKatex from "markdown-it-katex";
 import mdHighlight from "markdown-it-highlightjs";
 import IconRefresh from "./icons/Refresh";
+import Clear from "./icons/Clear";
 import Clipboard from "./Clipboard";
 
 interface Props {
   role: ChatMessage["role"];
   message: Accessor<string> | string;
+  loading: Accessor<boolean>;
   showRetry?: Accessor<boolean>;
   onRetry?: () => void;
+  onDelete?: () => void;
 }
 
-export default ({ role, message, showRetry, onRetry }: Props) => {
+export default ({
+  role,
+  message,
+  loading,
+  showRetry,
+  onRetry,
+  onDelete,
+}: Props) => {
   const [showCopy, setShowCopy] = createSignal(false);
 
   const roleClass = {
@@ -52,9 +62,10 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
           <button
             class="absolute"
             bottom-0
-            right-4
+            right-12
             z-1
             title="重试"
+            disabled={loading()}
             onClick={onRetry}
             style={{ "margin-top": "-25px" }}
             text-center
@@ -70,6 +81,28 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
             <IconRefresh />
           </button>
         )}
+        <button
+          class="absolute"
+          bottom-0
+          right-4
+          z-1
+          title="删除"
+          disabled={loading()}
+          onClick={onDelete}
+          style={{ "margin-top": "-25px" }}
+          text-center
+          float-right
+          px-2
+          py-1
+          bg-op-15
+          hover:bg-slate-400
+          transition-colors
+          text-slate-7
+          hover:text-slate-1
+          rounded-1>
+          <Clear />
+        </button>
+
         <Toaster />
       </div>
     </div>

@@ -61,8 +61,6 @@ export default () => {
     await requestTotalCount();
     setInterval(async () => {
       await requestRealtimeOnline();
-    }, 30000);
-    setInterval(async () => {
       await requestTotalCount();
     }, 60000);
 
@@ -257,7 +255,6 @@ export default () => {
       }
       setLoading(false);
     } catch (e) {
-      console.error(e);
       setLoading(false);
       setController(null);
       inputRef.focus();
@@ -300,9 +297,12 @@ export default () => {
       const lastMessage = messageList()[messageList().length - 1];
       if (lastMessage.role === "assistant") {
         setMessageList(messageList().slice(0, -1));
-        requestWithLatestMessage();
       }
+      requestWithLatestMessage();
     }
+  };
+  const handleDeleteMsg = (index: number) => {
+    setMessageList(messageList().slice(0, index));
   };
   const handleKeydown = (e: KeyboardEvent) => {
     if (e.isComposing || e.shiftKey) {
@@ -434,11 +434,10 @@ export default () => {
           <MessageItem
             role={message().role}
             message={message().content}
-            showRetry={() =>
-              message().role === "assistant" &&
-              index === messageList().length - 1
-            }
+            loading={loading}
+            showRetry={() => index === messageList().length - 1}
             onRetry={retryLastFetch}
+            onDelete={() => handleDeleteMsg(index)}
           />
         )}
       </Index>
@@ -447,6 +446,7 @@ export default () => {
           rounded-10
           role="assistant"
           message={currentAssistantMessage}
+          loading={loading}
         />
       )}
     </div>

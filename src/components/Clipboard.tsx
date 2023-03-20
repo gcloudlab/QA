@@ -9,10 +9,11 @@ export default function Clipboard(props: { message: string | Function }) {
   const { copy } = useClipboard({ source });
 
   return (
-    <div class="absolute top-0 right-4 z-1">
+    <div class="absolute top-0 right-3 z-1">
       <button
         title="复制"
-        m-3
+        mt-2
+        mx-3
         px-2
         py-2
         bg-slate-5
