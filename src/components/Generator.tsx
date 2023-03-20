@@ -155,11 +155,9 @@ export default () => {
       const decoder = new TextDecoder("utf-8");
       const { value } = await reader.read();
       let char = decoder.decode(value);
-      console.log(char);
-
       setReqCount(char);
     } else {
-      setReqCount("1002");
+      setReqCount("请求有点多");
     }
   };
 
@@ -335,7 +333,7 @@ export default () => {
               </div>
               <div class="flex items-center" text-sm>
                 <span class="request-dot mr-2.5 mt-0.03"></span>
-                <span>{reqCount} 请求</span>
+                <span>{reqCount}</span>
               </div>
             </div>
           </summary>

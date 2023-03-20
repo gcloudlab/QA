@@ -22,10 +22,10 @@ export const get: APIRoute = async () => {
       const totalRequests = resJson.data.find(
         (item) => item.target_path === "/api/generate"
       );
-      return new Response(totalRequests.requests);
+      return new Response(`${totalRequests.requests} 请求`);
     }
-    return new Response("1000");
+    return new Response("请求繁忙");
   } catch (error) {
-    return new Response("1001");
+    return new Response("请求难蚌");
   }
 };
