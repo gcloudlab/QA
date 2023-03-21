@@ -44,9 +44,9 @@ export default () => (
         border-slate
         border-none
         hover:border-dashed
-        href="https://qa-yesmore.vercel.app"
+        href="https://qachat.vercel.app"
         target="_blank">
-        https://qa-yesmore.vercel.app
+        https://qachat.vercel.app
       </a>
     </p>
     <p>
