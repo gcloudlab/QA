@@ -81,6 +81,9 @@ export default () => {
           ...parsed,
         });
         setIsLoadStorage(true);
+      } else {
+        localStorage.setItem("setting", JSON.stringify(defaultToggleSetting));
+        setIsLoadStorage(true);
       }
       if (session && autoSaveSession) {
         setMessageList(JSON.parse(session));
