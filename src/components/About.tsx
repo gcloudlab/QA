@@ -37,9 +37,17 @@ export default () => (
     </p>
     <p>
       <span text-lg text-pink-6>
-        更新
+        永久域名
       </span>{" "}
-      由于站内访问量过大，免费密钥即将消耗完，且用且珍惜～
+      <a
+        border-b
+        border-slate
+        border-none
+        hover:border-dashed
+        href="https://qa-yesmore.vercel.app"
+        target="_blank">
+        https://qa-yesmore.vercel.app
+      </a>
     </p>
     <p>
       <span text-lg>免责声明</span> 本站使用 GPT-3.5 API
