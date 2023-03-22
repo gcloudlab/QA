@@ -68,32 +68,10 @@ pnpm dev
 
 **分步部署教程：**
 
-1. [Fork](https://github.com/yesmore/QA/fork) 此项目，前往 [https://app.netlify.com/start](https://app.netlify.com/start) 新建站点，选择你 `fork` 完成的项目，将其与 `GitHub` 帐户连接。
+- [Fork](https://github.com/yesmore/QA/fork) 此项目，前往 [https://app.netlify.com/start](https://app.netlify.com/start) 新建站点，选择你 `fork` 完成的项目，将其与 `GitHub` 帐户连接。
+- 选择要部署的分支，选择 `main` 分支， 在项目设置中配置环境变量，环境变量配置参考下文。
+- 选择默认的构建命令和输出目录，单击 `Deploy Site` 按钮开始部署站点。
 
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.3nlt4hgzb16o.webp)
-
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.5fhfouap270g.webp)
-
-
-2. 选择要部署的分支，选择 `main` 分支， 在项目设置中配置环境变量，环境变量配置参考下文。
-
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.6dvtfmoijb7k.webp)
-
-3. 选择默认的构建命令和输出目录，单击 `Deploy Site` 按钮开始部署站点。
-
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.e0n7c0zaen4.webp)
-
-## 部署在 Docker
-在部署应用之前，请确保 `.env` 配置正常。
-
-```bash
-# build
-docker-compose build .
-# run
-docker-compose up -d
-# stop
-docker-compose down
-```
 
 ## 部署在更多的服务器
 
