@@ -19,6 +19,18 @@ export default function Setting({ setting, setSetting }: Props) {
       useFreeKey: e.target.checked,
     });
   };
+  const handleSetdeleteAllMsg = (e) => {
+    setSetting({
+      ...setting(),
+      deleteAllMsg: e.target.checked,
+    });
+  };
+  const handleSetSystemRole = (e) => {
+    setSetting({
+      ...setting(),
+      preSystemRole: e.target.checked,
+    });
+  };
 
   return (
     <div class="setting-wrapper">
@@ -34,6 +46,20 @@ export default function Setting({ setting, setSetting }: Props) {
           type="checkbox"
           checked={setting().useFreeKey}
           onChange={handleSetUseFreeKey}
+        />
+      </Toggle>
+      <Toggle title="激活系统角色设置（开发中）">
+        <input
+          type="checkbox"
+          checked={setting().preSystemRole}
+          onChange={handleSetSystemRole}
+        />
+      </Toggle>
+      <Toggle title="删除当前及之后的会话（开发中）">
+        <input
+          type="checkbox"
+          checked={setting().deleteAllMsg}
+          onChange={handleSetdeleteAllMsg}
         />
       </Toggle>
     </div>

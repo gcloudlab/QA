@@ -1,5 +1,6 @@
 export const defaultToggleSetting = {
   autoSaveSession: true,
   useFreeKey: true,
-  preSystemRole: "",
+  preSystemRole: true,
+  deleteAllMsg: true,
 };
