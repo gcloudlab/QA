@@ -58,11 +58,13 @@ pnpm i
 pnpm dev
 ```
 
-## 部署到 Vercel (推荐)
+## 部署
+
+#### Vercel (推荐)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyesmore%2FQA&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20Key&envLink=https%3A%2F%2Fplatform.openai.com%2Faccount%2Fapi-keys)
 
-## 部署到 Netlify
+#### Netlify
 
 [![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/yesmore/QA#OPENAI_API_KEY=&HTTPS_PROXY=&OPENAI_API_BASE_URL=&HEAD_SCRIPTS=&SECRET_KEY=&OPENAI_API_MODEL=&SITE_PASSWORD=)
 
@@ -73,19 +75,18 @@ pnpm dev
 - 选择默认的构建命令和输出目录，单击 `Deploy Site` 按钮开始部署站点。
 
 
-## 部署在更多的服务器
+#### 部署在更多的服务器
 
 请参考官方部署文档：https://docs.astro.build/en/guides/deploy
 
-
-## 开源许可
-
-[GPL](./LICENSE)
-
-## 鸣谢
+## 参考
 
 - [chatgpt-demo](https://github.com/ddiu8081/chatgpt-demo)
 - [Awesome ChatGPT Prompts](https://prompts.chat/)
 - [ChatGPT 中文调教指南](https://chatguide.plexpt.com/)
+
+## License 
+
+[GPL](./LICENSE) © [yesmore](https://github.com/yesmore)
 
 <a href="https://www.buymeacoffee.com/yesmore/gallery" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
