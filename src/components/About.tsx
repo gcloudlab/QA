@@ -44,10 +44,21 @@ export default () => (
         border-slate
         border-none
         hover:border-dashed
+        href="https://qachat.cn"
+        target="_blank">
+        https://qachat.cn
+      </a>{" "}
+      (国内)；
+      <a
+        border-b
+        border-slate
+        border-none
+        hover:border-dashed
         href="https://qachat.vercel.app"
         target="_blank">
         https://qachat.vercel.app
-      </a>
+      </a>{" "}
+      (国外)
     </p>
     <p>
       <span text-lg>免责声明</span> 本站使用 GPT-3.5 API
