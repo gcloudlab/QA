@@ -393,7 +393,7 @@ export default () => {
               </div>
               <div class="flex justify-between items-center ml-1 mt-2">
                 <p>
-                  <a
+                  {/* <a
                     text-sm
                     text-slate-4
                     border-b
@@ -403,6 +403,17 @@ export default () => {
                     href="https://shop.terobox.com?from=1127"
                     target="_blank">
                     购买 OpenAI API 账号/密钥
+                  </a> */}
+                  <a
+                    text-sm
+                    text-slate-4
+                    border-b
+                    border-slate
+                    border-none
+                    hover:border-dashed
+                    href="https://platform.openai.com/account/api-keys"
+                    target="_blank">
+                    获取 OpenAI API 账号/密钥
                   </a>
                 </p>
 
