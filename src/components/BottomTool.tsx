@@ -19,7 +19,7 @@ export default ({ loading, onClear, onRandom }: Props) => {
         随机预设场景 🎉
       </button>
       <button
-        class="flex items-center justify-between"
+        class="flex items-center justify-between ml-auto"
         title="清空当前会话"
         disabled={loading()}
         onClick={onClear}

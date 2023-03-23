@@ -56,7 +56,6 @@ export default () => {
         setBalance(res);
       });
     }
-
     await requestRealtimeOnline();
     // await requestTotalCount();
     setInterval(async () => {
@@ -529,9 +528,9 @@ export default () => {
                 bg-slate
                 bg-op-15
                 items-center
-                hover:bg-slate-500
                 transition-colors
                 text-slate
+                hover:bg-slate-500
                 hover:text-slate-1
                 rounded-r
                 onClick={stopStreamFetch}>

@@ -1,3 +1,4 @@
+import BackTop from "@/components/BackTop";
 import Github from "./icons/Github";
 
 export default () => (
@@ -29,6 +30,7 @@ export default () => (
         <Github />
         <span>Star on GitHub</span>
       </a>
+      <BackTop />
     </div>
   </footer>
 );
