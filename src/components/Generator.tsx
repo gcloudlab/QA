@@ -56,10 +56,10 @@ export default () => {
         setBalance(res);
       });
     }
-    await requestRealtimeOnline();
+    // await requestRealtimeOnline();
     // await requestTotalCount();
     setInterval(async () => {
-      await requestRealtimeOnline();
+      // await requestRealtimeOnline();
       // await requestTotalCount();
     }, 300000);
 
