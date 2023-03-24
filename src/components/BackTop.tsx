@@ -2,9 +2,9 @@ export default () => {
   return (
     <button
       title="回到顶部"
-      class="ml-auto flex justify-center items-center p-2.5 text-base rounded-md
-      bg-slate-400 text-slate-2 hover:bg-slate-500 hover:text-slate-1 
-        cursor-pointer"
+      class="ml-auto flex justify-center items-center p-2.5 text-base rounded-1
+        cursor-pointer bg-gray-3 px-3 py-2 text-gray-600 shadow-sm 
+        transition-colors hover:border-gray-500 hover:bg-gray-6 hover:text-slate-2"
       onClick={() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }}>

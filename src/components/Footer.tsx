@@ -28,9 +28,10 @@ export default () => (
         target="_blank"
         rel="noopener noreferrer">
         <Github />
-        <span>Star on GitHub</span>
+        <span>Star</span>
       </a>
       <BackTop />
     </div>
+    <div></div>
   </footer>
 );
