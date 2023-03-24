@@ -37,7 +37,8 @@ export default () => (
       <span text-lg text-slate-5>
         注意
       </span>{" "}
-      免费体验功能不保证稳定提供（使用人数较多响应较慢，或密钥额度已用完但是没来得及手动更新，以及更新后需要用户刷新网页）
+      免费体验功能不保证稳定提供
+      (使用人数较多响应较慢，或密钥额度已用完但是没来得及手动更新，以及更新后需要用户刷新网页)。
       白嫖不易($50/天)，你的打赏就是我的动力 (最下方打赏按钮直达)～
     </p>
     <p>
@@ -76,7 +77,7 @@ export default () => (
         hover:border-dashed
         href="https://t.me/yesmore_cc"
         target="_blank">
-        Telegram (集成ChatGPT喵娘机器人)
+        Telegram群组 (集成ChatGPT喵娘机器人)
       </a>
     </p>
     <details mt-1>
