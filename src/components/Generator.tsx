@@ -61,7 +61,7 @@ export default () => {
     setInterval(async () => {
       await requestRealtimeOnline();
       // await requestTotalCount();
-    }, 60000);
+    }, 300000);
 
     eventTypes.forEach((type) => {
       window.addEventListener(type, eventHandler, { passive: false });
