@@ -1,5 +1,5 @@
 export const defaultToggleSetting = {
-  autoSaveSession: true,
+  autoSaveSession: false,
   useFreeKey: true,
   activeSystemRole: false,
 };

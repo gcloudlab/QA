@@ -69,6 +69,7 @@ export default () => {
 
     const storage = localStorage.getItem("setting");
     const session = localStorage.getItem("session");
+
     try {
       let autoSaveSession = false;
       if (storage) {

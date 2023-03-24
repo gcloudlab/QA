@@ -19,13 +19,13 @@ export default ({ loading, onClear, onRandom }: Props) => {
         随机预设场景 🎉
       </button>
       <button
-        class="flex items-center justify-between ml-auto"
+        class="flex items-center justify-between"
         title="清空当前会话"
         disabled={loading()}
         onClick={onClear}
         transition-colors
         hover:text-slate-5>
-        <IconClear /> 清空会话
+        <IconClear /> 清空
       </button>
     </div>
   );
