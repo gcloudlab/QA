@@ -39,7 +39,7 @@ export default () => (
       </span>{" "}
       免费体验功能不保证稳定提供
       (使用人数较多响应较慢，或密钥额度已用完但是没来得及手动更新，以及更新后需要用户刷新网页)。
-      白嫖不易($50/天)，你的打赏就是我的动力 (最下方打赏按钮直达)～
+      白嫖不易($50+/天)，你的打赏就是我的动力 (最下方打赏按钮直达)～
     </p>
     <p>
       <span text-lg text-slate-5>
@@ -52,7 +52,7 @@ export default () => (
         hover:border-dashed
         href="https://qachat.cn"
         target="_blank">
-        https://qachat.cn
+        qachat.cc
       </a>{" "}
       (国内)；
       <a
@@ -62,9 +62,9 @@ export default () => (
         hover:border-dashed
         href="https://qachat.vercel.app"
         target="_blank">
-        https://qachat.vercel.app
+        qachats.vercel.app
       </a>{" "}
-      (国外)。
+      (国外，建议收藏)。
     </p>
     <p>
       <span text-lg text-slate-5>

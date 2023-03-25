@@ -330,10 +330,10 @@ export default () => {
           <summary>
             <div class="flex justify-between items-end text-slate">
               <p>高级设置</p>
-              <div class="flex ml-auto items-center" text-sm>
+              {/* <div class="flex ml-auto items-center" text-sm>
                 <span class="online-dot mr-2.5 mt-0.03"></span>
                 <span>{online} 在线</span>
-              </div>
+              </div> */}
               {/* <div class="flex items-center" text-sm>
                 <span class="request-dot mr-2.5 mt-0.03"></span>
                 <span>{reqCount}</span>
