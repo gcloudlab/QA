@@ -50,7 +50,7 @@ export default () => (
         border-slate
         border-none
         hover:border-dashed
-        href="https://qachat.cn"
+        href="https://qachat.cc"
         target="_blank">
         qachat.cc
       </a>{" "}
@@ -60,11 +60,11 @@ export default () => (
         border-slate
         border-none
         hover:border-dashed
-        href="https://qachat.vercel.app"
+        href="https://qachats.vercel.app"
         target="_blank">
         qachats.vercel.app
       </a>{" "}
-      (国外，建议收藏)。
+      (魔法，建议收藏)。
     </p>
     <p>
       <span text-lg text-slate-5>
