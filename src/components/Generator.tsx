@@ -135,19 +135,19 @@ export default () => {
     }
   };
 
-  const requestRealtimeOnline = async () => {
-    const response = await fetch("/api/online");
+  // const requestRealtimeOnline = async () => {
+  //   const response = await fetch("/api/online");
 
-    if (response.ok) {
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder("utf-8");
-      const { value } = await reader.read();
-      let char = decoder.decode(value);
-      setOnline(char);
-    } else {
-      setOnline("1000");
-    }
-  };
+  //   if (response.ok) {
+  //     const reader = response.body.getReader();
+  //     const decoder = new TextDecoder("utf-8");
+  //     const { value } = await reader.read();
+  //     let char = decoder.decode(value);
+  //     setOnline(char);
+  //   } else {
+  //     setOnline("1000");
+  //   }
+  // };
   const requestTotalCount = async () => {
     const response = await fetch("/api/requestCount");
 
