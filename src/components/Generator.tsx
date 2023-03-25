@@ -148,19 +148,19 @@ export default () => {
   //     setOnline("1000");
   //   }
   // };
-  const requestTotalCount = async () => {
-    const response = await fetch("/api/requestCount");
+  // const requestTotalCount = async () => {
+  //   const response = await fetch("/api/requestCount");
 
-    if (response.ok) {
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder("utf-8");
-      const { value } = await reader.read();
-      let char = decoder.decode(value);
-      setReqCount(char);
-    } else {
-      setReqCount("请求有点多");
-    }
-  };
+  //   if (response.ok) {
+  //     const reader = response.body.getReader();
+  //     const decoder = new TextDecoder("utf-8");
+  //     const { value } = await reader.read();
+  //     let char = decoder.decode(value);
+  //     setReqCount(char);
+  //   } else {
+  //     setReqCount("请求有点多");
+  //   }
+  // };
 
   const handleButtonClick = async () => {
     if (
@@ -201,7 +201,17 @@ export default () => {
     try {
       const controller = new AbortController();
       setController(controller);
-      const requestMessageList = [...messageList()];
+      let requestMessageList = [];
+      if (setting().continuousConversation) {
+        requestMessageList = [...messageList()];
+      } else {
+        requestMessageList = [
+          ...messageList().slice(
+            messageList().length - 1,
+            messageList().length
+          ),
+        ];
+      }
 
       setError("");
       setCustomKey(inputKeyRef.value);

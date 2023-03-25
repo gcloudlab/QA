@@ -19,9 +19,22 @@ export default function Setting({ setting, setSetting }: Props) {
       useFreeKey: e.target.checked,
     });
   };
+  const handleSetContinuous = (e) => {
+    setSetting({
+      ...setting(),
+      continuousConversation: e.target.checked,
+    });
+  };
 
   return (
     <div class="setting-wrapper">
+      <Toggle title="开启连续对话 (消耗额度增加)">
+        <input
+          type="checkbox"
+          checked={setting().continuousConversation}
+          onChange={handleSetContinuous}
+        />
+      </Toggle>
       <Toggle title="自动保存当前会话 (网站刷新后依然存在)">
         <input
           type="checkbox"
