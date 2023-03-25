@@ -412,9 +412,9 @@ export default () => {
                     border-slate
                     border-none
                     hover:border-dashed
-                    href="https://platform.openai.com/account/api-keys"
+                    href="https://shop.terobox.com?from=1127"
                     target="_blank">
-                    获取 OpenAI API 账号/密钥
+                    购买 OpenAI API 账号/密钥
                   </a>
                 </p>
 
