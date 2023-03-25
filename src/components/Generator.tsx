@@ -205,12 +205,7 @@ export default () => {
       if (setting().continuousConversation) {
         requestMessageList = [...messageList()];
       } else {
-        requestMessageList = [
-          ...messageList().slice(
-            messageList().length - 1,
-            messageList().length
-          ),
-        ];
+        requestMessageList = [messageList()[messageList().length - 1]];
       }
 
       setError("");
