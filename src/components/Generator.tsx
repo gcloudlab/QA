@@ -480,7 +480,7 @@ export default () => {
       <textarea
         ref={inputRef!}
         id="input"
-        placeholder="说点什么..."
+        placeholder="说点什么 (设置可开启连续对话)... "
         rows="1"
         resize-none
         autocomplete="off"

@@ -2,7 +2,7 @@
 
 与 AI 对话，基于 ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.openai.com/docs/guides/chat)，并提供免费体验密钥，支持自定义 OpenAI API 密钥。
 
-在线体验：[https://qachat.cn](https://qachat.cn) (国内)；[https://qachat.vercel.app](https://qachat.vercel.app/) (国外)
+在线体验：[https://qachat.cc](https://qachat.cc) (国内)；[https://qachats.vercel.app](https://qachats.vercel.app/) (国外)
 
 > tip：欢迎加入 <a href='https://t.me/yesmore_cc'><img src='https://img.shields.io/badge/-Juiçe的秘密基地-fff?logo=Telegram'/></a> 与喵娘聊天~（集成ChatGPT机器人）
 
