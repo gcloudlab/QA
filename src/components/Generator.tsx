@@ -335,6 +335,7 @@ export default () => {
           <summary>
             <div class="flex justify-between items-end text-slate">
               <p>高级设置</p>
+              {renderProInfo}
               {/* <div class="flex ml-auto items-center" text-sm>
                 <span class="online-dot mr-2.5 mt-0.03"></span>
                 <span>{online} 在线</span>
@@ -517,6 +518,21 @@ export default () => {
         text-slate>
         <IconSend />
       </button>
+    </div>
+  );
+  const renderProInfo = () => (
+    <div>
+      <a
+        text-sm
+        text-slate-4
+        border-b
+        border-slate
+        border-none
+        hover:border-dashed
+        href="https://qapro.vercel.app"
+        target="_blank">
+        QAChat Pro 现在上线啦~
+      </a>
     </div>
   );
 

@@ -1,5 +1,7 @@
 # QAChat
 
+> [QAChat Pro](https://github.com/gcloudlab/QApro) 已经上线~ 
+
 与 AI 对话，基于 ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.openai.com/docs/guides/chat)，并提供免费体验密钥，支持自定义 OpenAI API 密钥。
 
 在线体验：[https://qachat.cc](https://qachat.cc) (国内)；[https://qachats.vercel.app](https://qachats.vercel.app/) (国外)
