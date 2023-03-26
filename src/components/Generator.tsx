@@ -109,7 +109,7 @@ export default () => {
     });
   });
 
-  const eventHandler = (e) => {
+  const eventHandler = (e: KeyboardEvent) => {
     if (e.type === "keydown") {
       if (e.key !== "ArrowUp" && e.key !== "ArrowDown") {
         return;
