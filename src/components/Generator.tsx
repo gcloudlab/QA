@@ -537,7 +537,7 @@ export default () => {
   );
   const renderElem = () => (
     <Show when={iShowWaimai()}>
-      <div class="absolute left-0 z-10">
+      <div class="absolute left-0 bottom-0 z-10">
         <div
           onClick={() => {
             setIsShowWaimai(false);
