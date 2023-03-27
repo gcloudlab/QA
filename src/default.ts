@@ -3,4 +3,5 @@ export const defaultToggleSetting = {
   useFreeKey: true,
   activeSystemRole: false,
   continuousConversation: false,
+  useProxyApi: true,
 };

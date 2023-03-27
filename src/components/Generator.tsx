@@ -48,7 +48,7 @@ export default () => {
   const [balance, setBalance] = createSignal("--");
   const [setting, setSetting] = createSignal(defaultToggleSetting);
   const [isLoadStorage, setIsLoadStorage] = createSignal(false);
-  const [iShowWaimai, setIsShowWaimai] = createSignal(false);
+  const [iShowWaimai, setIsShowWaimai] = createSignal(true);
 
   onMount(async () => {
     if (getCustomKey() !== "") {
@@ -162,6 +162,11 @@ export default () => {
   //   }
   // };
 
+  const requestMode = () =>
+    setting().useProxyApi
+      ? requestWithLatestMessageProxy()
+      : requestWithLatestMessage();
+
   const handleButtonClick = async () => {
     if (
       getCustomKey() === "" &&
@@ -185,7 +190,7 @@ export default () => {
         content: inputValue,
       },
     ]);
-    requestWithLatestMessage();
+    requestMode();
   };
   const requestKeyBalance = async () => {
     if (inputKeyRef.value !== "") {
@@ -270,6 +275,90 @@ export default () => {
     }
     archiveCurrentMessage();
   };
+  const requestWithLatestMessageProxy = async () => {
+    autoScrolling = true;
+    setLoading(true);
+    setCurrentAssistantMessage("");
+    try {
+      const controller = new AbortController();
+      setController(controller);
+      let requestMessageList = [];
+      if (setting().continuousConversation) {
+        requestMessageList = [...messageList()];
+      } else {
+        requestMessageList = [messageList()[messageList().length - 1]];
+      }
+
+      setError("");
+      setCustomKey(inputKeyRef.value);
+
+      inputKeyRef.value = "";
+      inputKeyRef.placeholder =
+        getCustomKey() !== ""
+          ? hideKey(getCustomKey())
+          : "请填写 OpenAI API 密钥";
+
+      const timestamp = Date.now();
+      const response = await fetch("/api/proxy", {
+        method: "POST",
+        body: JSON.stringify({
+          messages: requestMessageList,
+          customKey: getCustomKey(),
+          time: timestamp,
+          sign: await generateSignature({
+            t: timestamp,
+            m:
+              requestMessageList?.[requestMessageList.length - 1]?.content ||
+              "",
+          }),
+        }),
+        signal: controller.signal,
+      });
+      console.log(response);
+
+      // const reader = response.body.getReader();
+      // const d = new TextDecoder("utf-8");
+      // const { value } = await reader.read();
+      // let char = d.decode(value);
+      // console.log(char);
+      // const _response = JSON.parse(response as unknown as string);
+
+      if (!response.ok) {
+        setLoading(false);
+        setError("响应出错了");
+        throw new Error(response.statusText);
+      }
+      const data = response.body;
+      if (!data) {
+        throw new Error("No data");
+      }
+      const reader = data.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let done = false;
+
+      while (!done) {
+        const { value, done: readerDone } = await reader.read();
+        if (value) {
+          let char = decoder.decode(value);
+          console.log();
+          let parse = JSON.parse(char);
+
+          if (parse?.choices[0]?.message?.content) {
+            setCurrentAssistantMessage(parse?.choices[0]?.message?.content);
+          }
+          startAutoScroll();
+        }
+        done = readerDone;
+      }
+      setLoading(false);
+    } catch (e) {
+      setLoading(false);
+      setController(null);
+      inputRef.focus();
+      return;
+    }
+    archiveCurrentMessage();
+  };
   const archiveCurrentMessage = () => {
     if (currentAssistantMessage()) {
       setMessageList([
@@ -306,7 +395,7 @@ export default () => {
       if (lastMessage.role === "assistant") {
         setMessageList(messageList().slice(0, -1));
       }
-      requestWithLatestMessage();
+      requestMode();
     }
   };
   const handleDeleteMsg = (index: number) => {
@@ -443,6 +532,7 @@ export default () => {
             </div>
           </div>
           <About />
+          {renderElem()}
         </details>
       </li>
     </ul>
@@ -537,7 +627,7 @@ export default () => {
   );
   const renderElem = () => (
     <Show when={iShowWaimai()}>
-      <div class="absolute left-0 bottom-0 z-10">
+      <div class="z-1 mt-2 relative">
         <div
           onClick={() => {
             setIsShowWaimai(false);
@@ -545,9 +635,14 @@ export default () => {
           <IconClose />
         </div>
         <img
-          class="h-90 shadow rounded-md"
-          src="https://smartcucu.oss-cn-shanghai.aliyuncs.com/activity/waimai20230327.jpeg"
+          class="shadow rounded-md"
+          src="https://i.postimg.cc/43VZYkBK/xxzs.jpg"
+          w-30
+          h-30
         />
+        <p text-slate-5 text-xs mt-2>
+          本站代理接口由小星助手提供（上方二维码）
+        </p>
       </div>
     </Show>
   );
@@ -597,7 +692,6 @@ export default () => {
         />
         <Footer setWaimai={setIsShowWaimai} />
       </div>
-      {renderElem()}
     </div>
   );
 };

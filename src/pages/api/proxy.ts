@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { generatePayload, parseOpenAIStream } from "@/utils/openAI";
+import { generateProxyPayload } from "@/utils/openAI";
 import { verifySignature } from "@/utils/auth";
 // #vercel-disable-blocks
 import { fetch, ProxyAgent } from "undici";
@@ -12,10 +12,11 @@ const baseUrl = (
 )
   .trim()
   .replace(/\/$/, "");
+const openaiProxyApi = import.meta.env.OPENAI_API_PROXY_URL;
 
 export const post: APIRoute = async (context) => {
   const body = await context.request.json();
-  const { sign, time, messages, customKey } = body;
+  const { sign, time, messages } = body;
 
   if (!messages) {
     return new Response("No input text");
@@ -31,18 +32,19 @@ export const post: APIRoute = async (context) => {
     return new Response("Invalid signature");
   }
 
-  const initOptions = generatePayload(
-    customKey !== "" ? customKey : apiKey,
-    messages
-  );
+  const initOptions = generateProxyPayload(messages);
   // #vercel-disable-blocks
   if (httpsProxy) {
     initOptions["dispatcher"] = new ProxyAgent(httpsProxy);
   }
   // #vercel-end
 
-  // @ts-ignore
-  const response = (await fetch(`${baseUrl}/v1/chat/completions`, initOptions)) as Response;
+  const url = openaiProxyApi
+    ? openaiProxyApi
+    : `${baseUrl}/v1/chat/completions`;
 
-  return new Response(parseOpenAIStream(response));
+  // @ts-ignore
+  const response = (await fetch(url, initOptions)) as Response;
+
+  return new Response(response.body);
 };

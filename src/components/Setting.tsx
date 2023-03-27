@@ -25,9 +25,22 @@ export default function Setting({ setting, setSetting }: Props) {
       continuousConversation: e.target.checked,
     });
   };
+  const handleSetUseProxyApi = (e) => {
+    setSetting({
+      ...setting(),
+      useProxyApi: e.target.checked,
+    });
+  };
 
   return (
     <div class="setting-wrapper">
+      <Toggle title="使用自部署代理官网接口 (优先级最高，无打字机效果)">
+        <input
+          type="checkbox"
+          checked={setting().useProxyApi}
+          onChange={handleSetUseProxyApi}
+        />
+      </Toggle>
       <Toggle title="开启连续对话 (消耗额度增加)">
         <input
           type="checkbox"
@@ -42,6 +55,7 @@ export default function Setting({ setting, setSetting }: Props) {
           onChange={handleSetAutoSaveSession}
         />
       </Toggle>
+
       <Toggle title="使用免费体验密钥">
         <input
           type="checkbox"

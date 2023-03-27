@@ -21,10 +21,24 @@ export const generatePayload = (
   },
   method: "POST",
   body: JSON.stringify({
-    model: "gpt-3.5-turbo-0301",
+    model: "gpt-3.5-turbo",
     messages,
     temperature: 0.6,
     stream: true,
+  }),
+});
+
+export const generateProxyPayload = (messages: ChatMessage[]): RequestInit => ({
+  headers: {
+    "Content-Type": "application/json",
+    "App-Key": "1",
+    "App-Secret": "RTX4090",
+  },
+  method: "POST",
+  body: JSON.stringify({
+    model: "gpt-3.5-turbo",
+    messages,
+    temperature: 0.6,
   }),
 });
 
