@@ -48,7 +48,7 @@ export default () => {
   const [balance, setBalance] = createSignal("--");
   const [setting, setSetting] = createSignal(defaultToggleSetting);
   const [isLoadStorage, setIsLoadStorage] = createSignal(false);
-  const [iShowWaimai, setIsShowWaimai] = createSignal(true);
+  const [iShowWaimai, setIsShowWaimai] = createSignal(false);
 
   onMount(async () => {
     if (getCustomKey() !== "") {
