@@ -28,6 +28,7 @@ import LoadingDots from "./icons/LoadingDots";
 import IconClear from "./icons/Clear";
 import IconSend from "./icons/Send";
 import IconStop from "./icons/Stop";
+import IconClose from "./icons/Close";
 import type { ChatMessage } from "@/types";
 
 export type Setting = typeof defaultToggleSetting;
@@ -47,8 +48,7 @@ export default () => {
   const [balance, setBalance] = createSignal("--");
   const [setting, setSetting] = createSignal(defaultToggleSetting);
   const [isLoadStorage, setIsLoadStorage] = createSignal(false);
-  const [online, setOnline] = createSignal("0");
-  const [reqCount, setReqCount] = createSignal("0");
+  const [iShowWaimai, setIsShowWaimai] = createSignal(true);
 
   onMount(async () => {
     if (getCustomKey() !== "") {
@@ -535,6 +535,19 @@ export default () => {
       </a>
     </div>
   );
+  const renderElem = () => (
+    <Show when={iShowWaimai()}>
+      <div class="absolute left-0 z-10">
+        <div
+          onClick={() => {
+            setIsShowWaimai(false);
+          }}>
+          <IconClose />
+        </div>
+        <img class="h-90 shadow rounded-md" src="/src/assets/waimai.jpeg" />
+      </div>
+    </Show>
+  );
 
   return (
     <div class="my-6 flex flex-col">
@@ -579,8 +592,9 @@ export default () => {
           onClear={clear}
           onRandom={handleRandomPrompt}
         />
-        <Footer />
+        <Footer setWaimai={setIsShowWaimai} />
       </div>
+      {renderElem()}
     </div>
   );
 };

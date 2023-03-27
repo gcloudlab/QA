@@ -1,9 +1,18 @@
 import BackTop from "@/components/BackTop";
 import Github from "./icons/Github";
+import { Setter } from "solid-js";
 
-export default () => (
+interface Props {
+  setWaimai: Setter<boolean>;
+}
+export default ({ setWaimai }: Props) => (
   <footer class="mt-6 text-sm text-slate-800 op-60">
     <div class="flex" mt-3 gap-2>
+      <span
+        onClick={setWaimai}
+        class="flex max-w-fit items-center justify-center space-x-2 rounded-1 border border-amber-300 bg-amber px-3 py-2 text-sm text-gray-600 shadow-sm transition-colors hover:border-gray-500 hover:bg-gray-6 hover:text-slate-2">
+        🧧 福利
+      </span>
       <a
         class="flex max-w-fit items-center justify-center space-x-2 rounded-1 border border-amber-300 bg-amber px-3 py-2 text-sm text-gray-600 shadow-sm transition-colors hover:border-amber-400 hover:bg-amber-300 hover:text-slate-2"
         href="https://www.buymeacoffee.com/yesmore/gallery"
@@ -30,6 +39,7 @@ export default () => (
         <Github />
         <span>Star</span>
       </a>
+
       <BackTop />
     </div>
     <div></div>
