@@ -1,11 +1,7 @@
 import type { APIRoute } from "astro";
 import { generateProxyPayload } from "@/utils/openAI";
 import { verifySignature } from "@/utils/auth";
-// #vercel-disable-blocks
-import { fetch, ProxyAgent } from "undici";
-// #vercel-end
 
-const apiKey = import.meta.env.OPENAI_API_KEY || "";
 const httpsProxy = import.meta.env.HTTPS_PROXY;
 const baseUrl = (
   import.meta.env.OPENAI_API_BASE_URL || "https://api.openai.com"
@@ -33,11 +29,6 @@ export const post: APIRoute = async (context) => {
   }
 
   const initOptions = generateProxyPayload(messages);
-  // #vercel-disable-blocks
-  if (httpsProxy) {
-    initOptions["dispatcher"] = new ProxyAgent(httpsProxy);
-  }
-  // #vercel-end
 
   const url = openaiProxyApi
     ? openaiProxyApi

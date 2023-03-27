@@ -314,14 +314,6 @@ export default () => {
         }),
         signal: controller.signal,
       });
-      console.log(response);
-
-      // const reader = response.body.getReader();
-      // const d = new TextDecoder("utf-8");
-      // const { value } = await reader.read();
-      // let char = d.decode(value);
-      // console.log(char);
-      // const _response = JSON.parse(response as unknown as string);
 
       if (!response.ok) {
         setLoading(false);
@@ -329,6 +321,7 @@ export default () => {
         throw new Error(response.statusText);
       }
       const data = response.body;
+
       if (!data) {
         throw new Error("No data");
       }
@@ -337,11 +330,10 @@ export default () => {
       let done = false;
 
       while (!done) {
-        const { value, done: readerDone } = await reader.read();
+        const { value, done: readerDone } = await reader?.read();
         if (value) {
           let char = decoder.decode(value);
-          console.log();
-          let parse = JSON.parse(char);
+          let parse = JSON.parse(char) || {};
 
           if (parse?.choices[0]?.message?.content) {
             setCurrentAssistantMessage(parse?.choices[0]?.message?.content);
@@ -641,7 +633,7 @@ export default () => {
           h-30
         />
         <p text-slate-5 text-xs mt-2>
-          本站代理接口由小星助手提供（上方二维码）
+          更多功能扫上方二维码
         </p>
       </div>
     </Show>
