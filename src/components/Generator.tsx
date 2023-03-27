@@ -544,7 +544,10 @@ export default () => {
           }}>
           <IconClose />
         </div>
-        <img class="h-90 shadow rounded-md" src="/src/assets/waimai.jpeg" />
+        <img
+          class="h-90 shadow rounded-md"
+          src="https://smartcucu.oss-cn-shanghai.aliyuncs.com/activity/waimai20230327.jpeg"
+        />
       </div>
     </Show>
   );
