@@ -56,7 +56,7 @@ export default function Setting({ setting, setSetting }: Props) {
           onChange={handleSetUseFreeKey}
         />
       </Toggle>
-      <Toggle title="使用自部署代理官网接口 (优先级最高，无打字机效果)">
+      <Toggle title="使用自部署代理官网接口 (暂无免费接口，请勿开启)">
         <input
           type="checkbox"
           checked={setting().useProxyApi}
