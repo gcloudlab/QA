@@ -524,7 +524,6 @@ export default () => {
             </div>
           </div>
           <About />
-          {renderElem()}
         </details>
       </li>
     </ul>
@@ -616,27 +615,6 @@ export default () => {
         QAChat Pro 现在上线啦~
       </a>
     </div>
-  );
-  const renderElem = () => (
-    <Show when={iShowWaimai()}>
-      <div class="z-1 mt-2 relative">
-        <div
-          onClick={() => {
-            setIsShowWaimai(false);
-          }}>
-          <IconClose />
-        </div>
-        <img
-          class="shadow rounded-md"
-          src="https://i.postimg.cc/43VZYkBK/xxzs.jpg"
-          w-30
-          h-30
-        />
-        <p text-slate-5 text-xs mt-2>
-          更多功能扫上方二维码
-        </p>
-      </div>
-    </Show>
   );
 
   return (
