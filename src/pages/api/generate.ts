@@ -14,6 +14,8 @@ const baseUrl = (
   .replace(/\/$/, "");
 
 export const post: APIRoute = async (context) => {
+  console.log(context);
+  
   const body = await context.request.json();
   const { sign, time, messages, customKey } = body;
 
