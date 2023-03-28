@@ -7,7 +7,6 @@ import { fetch, ProxyAgent } from "undici";
 
 const apiKey = import.meta.env.OPENAI_API_KEY || "";
 const httpsProxy = import.meta.env.HTTPS_PROXY;
-const whiteList = import.meta.env.WHITE_LIST;
 const baseUrl = (
   import.meta.env.OPENAI_API_BASE_URL || "https://api.openai.com"
 )
@@ -15,13 +14,6 @@ const baseUrl = (
   .replace(/\/$/, "");
 
 export const post: APIRoute = async (context) => {
-  if (whiteList) {
-    const list =  whiteList.split(",")
-    if (!list.includes(context.url.origin)) {
-      return new Response("Invalid signature1");
-    }
-  }
-  
   const body = await context.request.json();
   const { sign, time, messages, customKey } = body;
 
