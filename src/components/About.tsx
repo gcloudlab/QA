@@ -80,6 +80,16 @@ export default () => (
         target="_blank">
         Telegram群组 (集成ChatGPT喵娘机器人)
       </a>
+      {" · "}
+      <a
+        border-b
+        border-slate
+        border-none
+        hover:border-dashed
+        href="https://openaizh.com"
+        target="_blank">
+        OpenAI中文网
+      </a>
     </p>
     <details mt-1>
       <summary class="-ml-8">免责声明</summary>
