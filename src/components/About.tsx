@@ -2,6 +2,12 @@ export default () => (
   <div text-sm text-slate-4 pt-2 ml-1 border-t border-dashed border-slate>
     <p>
       <span text-lg text-slate-5>
+        注意
+      </span>{" "}
+      本站严禁用户输入/输出任何违反法律法规、道德规范、社会公德的内容，包括但不限于涉及黄色、色情、淫秽、赌博、毒品等违禁内容，侵犯他人知识产权、隐私权等合法权益的内容等。
+    </p>
+    <p>
+      <span text-lg text-slate-5>
         关于
       </span>
       {"  "}
@@ -35,24 +41,16 @@ export default () => (
     </p>
     <p>
       <span text-lg text-slate-5>
-        注意
-      </span>{" "}
-      免费体验功能不保证稳定提供
-      (使用人数较多响应较慢，或密钥额度已用完但是没来得及手动更新，以及更新后需要用户刷新网页)。
-      白嫖不易($50+/天)，你的打赏就是我的动力 (最下方打赏按钮直达)～
-    </p>
-    <p>
-      <span text-lg text-slate-5>
-        域名
+        域名和公众号
       </span>{" "}
       <a
         border-b
         border-slate
         border-none
         hover:border-dashed
-        href="https://qachat.cc"
+        href="https://qachat.one"
         target="_blank">
-        qachat.cc
+        qachat.one
       </a>{" "}
       (国内)；
       <a
@@ -65,7 +63,16 @@ export default () => (
         qachats.vercel.app
       </a>{" "}
       (魔法，建议收藏)。鉴于前几次域名被墙导致有小伙伴迷路，建了个{" "}
-      <strong>公众号</strong>随时更新最新域名，欢迎扫码关注
+      <strong>公众号</strong> 随时更新最新域名，欢迎扫码关注。
+    </p>
+    <p>
+      <span text-lg text-slate-5>
+        关于打赏
+      </span>{" "}
+      免费体验功能不保证稳定提供
+      (使用人数较多响应较慢，或密钥额度已用完但是没来得及手动更新，以及更新后需要用户刷新网页)。
+      白嫖不易($50+/天)，你的打赏就是我的动力
+      (站长会根据当日打赏情况决定未来几天的免费额度)～
     </p>
     <p>
       <span text-lg text-slate-5>
