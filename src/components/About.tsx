@@ -65,7 +65,7 @@ export default () => (
         qachats.vercel.app
       </a>{" "}
       (魔法，建议收藏)。鉴于前几次域名被墙导致有小伙伴迷路，建了个{" "}
-      <strong>QAChat防走失群(634323049)</strong>，欢迎加入。
+      <strong>公众号</strong>随时更新最新域名，欢迎扫码关注
     </p>
     <p>
       <span text-lg text-slate-5>
