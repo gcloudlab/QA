@@ -78,6 +78,8 @@ export default () => (
       <span text-lg text-slate-5>
         交流
       </span>{" "}
+      Q群634323049
+      {" · "}
       <a
         border-b
         border-slate
