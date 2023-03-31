@@ -64,13 +64,6 @@ const customTosat = () => {
 export default ({ setWaimai }: Props) => (
   <footer class="mt-6 text-sm text-slate-800 op-90">
     <div class="flex" mt-3 gap-2>
-      <div
-        class="flex max-w-fit items-center justify-center space-x-2 rounded-1 border border-amber-300 bg-amber px-3 py-2 text-sm text-gray-600 shadow-sm transition-colors hover:border-gray-500 hover:bg-gray-6 hover:text-slate-2"
-        onClick={() => {
-          customTosat();
-        }}>
-        🧧 去赚钱
-      </div>
       <a
         class="flex max-w-fit items-center justify-center space-x-2 rounded-1 border border-amber-300 bg-amber px-3 py-2 text-sm text-gray-600 shadow-sm transition-colors hover:border-amber-400 hover:bg-amber-300 hover:text-slate-2"
         href="https://www.buymeacoffee.com/yesmore/gallery"
@@ -89,7 +82,14 @@ export default ({ setWaimai }: Props) => (
         </svg>
         <span text-slate-800>二维码打赏</span>
       </a>
-    {/*  <a
+      <div
+        class="flex max-w-fit items-center justify-center space-x-2 rounded-1 border border-amber-300 bg-amber px-3 py-2 text-sm text-gray-600 shadow-sm transition-colors hover:border-gray-500 hover:bg-gray-6 hover:text-slate-2"
+        onClick={() => {
+          customTosat();
+        }}>
+        🧧 去赚钱
+      </div>
+      {/*  <a
         class="flex max-w-fit items-center justify-center space-x-2 rounded-1 border border-gray-300 bg-gray-3 px-3 py-2 text-sm text-gray-600 shadow-sm transition-colors hover:border-gray-500 hover:bg-gray-6 hover:text-slate-2"
         href="https://github.com/gcloudlab/QA"
         target="_blank"
