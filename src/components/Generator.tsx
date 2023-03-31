@@ -36,6 +36,7 @@ export type Setting = typeof defaultToggleSetting;
 export default () => {
   let inputRef: HTMLTextAreaElement;
   let inputKeyRef: HTMLInputElement;
+  let inputCodeRef: HTMLInputElement;
   let autoScrolling = true;
   const eventTypes = ["wheel", "touchmove", "keydown"];
 
@@ -51,8 +52,9 @@ export default () => {
   const [iShowWaimai, setIsShowWaimai] = createSignal(true);
 
   onMount(async () => {
-    if (getCustomKey() !== "") {
-      getCreditGrants(getCustomKey()).then((res) => {
+    inputCodeRef.value = getCustomKey("access-code")
+    if (getCustomKey("custom-key") !== "") {
+      getCreditGrants(getCustomKey("custom-key")).then((res) => {
         setBalance(res);
       });
     }
@@ -169,7 +171,7 @@ export default () => {
 
   const handleButtonClick = async () => {
     if (
-      getCustomKey() === "" &&
+      getCustomKey("custom-key") === "" &&
       inputKeyRef.value === "" &&
       !setting().useFreeKey
     ) {
@@ -214,12 +216,14 @@ export default () => {
       }
 
       setError("");
-      setCustomKey(inputKeyRef.value);
+      setCustomKey("custom-key", inputKeyRef.value);
+      setCustomKey("access-code", inputCodeRef.value)
+      
 
       inputKeyRef.value = "";
       inputKeyRef.placeholder =
-        getCustomKey() !== ""
-          ? hideKey(getCustomKey())
+        getCustomKey("custom-key") !== ""
+          ? hideKey(getCustomKey("custom-key"))
           : "请填写 OpenAI API 密钥";
 
       const timestamp = Date.now();
@@ -227,7 +231,8 @@ export default () => {
         method: "POST",
         body: JSON.stringify({
           messages: requestMessageList,
-          customKey: getCustomKey(),
+          customKey: getCustomKey("custom-key"),
+          code: inputCodeRef.value || "",
           time: timestamp,
           sign: await generateSignature({
             t: timestamp,
@@ -290,12 +295,12 @@ export default () => {
       }
 
       setError("");
-      setCustomKey(inputKeyRef.value);
+      setCustomKey("custom-key", inputKeyRef.value);
 
       inputKeyRef.value = "";
       inputKeyRef.placeholder =
-        getCustomKey() !== ""
-          ? hideKey(getCustomKey())
+        getCustomKey("custom-key") !== ""
+          ? hideKey(getCustomKey("custom-key"))
           : "请填写 OpenAI API 密钥";
 
       const timestamp = Date.now();
@@ -303,7 +308,7 @@ export default () => {
         method: "POST",
         body: JSON.stringify({
           messages: requestMessageList,
-          customKey: getCustomKey(),
+          customKey: getCustomKey("custom-key"),
           time: timestamp,
           sign: await generateSignature({
             t: timestamp,
@@ -429,13 +434,36 @@ export default () => {
           </summary>
           <div class="mt-4 pb-2">
             <div class="api-key">
+              <div class="flex mb-2">
+              <input
+                  ref={inputCodeRef!}
+                  type="password"
+                  placeholder={"请填写授权码 (若已填写密钥则无需填写)"}
+                  onBlur={requestKeyBalance}
+                  autocomplete="off"
+                  w-full
+                  px-4
+                  py-2
+                  h-10
+                  min-h-10
+                  text-slate-700
+                  rounded-l
+                  bg-slate
+                  bg-op-15
+                  focus:bg-op-20
+                  focus:ring-0
+                  focus:outline-none
+                  placeholder:text-slate-900
+                  placeholder:op-30
+                />
+              </div>
               <div class="flex">
                 <input
                   ref={inputKeyRef!}
                   type="text"
                   placeholder={`${
-                    getCustomKey() !== ""
-                      ? hideKey(getCustomKey())
+                    getCustomKey("custom-key") !== ""
+                      ? hideKey(getCustomKey("custom-key"))
                       : "请填写 OpenAI API 密钥"
                   }`}
                   onBlur={requestKeyBalance}
@@ -462,8 +490,8 @@ export default () => {
                     setBalance("--");
                     inputKeyRef.value = "";
                     inputKeyRef.placeholder =
-                      getCustomKey() !== ""
-                        ? hideKey(getCustomKey())
+                      getCustomKey("custom-key") !== ""
+                        ? hideKey(getCustomKey("custom-key"))
                         : "请填写 OpenAI API 密钥";
                   }}
                   h-10
