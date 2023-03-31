@@ -11,17 +11,7 @@ export default () => (
         关于
       </span>
       {"  "}
-      本站基于{" "}
-      <a
-        border-b
-        border-slate
-        border-none
-        hover:border-dashed
-        href="https://platform.openai.com"
-        target="_blank">
-        OpenAI GPT-3.5 Turbo API
-      </a>{" "}
-      接口。如果你想和它聊天，
+      本站基于问答 Ai，如果你想和它聊天，
       <strong>
         请先准备好{" "}
         <a
@@ -31,9 +21,9 @@ export default () => (
           hover:border-dashed
           href="https://platform.openai.com/account/api-keys"
           target="_blank">
-          OpenAI API Key
+          API Key (密钥)
         </a>{" "}
-        密钥并填写 (用户密钥均保存在用户本地，不涉及任何上传功能)。
+        并填写 (用户密钥均保存在用户本地，不涉及任何上传功能)。
       </strong>
       你也可以选中"免费体验密钥"功能 (默认已开启)，即可使用站长提供的
       <strong>免费密钥且无需填写自己的密钥</strong>
