@@ -650,7 +650,7 @@ export default () => {
         border-slate
         border-none
         hover:border-dashed
-        href="https://qapro.vercel.app"
+        href="https://aka.qachat.pro"
         target="_blank">
         QAChat Pro 体验版上线啦~
       </a>
