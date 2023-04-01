@@ -22,7 +22,7 @@ export const post: APIRoute = async (context) => {
   // 使用免费密钥且开启授权模式，则激活授权模式
   if (customKey === "" && accessCode !== undefined) {
     if (code === "") {
-      return new Response("请在高级设置内填写授权码。关注公众号即可获取授权码，激活免费使用 (有效期两小时，过期需重新获取)。");
+      return new Response("hi，使用免费版需要在高级设置内填写授权码。关注公众号即可获取授权码，激活免费使用 (为保障免费服务稳定提供，授权码有效期为两小时，过期后重新获取即可)。");
     }
     const access_check = await requestAccessCheck(code)
     if (access_check !== true) {
