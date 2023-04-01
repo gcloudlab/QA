@@ -8,12 +8,10 @@
     "build": "astro build",
     "build:vercel": "OUTPUT=vercel astro build",
     "build:netlify": "OUTPUT=netlify astro build",
-    "build:cloudflare": "OUTPUT=cloudflare astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^6.2.2",
     "@astrojs/netlify": "2.0.0",
     "@astrojs/node": "^5.0.4",
     "@astrojs/solid-js": "^2.0.2",

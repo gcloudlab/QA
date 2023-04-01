@@ -5,7 +5,6 @@ import solidJs from "@astrojs/solid-js";
 import node from "@astrojs/node";
 import vercel from "@astrojs/vercel/edge";
 import netlify from "@astrojs/netlify/edge-functions";
-import cloudflare from "@astrojs/cloudflare";
 import vercelDisableBlocks from "./plugins/vercelDisableBlocks";
 
 const envAdapter = () => {
@@ -13,8 +12,6 @@ const envAdapter = () => {
     return vercel();
   } else if (process.env.OUTPUT === "netlify") {
     return netlify();
-  } else if (process.env.OUTPUT === "cloudflare") {
-    return cloudflare();
   } else {
     return node({
       mode: "standalone",
@@ -31,7 +28,6 @@ export default defineConfig({
     plugins: [
       process.env.OUTPUT === "vercel" && vercelDisableBlocks(),
       process.env.OUTPUT === "netlify" && vercelDisableBlocks(),
-      process.env.OUTPUT === "cloudflare" && vercelDisableBlocks(),
     ],
   },
 });

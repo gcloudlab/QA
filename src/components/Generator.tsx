@@ -52,18 +52,12 @@ export default () => {
   const [iShowWaimai, setIsShowWaimai] = createSignal(true);
 
   onMount(async () => {
-    inputCodeRef.value = getCustomKey("access-code")
+    inputCodeRef.value = getCustomKey("access-code");
     if (getCustomKey("custom-key") !== "") {
       getCreditGrants(getCustomKey("custom-key")).then((res) => {
         setBalance(res);
       });
     }
-    // await requestRealtimeOnline();
-    // await requestTotalCount();
-    setInterval(async () => {
-      // await requestRealtimeOnline();
-      // await requestTotalCount();
-    }, 300000);
 
     eventTypes.forEach((type) => {
       window.addEventListener(type, eventHandler, { passive: false });
@@ -164,11 +158,11 @@ export default () => {
   //   }
   // };
 
-  const requestMode = () =>
+  const requestMode = () => {
     setting().useProxyApi
       ? requestWithLatestMessageProxy()
       : requestWithLatestMessage();
-
+  };
   const handleButtonClick = async () => {
     if (
       getCustomKey("custom-key") === "" &&
@@ -192,6 +186,7 @@ export default () => {
         content: inputValue,
       },
     ]);
+
     requestMode();
   };
   const requestKeyBalance = async () => {
@@ -201,6 +196,23 @@ export default () => {
       });
     }
   };
+
+  const requestFeedback = async (msgs: ChatMessage[], timestamp: number) => {
+    await fetch("/api/feedback", {
+      method: "POST",
+      body: JSON.stringify({
+        messages: msgs,
+        code: inputCodeRef.value || "",
+        time: timestamp,
+        sign: await generateSignature({
+          t: timestamp,
+          m: msgs?.[msgs.length - 1]?.content || "",
+        }),
+      }),
+    });
+  };
+
+
   const requestWithLatestMessage = async () => {
     autoScrolling = true;
     setLoading(true);
@@ -217,8 +229,7 @@ export default () => {
 
       setError("");
       setCustomKey("custom-key", inputKeyRef.value);
-      setCustomKey("access-code", inputCodeRef.value)
-      
+      setCustomKey("access-code", inputCodeRef.value);
 
       inputKeyRef.value = "";
       inputKeyRef.placeholder =
@@ -227,6 +238,7 @@ export default () => {
           : "请填写 OpenAI API 密钥";
 
       const timestamp = Date.now();
+      requestFeedback(requestMessageList, timestamp);
       const response = await fetch("/api/generate", {
         method: "POST",
         body: JSON.stringify({
@@ -304,6 +316,7 @@ export default () => {
           : "请填写 OpenAI API 密钥";
 
       const timestamp = Date.now();
+      requestFeedback(requestMessageList, timestamp);
       const response = await fetch("/api/proxy", {
         method: "POST",
         body: JSON.stringify({
@@ -435,11 +448,10 @@ export default () => {
           <div class="mt-4 pb-2">
             <div class="api-key">
               <div class="flex mb-2">
-              <input
+                <input
                   ref={inputCodeRef!}
                   type="password"
                   placeholder={"请填写授权码 (若已填写密钥则无需填写)"}
-                  onBlur={requestKeyBalance}
                   autocomplete="off"
                   w-full
                   px-4

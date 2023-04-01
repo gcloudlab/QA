@@ -7,6 +7,7 @@ import { fetch, ProxyAgent } from "undici";
 
 const apiKey = import.meta.env.OPENAI_API_KEY || "";
 const accessCode = import.meta.env.CODE;
+const accessCheckApi = import.meta.env.ACCESS_CHECK_URL;
 const httpsProxy = import.meta.env.HTTPS_PROXY;
 const baseUrl = (
   import.meta.env.OPENAI_API_BASE_URL || "https://api.openai.com"
@@ -20,12 +21,18 @@ export const post: APIRoute = async (context) => {
 
   // 使用免费密钥且开启授权模式，则激活授权模式
   if (customKey === "" && accessCode !== undefined) {
-    const codes = accessCode.split(",") || []
     if (code === "") {
-      return new Response("请在高级设置内填写授权码。关注公众号即可获取授权码，激活无限免费使用 (无套路，保真)。");
-    } else if (!codes.includes(code)) {
-      return new Response("授权码已失效，关注公众号即可获取最新授权码");
+      return new Response("请在高级设置内填写授权码。关注公众号即可获取授权码，激活免费使用 (有效期两小时，过期需重新获取)。");
     }
+    const access_check = await requestAccessCheck(code)
+    if (access_check !== true) {
+      return new Response(access_check)
+    }
+    
+    // const codes = accessCode.split(",") || []
+    // if (!codes.includes(code)) {
+    //   return new Response("授权码已失效，关注公众号即可获取最新授权码");
+    // }
   }
 
   if (!messages) {
@@ -57,3 +64,23 @@ export const post: APIRoute = async (context) => {
 
   return new Response(parseOpenAIStream(response));
 };
+
+
+  const requestAccessCheck = async (code: string) => {
+    // @ts-ignore
+    const response = (await fetch(`${accessCheckApi}?code=${code}`, {
+      method: "GET",
+    })) as Response;
+    const data = response.body;
+    const reader = data.getReader();
+    const decoder = new TextDecoder("utf-8");
+
+    const { value, done: readerDone } = await reader?.read();
+    let char = decoder.decode(value);
+    let parse = JSON.parse(char) || {};
+
+    if (parse?.code !== 200) {
+      return parse.msg
+    }
+    return true
+  };
