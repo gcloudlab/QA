@@ -28,7 +28,6 @@ import LoadingDots from "./icons/LoadingDots";
 import IconClear from "./icons/Clear";
 import IconSend from "./icons/Send";
 import IconStop from "./icons/Stop";
-import IconClose from "./icons/Close";
 import type { ChatMessage } from "@/types";
 
 export type Setting = typeof defaultToggleSetting;
@@ -211,7 +210,6 @@ export default () => {
       }),
     });
   };
-
 
   const requestWithLatestMessage = async () => {
     autoScrolling = true;
