@@ -226,7 +226,6 @@ export default () => {
       }
 
       setError("");
-      setCustomKey("custom-key", inputKeyRef.value);
       setCustomKey("access-code", inputCodeRef.value);
 
       inputKeyRef.value = "";
@@ -305,7 +304,6 @@ export default () => {
       }
 
       setError("");
-      setCustomKey("custom-key", inputKeyRef.value);
 
       inputKeyRef.value = "";
       inputKeyRef.placeholder =
@@ -476,7 +474,10 @@ export default () => {
                       ? hideKey(getCustomKey("custom-key"))
                       : "请填写 OpenAI API 密钥"
                   }`}
-                  onBlur={requestKeyBalance}
+                  onBlur={() => {
+                    setCustomKey("custom-key", inputKeyRef.value);
+                    requestKeyBalance();
+                  }}
                   autocomplete="off"
                   w-full
                   px-4
