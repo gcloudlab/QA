@@ -644,14 +644,14 @@ export default () => {
     <div>
       <a
         text-sm
-        text-slate-4
+        text-slate-5
         border-b
         border-slate
         border-none
         hover:border-dashed
         href="https://aka.qachat.pro"
         target="_blank">
-        QAChat Pro 体验版上线啦~
+        QAchat Pro 上线啦~
       </a>
     </div>
   );

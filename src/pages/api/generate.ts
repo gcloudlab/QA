@@ -17,12 +17,12 @@ const baseUrl = (
 
 export const post: APIRoute = async (context) => {
   const body = await context.request.json();
-  const { sign, time, messages, customKey, code } = body;
+  const { messages, customKey, code } = body;
 
   // 使用免费密钥且开启授权模式，则激活授权模式
   if (customKey === "" && accessCode !== undefined) {
     if (code === "") {
-      return new Response("hi，使用免费版需要在高级设置内填写授权码。关注公众号即可获取授权码，激活免费使用 (为保障免费服务稳定提供，授权码有效期为两小时，过期后重新获取即可)。");
+      return new Response("Hi~ 使用免费版需要在**高级设置**内填写**授权码**。关注公众号即可获取授权码，激活免费使用 (为保障免费服务稳定提供，授权码有效期为**两小时**，过期后重新获取即可)。");
     }
     const access_check = await requestAccessCheck(code)
     if (access_check !== true) {
@@ -64,7 +64,6 @@ export const post: APIRoute = async (context) => {
 
   return new Response(parseOpenAIStream(response));
 };
-
 
   const requestAccessCheck = async (code: string) => {
     // @ts-ignore
