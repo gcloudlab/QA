@@ -243,6 +243,7 @@ export default () => {
           messages: requestMessageList,
           customKey: getCustomKey("custom-key"),
           code: inputCodeRef.value || "",
+          continuous: setting().continuousConversation,
           time: timestamp,
           sign: await generateSignature({
             t: timestamp,
