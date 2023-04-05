@@ -68,7 +68,7 @@ export default () => (
       <span text-lg text-slate-5>
         交流
       </span>{" "}
-      Q群634323049
+      Q群634323049 (群内不定期分享免费密钥)
       {" · "}
       <a
         border-b

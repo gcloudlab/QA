@@ -29,6 +29,7 @@ import IconClear from "./icons/Clear";
 import IconSend from "./icons/Send";
 import IconStop from "./icons/Stop";
 import type { ChatMessage } from "@/types";
+import { Toaster } from "solid-toast";
 
 export type Setting = typeof defaultToggleSetting;
 
@@ -520,17 +521,6 @@ export default () => {
               </div>
               <div class="flex justify-between items-center ml-1 mt-2">
                 <p>
-                  {/* <a
-                    text-sm
-                    text-slate-4
-                    border-b
-                    border-slate
-                    border-none
-                    hover:border-dashed
-                    href="https://shop.terobox.com?from=1127"
-                    target="_blank">
-                    购买 OpenAI API 账号/密钥
-                  </a> */}
                   <a
                     text-sm
                     text-slate-4
@@ -538,7 +528,7 @@ export default () => {
                     border-slate
                     border-none
                     hover:border-dashed
-                    href="https://shop.terobox.com?from=1127"
+                    href="https://aka.qachat.pro"
                     target="_blank">
                     购买 OpenAI API 账号/密钥
                   </a>
@@ -700,6 +690,7 @@ export default () => {
           onRandom={handleRandomPrompt}
         />
         <Footer setWaimai={setIsShowWaimai} />
+        <Toaster/>
       </div>
     </div>
   );
