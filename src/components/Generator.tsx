@@ -199,41 +199,36 @@ export default () => {
   };
 
   const requestFeedback = async (msgs: ChatMessage[], timestamp: number) => {
-    try {
-      const res = await fetch("/api/feedback", {
-        method: "POST",
-        body: JSON.stringify({
-          messages: msgs,
-          code: inputCodeRef.value || "",
-          time: timestamp,
-          sign: await generateSignature({
-            t: timestamp,
-            m: msgs?.[msgs.length - 1]?.content || "",
-          }),
+    const res = await fetch("/api/feedback", {
+      method: "POST",
+      body: JSON.stringify({
+        messages: msgs,
+        code: inputCodeRef.value || "",
+        time: timestamp,
+        sign: await generateSignature({
+          t: timestamp,
+          m: msgs?.[msgs.length - 1]?.content || "",
         }),
-      });
-      if (!res.ok) {
-        setLoading(false);
-        setError("响应出错了");
-        throw new Error(res.statusText);
-      }
-      const data = res.body;
-      const reader = data.getReader();
-      const decoder = new TextDecoder("utf-8");
-      const { value, done: readerDone } = await reader.read();
-      let char = decoder.decode(value);
-      let parsed = JSON.parse(char)
-      if (parsed && parsed.code !== 200) {
-        setLoading(false);
-        setError("非法输入");
-        return false
-      }
-      return true
-    } catch (error) {
-      console.log("FEEDBACK ERROR");
-      return false
+      }),
+    });
+    if (!res.ok) {
+      setLoading(false);
+      setError("响应出错了");
+      throw new Error(res.statusText);
     }
-  };
+    const data = res.body;
+    const reader = data.getReader();
+    const decoder = new TextDecoder("utf-8");
+    const { value, done: readerDone } = await reader.read();
+    let char = decoder.decode(value);
+    let parsed = JSON.parse(char)
+    if (parsed && parsed.code === 200) {
+      return true
+    }
+    setLoading(false);
+      setError("非法输入");
+    return false
+  }
 
   const requestWithLatestMessage = async () => {
     autoScrolling = true;
