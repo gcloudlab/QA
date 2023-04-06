@@ -7,9 +7,6 @@ export const post: APIRoute = async (context) => {
   const body = await context.request.json();
   const { sign, time, messages, code } = body;
 
-  if (!code) {
-    return new Response("Invalid signature");
-  }
   if (!messages) {
     return new Response("No input text");
   }

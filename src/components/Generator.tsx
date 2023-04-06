@@ -226,7 +226,7 @@ export default () => {
       return true
     }
     setLoading(false);
-      setError("非法输入");
+    setError("非法输入");
     return false
   }
 
