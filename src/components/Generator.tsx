@@ -259,55 +259,57 @@ export default () => {
           : "请填写 OpenAI API 密钥";
 
       const timestamp = Date.now();
-      if (await requestFeedback(requestMessageList, timestamp)) {
-        const response = await fetch("/api/generate", {
-          method: "POST",
-          body: JSON.stringify({
-            messages: requestMessageList,
-            customKey: getCustomKey("custom-key"),
-            code: inputCodeRef.value || "",
-            continuous: setting().continuousConversation,
-            time: timestamp,
-            sign: await generateSignature({
-              t: timestamp,
-              m:
-                requestMessageList?.[requestMessageList.length - 1]?.content ||
-                "",
-            }),
-          }),
-          signal: controller.signal,
-        });
-  
-        if (!response.ok) {
-          setLoading(false);
-          setError("响应出错了");
-          throw new Error(response.statusText);
-        }
-        const data = response.body;
-        if (!data) {
-          throw new Error("No data");
-        }
-        const reader = data.getReader();
-        const decoder = new TextDecoder("utf-8");
-        let done = false;
-  
-        while (!done) {
-          const { value, done: readerDone } = await reader.read();
-          if (value) {
-            let char = decoder.decode(value);
-            if (char === "\n" && currentAssistantMessage().endsWith("\n")) {
-              continue;
-            }
-            if (char) {
-              setCurrentAssistantMessage(currentAssistantMessage() + char);
-            }
-            startAutoScroll();
-          }
-          done = readerDone;
-        }
-        setLoading(false);
+      const test = await requestFeedback(requestMessageList, timestamp)
+
+      if (!test) {
+        return
       }
-      
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        body: JSON.stringify({
+          messages: requestMessageList,
+          customKey: getCustomKey("custom-key"),
+          code: inputCodeRef.value || "",
+          continuous: setting().continuousConversation,
+          time: timestamp,
+          sign: await generateSignature({
+            t: timestamp,
+            m:
+              requestMessageList?.[requestMessageList.length - 1]?.content ||
+              "",
+          }),
+        }),
+        signal: controller.signal,
+      });
+
+      if (!response.ok) {
+        setLoading(false);
+        setError("响应出错了");
+        throw new Error(response.statusText);
+      }
+      const data = response.body;
+      if (!data) {
+        throw new Error("No data");
+      }
+      const reader = data.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let done = false;
+
+      while (!done) {
+        const { value, done: readerDone } = await reader.read();
+        if (value) {
+          let char = decoder.decode(value);
+          if (char === "\n" && currentAssistantMessage().endsWith("\n")) {
+            continue;
+          }
+          if (char) {
+            setCurrentAssistantMessage(currentAssistantMessage() + char);
+          }
+          startAutoScroll();
+        }
+        done = readerDone;
+      }
+      setLoading(false);
       
     } catch (e) {
       setLoading(false);
