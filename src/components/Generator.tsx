@@ -30,6 +30,7 @@ import IconSend from "./icons/Send";
 import IconStop from "./icons/Stop";
 import type { ChatMessage } from "@/types";
 import { Toaster } from "solid-toast";
+import { PRO_URL } from "@/contants";
 
 export type Setting = typeof defaultToggleSetting;
 
@@ -198,18 +199,40 @@ export default () => {
   };
 
   const requestFeedback = async (msgs: ChatMessage[], timestamp: number) => {
-    await fetch("/api/feedback", {
-      method: "POST",
-      body: JSON.stringify({
-        messages: msgs,
-        code: inputCodeRef.value || "",
-        time: timestamp,
-        sign: await generateSignature({
-          t: timestamp,
-          m: msgs?.[msgs.length - 1]?.content || "",
+    try {
+      const res = await fetch("/api/feedback", {
+        method: "POST",
+        body: JSON.stringify({
+          messages: msgs,
+          code: inputCodeRef.value || "",
+          time: timestamp,
+          sign: await generateSignature({
+            t: timestamp,
+            m: msgs?.[msgs.length - 1]?.content || "",
+          }),
         }),
-      }),
-    });
+      });
+      if (!res.ok) {
+        setLoading(false);
+        setError("响应出错了");
+        throw new Error(res.statusText);
+      }
+      const data = res.body;
+      const reader = data.getReader();
+      const decoder = new TextDecoder("utf-8");
+      const { value, done: readerDone } = await reader.read();
+      let char = decoder.decode(value);
+      let parsed = JSON.parse(char)
+      if (parsed && parsed.code !== 200) {
+        setLoading(false);
+        setError("非法输入");
+        return false
+      }
+      return true
+    } catch (error) {
+      console.log("FEEDBACK ERROR");
+      return false
+    }
   };
 
   const requestWithLatestMessage = async () => {
@@ -236,53 +259,56 @@ export default () => {
           : "请填写 OpenAI API 密钥";
 
       const timestamp = Date.now();
-      requestFeedback(requestMessageList, timestamp);
-      const response = await fetch("/api/generate", {
-        method: "POST",
-        body: JSON.stringify({
-          messages: requestMessageList,
-          customKey: getCustomKey("custom-key"),
-          code: inputCodeRef.value || "",
-          continuous: setting().continuousConversation,
-          time: timestamp,
-          sign: await generateSignature({
-            t: timestamp,
-            m:
-              requestMessageList?.[requestMessageList.length - 1]?.content ||
-              "",
+      if (await requestFeedback(requestMessageList, timestamp)) {
+        const response = await fetch("/api/generate", {
+          method: "POST",
+          body: JSON.stringify({
+            messages: requestMessageList,
+            customKey: getCustomKey("custom-key"),
+            code: inputCodeRef.value || "",
+            continuous: setting().continuousConversation,
+            time: timestamp,
+            sign: await generateSignature({
+              t: timestamp,
+              m:
+                requestMessageList?.[requestMessageList.length - 1]?.content ||
+                "",
+            }),
           }),
-        }),
-        signal: controller.signal,
-      });
-
-      if (!response.ok) {
-        setLoading(false);
-        setError("响应出错了");
-        throw new Error(response.statusText);
-      }
-      const data = response.body;
-      if (!data) {
-        throw new Error("No data");
-      }
-      const reader = data.getReader();
-      const decoder = new TextDecoder("utf-8");
-      let done = false;
-
-      while (!done) {
-        const { value, done: readerDone } = await reader.read();
-        if (value) {
-          let char = decoder.decode(value);
-          if (char === "\n" && currentAssistantMessage().endsWith("\n")) {
-            continue;
-          }
-          if (char) {
-            setCurrentAssistantMessage(currentAssistantMessage() + char);
-          }
-          startAutoScroll();
+          signal: controller.signal,
+        });
+  
+        if (!response.ok) {
+          setLoading(false);
+          setError("响应出错了");
+          throw new Error(response.statusText);
         }
-        done = readerDone;
+        const data = response.body;
+        if (!data) {
+          throw new Error("No data");
+        }
+        const reader = data.getReader();
+        const decoder = new TextDecoder("utf-8");
+        let done = false;
+  
+        while (!done) {
+          const { value, done: readerDone } = await reader.read();
+          if (value) {
+            let char = decoder.decode(value);
+            if (char === "\n" && currentAssistantMessage().endsWith("\n")) {
+              continue;
+            }
+            if (char) {
+              setCurrentAssistantMessage(currentAssistantMessage() + char);
+            }
+            startAutoScroll();
+          }
+          done = readerDone;
+        }
+        setLoading(false);
       }
-      setLoading(false);
+      
+      
     } catch (e) {
       setLoading(false);
       setController(null);
@@ -529,7 +555,7 @@ export default () => {
                     border-slate
                     border-none
                     hover:border-dashed
-                    href="https://aka.qachat.pro"
+                    href={PRO_URL}
                     target="_blank">
                     购买 OpenAI API 账号/密钥
                   </a>
@@ -640,7 +666,7 @@ export default () => {
         border-slate
         border-none
         hover:border-dashed
-        href="https://a.qachat.pro"
+        href={PRO_URL}
         target="_blank">
         QAchat Pro 上线啦~
       </a>
