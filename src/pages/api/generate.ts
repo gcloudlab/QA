@@ -26,7 +26,7 @@ export const post: APIRoute = async (context) => {
   // 开启连续对话且对话长度大于5，使用免费密钥且开启授权模式，则激活授权模式
   if (continuous && messages.length > 5 && customKey === "" && accessCode !== undefined) {
     if (code === "") {
-      return new Response("Hi~ 使用免费版连续对话需要在**高级设置**内填写**授权码**。关注公众号即可获取授权码，激活免费使用 (为保障免费服务稳定提供，授权码有效期为**两小时**，过期后重新获取即可)。");
+      return new Response("Hi~ 使用免费版连续对话需要在**高级设置**内填写**授权码**。扫码(右上方二维码)关注公众号即可获取授权码，激活免费使用 (为保障免费服务稳定提供，授权码有效期为**两小时**，过期后重新获取即可)。");
     }
     const access_check = await requestAccessCheck(code)
     if (access_check !== true) {
