@@ -33,26 +33,7 @@ export default () => (
       <span text-lg text-slate-5>
         域名和公众号
       </span>{" "}
-      <a
-        border-b
-        border-slate
-        border-none
-        hover:border-dashed
-        href="https://qachat.one"
-        target="_blank">
-        qachat.one
-      </a>{" "}
-      (国内)；
-      <a
-        border-b
-        border-slate
-        border-none
-        hover:border-dashed
-        href="https://qachats.vercel.app"
-        target="_blank">
-        qachats.vercel.app
-      </a>{" "}
-      (魔法，建议收藏)。鉴于前几次域名被墙导致有小伙伴迷路，建了个{" "}
+      由于域名频繁被qiang，备用域名按照 a、b、c、d 准备，例如 a.mydog.buzz, b.mydog.buzz。鉴于前几次域名被墙导致有小伙伴迷路，建了个{" "}
       <strong>公众号</strong> 随时更新最新域名及授权码，欢迎扫码关注。
     </p>
     <p>

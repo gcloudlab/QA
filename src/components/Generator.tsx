@@ -640,7 +640,7 @@ export default () => {
         border-slate
         border-none
         hover:border-dashed
-        href="https://aka.qachat.pro"
+        href="https://a.qachat.pro"
         target="_blank">
         QAchat Pro 上线啦~
       </a>
