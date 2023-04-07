@@ -221,14 +221,14 @@ export default () => {
     const decoder = new TextDecoder("utf-8");
     const { value, done: readerDone } = await reader.read();
     let char = decoder.decode(value);
-    let parsed = JSON.parse(char)
+    let parsed = JSON.parse(char);
     if (parsed && parsed.code === 200) {
-      return true
+      return true;
     }
     setLoading(false);
     setError("非法输入");
-    return false
-  }
+    return false;
+  };
 
   const requestWithLatestMessage = async () => {
     autoScrolling = true;
@@ -254,10 +254,10 @@ export default () => {
           : "请填写 OpenAI API 密钥";
 
       const timestamp = Date.now();
-      const test = await requestFeedback(requestMessageList, timestamp)
+      const test = await requestFeedback(requestMessageList, timestamp);
 
       if (!test) {
-        return
+        return;
       }
       const response = await fetch("/api/generate", {
         method: "POST",
@@ -305,7 +305,6 @@ export default () => {
         done = readerDone;
       }
       setLoading(false);
-      
     } catch (e) {
       setLoading(false);
       setController(null);
@@ -472,7 +471,7 @@ export default () => {
                 <input
                   ref={inputCodeRef!}
                   type="password"
-                  placeholder={"请填写授权码 (若已填写密钥则无需填写)"}
+                  placeholder={"请填写授权码"}
                   autocomplete="off"
                   w-full
                   px-4
@@ -559,7 +558,7 @@ export default () => {
                 </p>
 
                 <p text-sm text-slate-4>
-                  已使用:{" "}
+                  本月已使用:{" "}
                   <span
                     border-b
                     border-slate
@@ -714,7 +713,7 @@ export default () => {
           onRandom={handleRandomPrompt}
         />
         <Footer setWaimai={setIsShowWaimai} />
-        <Toaster/>
+        <Toaster />
       </div>
     </div>
   );
