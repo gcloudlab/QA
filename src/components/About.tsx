@@ -33,8 +33,11 @@ export default () => (
       <span text-lg text-slate-5>
         域名和公众号
       </span>{" "}
-      由于域名频繁被qiang，备用域名按照 a、b、c、d 准备，例如 a.mydog.buzz, b.mydog.buzz。鉴于前几次域名被墙导致有小伙伴迷路，建了个{" "}
-      <strong>公众号</strong> 随时更新最新域名及授权码，欢迎扫码关注。
+      由于域名频繁被qiang，备用域名按照 a、b、c、d 准备，例如 a.mydog.buzz,
+      b.mydog.buzz。由于域名频繁被qiang，备用域名按字母 a、b、c、d
+      顺序尝试，例如 a.qachat.pro,
+      b.qachat.pro；同时提供了永久导航网址：https://yesmore.cc/ai,
+      同步更新最新域名，建议收藏！！
     </p>
     <p>
       <span text-lg text-slate-5>

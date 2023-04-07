@@ -30,7 +30,7 @@ import IconSend from "./icons/Send";
 import IconStop from "./icons/Stop";
 import type { ChatMessage } from "@/types";
 import { Toaster } from "solid-toast";
-import { PRO_URL } from "@/contants";
+import { DAO, PRO_URL } from "@/contants";
 
 export type Setting = typeof defaultToggleSetting;
 
@@ -662,7 +662,7 @@ export default () => {
         border-slate
         border-none
         hover:border-dashed
-        href={PRO_URL}
+        href={DAO}
         target="_blank">
         QAchat Pro 上线啦~
       </a>
