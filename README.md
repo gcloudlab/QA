@@ -1,6 +1,6 @@
 # QAChat
 
-> [QAChat Pro](https://a.qachat.pro) 已经上线~ 
+> [QAChat Pro](https://nav.navnav.top) 已经上线~ 
 
 与 AI 对话，基于 ChatGPT [OpenAI GPT-3.5 Turbo API](https://platform.openai.com/docs/guides/chat)，并提供免费体验密钥，支持自定义 OpenAI API 密钥。
 
@@ -38,14 +38,14 @@
 > 如果需要本地开发，请填写http代理 `HTTPS_PROXY` 变量。
 
 
-| 变量                  | 描述                           | 示例                           |
-| --------------------- | ------------------------------ | ------------------------------ |
-| `OPENAI_API_BASE_URL` | Custom base url for OpenAI API | `https://api.openai.com`       |
-| `OPENAI_API_KEY`      | Custom OpenAI API Key          | `sk-eawsgfwegwaqeqtq234516512` |
-| `HTTPS_PROXY`         | Provide proxy for OpenAI API   | `http://127.0.0.1:7890`        |
-| `SECRET_KEY`          | Secret string for the project  | `123456`                       |
-| `HEAD_SCRIPTS`        | HTML Scripts                   |                                |
-| `CODE`        | 授权码 (提供免费密钥且设置CODE值，则激活授权模式)               | `123,124,125`               |
+| 变量                  | 描述                                              | 示例                           |
+| --------------------- | ------------------------------------------------- | ------------------------------ |
+| `OPENAI_API_BASE_URL` | Custom base url for OpenAI API                    | `https://api.openai.com`       |
+| `OPENAI_API_KEY`      | Custom OpenAI API Key                             | `sk-eawsgfwegwaqeqtq234516512` |
+| `HTTPS_PROXY`         | Provide proxy for OpenAI API                      | `http://127.0.0.1:7890`        |
+| `SECRET_KEY`          | Secret string for the project                     | `123456`                       |
+| `HEAD_SCRIPTS`        | HTML Scripts                                      |                                |
+| `CODE`                | 授权码 (提供免费密钥且设置CODE值，则激活授权模式) | `123,124,125`                  |
 
 ## 本地调试
 
