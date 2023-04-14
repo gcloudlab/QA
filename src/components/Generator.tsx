@@ -664,7 +664,7 @@ export default () => {
         hover:border-dashed
         href={DAO}
         target="_blank">
-        App 手机版已上线
+        App Pro 已上线
       </a>
     </div>
   );
