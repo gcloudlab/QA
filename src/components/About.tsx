@@ -51,8 +51,7 @@ export default () => (
         交流
       </span>{" "}
       Q群634323049
-      (限时抽奖活动开始啦：ChatGPT手工注册谷歌账号免费领，附带5美金额度（套餐1），进群即可参与抽奖~
-      ){" · "}
+      {" · "}
       <a
         border-b
         border-slate
