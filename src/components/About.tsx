@@ -1,5 +1,16 @@
+import { DAO } from "@/contants";
+
 export default () => (
   <div text-sm text-slate-4 pt-2 ml-1 border-t border-dashed border-slate>
+    <p>
+      <span text-lg text-slate-5>
+        App下载
+      </span>{" "}
+      本站已推出移动端手机版App应用，集成 QAchat + Pro 版，欢迎下载体验～{" "}
+      <a href={DAO} target="_blank">
+        🔗下载链接
+      </a>
+    </p>
     <p>
       <span text-lg text-slate-5>
         注意
@@ -31,7 +42,7 @@ export default () => (
     </p>
     <p>
       <span text-lg text-slate-5>
-        域名和公众号
+        域名
       </span>{" "}
       由于域名频繁被qiang，备用域名按照 a、b、c、d 准备，例如 a.mydog.buzz,
       b.mydog.buzz。鉴于前几次域名被墙导致有小伙伴迷路，建了个{" "}
@@ -39,7 +50,7 @@ export default () => (
     </p>
     <p>
       <span text-lg text-slate-5>
-        关于打赏
+        打赏
       </span>{" "}
       免费体验功能不保证稳定提供
       (使用人数较多响应较慢，或密钥额度已用完但是没来得及手动更新，以及更新后需要用户刷新网页)。
@@ -67,7 +78,7 @@ export default () => (
         border-slate
         border-none
         hover:border-dashed
-        href="https://openaizh.com"
+        href="https://openaizh.cc"
         target="_blank">
         OpenAI中文网
       </a>

@@ -30,7 +30,7 @@ import IconSend from "./icons/Send";
 import IconStop from "./icons/Stop";
 import type { ChatMessage } from "@/types";
 import { Toaster } from "solid-toast";
-import { PRO_URL } from "@/contants";
+import { DAO, PRO_URL } from "@/contants";
 
 export type Setting = typeof defaultToggleSetting;
 
@@ -472,7 +472,7 @@ export default () => {
                 <input
                   ref={inputCodeRef!}
                   type="password"
-                  placeholder={"请填写授权码 (若已填写密钥则无需填写)"}
+                  placeholder={"请填写授权码"}
                   autocomplete="off"
                   w-full
                   px-4
@@ -559,7 +559,7 @@ export default () => {
                 </p>
 
                 <p text-sm text-slate-4>
-                  已使用:{" "}
+                  本月已使用:{" "}
                   <span
                     border-b
                     border-slate
@@ -663,9 +663,9 @@ export default () => {
         border-slate
         border-none
         hover:border-dashed
-        href={PRO_URL}
+        href={DAO}
         target="_blank">
-        QAchat Pro 上线啦~
+        安卓版Pro已发布
       </a>
     </div>
   );
