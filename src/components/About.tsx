@@ -33,7 +33,8 @@ export default () => (
       <span text-lg text-slate-5>
         域名和公众号
       </span>{" "}
-      由于域名频繁被qiang，备用域名按照 a、b、c、d 准备，例如 a.mydog.buzz, b.mydog.buzz。鉴于前几次域名被墙导致有小伙伴迷路，建了个{" "}
+      由于域名频繁被qiang，备用域名按照 a、b、c、d 准备，例如 a.mydog.buzz,
+      b.mydog.buzz。鉴于前几次域名被墙导致有小伙伴迷路，建了个{" "}
       <strong>公众号</strong> 随时更新最新域名及授权码，欢迎扫码关注。
     </p>
     <p>
@@ -49,8 +50,9 @@ export default () => (
       <span text-lg text-slate-5>
         交流
       </span>{" "}
-      Q群634323049 (群内不定期分享免费密钥)
-      {" · "}
+      Q群634323049
+      (限时抽奖活动开始啦：ChatGPT手工注册谷歌账号免费领，附带5美金额度（套餐1），进群即可参与抽奖~
+      ){" · "}
       <a
         border-b
         border-slate

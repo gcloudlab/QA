@@ -197,6 +197,7 @@ export default () => {
       });
     }
   };
+  ``;
 
   const requestFeedback = async (msgs: ChatMessage[], timestamp: number) => {
     const res = await fetch("/api/feedback", {
@@ -221,14 +222,14 @@ export default () => {
     const decoder = new TextDecoder("utf-8");
     const { value, done: readerDone } = await reader.read();
     let char = decoder.decode(value);
-    let parsed = JSON.parse(char)
+    let parsed = JSON.parse(char);
     if (parsed && parsed.code === 200) {
-      return true
+      return true;
     }
     setLoading(false);
     setError("非法输入");
-    return false
-  }
+    return false;
+  };
 
   const requestWithLatestMessage = async () => {
     autoScrolling = true;
@@ -254,10 +255,10 @@ export default () => {
           : "请填写 OpenAI API 密钥";
 
       const timestamp = Date.now();
-      const test = await requestFeedback(requestMessageList, timestamp)
+      const test = await requestFeedback(requestMessageList, timestamp);
 
       if (!test) {
-        return
+        return;
       }
       const response = await fetch("/api/generate", {
         method: "POST",
@@ -305,7 +306,6 @@ export default () => {
         done = readerDone;
       }
       setLoading(false);
-      
     } catch (e) {
       setLoading(false);
       setController(null);
@@ -713,8 +713,11 @@ export default () => {
           onClear={clear}
           onRandom={handleRandomPrompt}
         />
+        <p class="text-pink-600 mt-1">
+          限时抽奖活动开始啦：ChatGPT手工注册谷歌账号免费领，附带5美金额度（套餐1），进群（634323049）即可参与抽奖~{" "}
+        </p>
         <Footer setWaimai={setIsShowWaimai} />
-        <Toaster/>
+        <Toaster />
       </div>
     </div>
   );
