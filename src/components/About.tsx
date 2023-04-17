@@ -4,7 +4,7 @@ export default () => (
   <div text-sm text-slate-4 pt-2 ml-1 border-t border-dashed border-slate>
     <p>
       <span text-lg text-slate-5>
-        App下载
+        通知
       </span>{" "}
       由于OpenAI官方对API请求限速 3次/分钟，所以当长时间无回复时时，请点击暂停按钮，并重新尝试发送，或稍等几秒后再发送。{" "}
     </p>
