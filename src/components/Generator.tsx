@@ -672,6 +672,9 @@ export default () => {
 
   return (
     <div class="my-6 flex flex-col">
+      <p class="text-pink-600 text-sm mt-1">
+         每日抽奖活动开始啦：ChatGPT手工注册谷歌账号免费领，5美金额度API-key，进群（634323049）即可参与抽奖~{" "}
+      </p>
       {renderAdvancedSettings()}
       {renderMessageWrapper()}
       <div
@@ -713,9 +716,7 @@ export default () => {
           onClear={clear}
           onRandom={handleRandomPrompt}
         />
-        <p class="text-pink-600 text-sm mt-1">
-          每日抽奖活动开始啦：ChatGPT手工注册谷歌账号免费领，5美金额度API-key，进群（634323049）即可参与抽奖~{" "}
-        </p>
+        
         <Footer setWaimai={setIsShowWaimai} />
         <Toaster />
       </div>
