@@ -46,7 +46,7 @@ export default () => (
       </span>{" "}
       由于域名频繁被qiang，备用域名按照 a、b、c、d 准备，例如 a.mydog.buzz,
       b.mydog.buzz。鉴于前几次域名被墙导致有小伙伴迷路，建了个{" "}
-      <strong>公众号</strong> 随时更新最新域名及授权码，欢迎扫码关注。
+      <strong>公众号</strong> 随时更新授权码，欢迎扫码关注。
     </p>
     <p>
       <span text-lg text-slate-5>
