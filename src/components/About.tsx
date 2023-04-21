@@ -6,7 +6,7 @@ export default () => (
       <span text-lg text-slate-5>
         通知
       </span>{" "}
-      由于OpenAI官方对API请求限速 3次/分钟，所以当长时间无回复时时，请点击暂停按钮，并重新尝试发送，或稍等几秒后再发送。{" "}
+      由于OpenAI官方对API请求限速 3次/分钟，所以当长时间无回复时时，请点击暂停按钮，并重新尝试发送，或稍等几秒后再发送。<strong>开启连续对话不限速！！！</strong> {" "}
     </p>
     <p>
       <span text-lg text-slate-5>
