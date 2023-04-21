@@ -673,6 +673,9 @@ export default () => {
   return (
     <div class="my-6 flex flex-col">
       <p class="text-pink-600 text-sm mb-1">
+         永久免费不限速，应用市场搜索「美兔优选」，一起来Chat吧~
+      </p>
+      <p class="text-pink-600 text-sm mb-1">
          每日抽奖活动开始啦：ChatGPT手工注册谷歌账号免费领，5美金额度API-key，进群（634323049）即可参与抽奖~{" "}
       </p>
       {renderAdvancedSettings()}
