@@ -91,6 +91,12 @@ export default () => {
   });
 
   createEffect(() => {
+    if (!getCustomKey("access-code")) {
+      alert("连续对话需要在设置页填写授权码哦~");
+    }
+  });
+
+  createEffect(() => {
     if (isLoadStorage()) {
       localStorage.setItem("setting", JSON.stringify(setting()));
     }
@@ -673,10 +679,10 @@ export default () => {
   return (
     <div class="my-6 flex flex-col">
       <p class="text-pink-600 text-sm mb-1">
-         永久免费不限速，应用市场搜索「美兔优选」，一起来Chat吧~
+        永久免费不限速，应用市场搜索「美兔优选」，一起来Chat吧~
       </p>
       <p class="text-pink-600 text-sm mb-1">
-         每日抽奖活动开始啦：ChatGPT手工注册谷歌账号免费领，5美金额度API-key，进群（634323049）即可参与抽奖~{" "}
+        每日抽奖活动开始啦：ChatGPT手工注册谷歌账号免费领，5美金额度API-key，进群（634323049）即可参与抽奖~{" "}
       </p>
       {renderAdvancedSettings()}
       {renderMessageWrapper()}
@@ -719,7 +725,7 @@ export default () => {
           onClear={clear}
           onRandom={handleRandomPrompt}
         />
-        
+
         <Footer setWaimai={setIsShowWaimai} />
         <Toaster />
       </div>
