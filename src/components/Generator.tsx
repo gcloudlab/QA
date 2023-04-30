@@ -558,7 +558,7 @@ export default () => {
                     border-slate
                     border-none
                     hover:border-dashed
-                    href={PRO_URL}
+                    href="https://shop.taoist.fun/"
                     target="_blank">
                     购买 OpenAI API 账号/密钥
                   </a>
